@@ -1,5 +1,4 @@
-﻿using MarketPlaceEnd.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MarketPlaceEnd
+namespace MarketPlaceEnd.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для Orders.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Orders : Page
     {
-        public MainWindow()
+        public Orders()
         {
             InitializeComponent();
-            Frame1.NavigationService.Navigate(new AuthPage());
         }
     }
 }
