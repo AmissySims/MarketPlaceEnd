@@ -11,23 +11,7 @@
         <Style TargetType="Button" x:Key="Buttons">
             <Setter Property="Background" Value="Cornsilk"/>
             <Setter Property="BorderBrush" Value="DarkSalmon"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border BorderBrush="{TemplateBinding BorderBrush}">
-                            <Button Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Button>
-                        </Border>
-                       
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Gold"/>
-                </Trigger>
-            </Style.Triggers>
+           
         </Style>
         <Style TargetType="Button" x:Key="1Button">
             <Setter Property="Background" Value="Transparent"/>
@@ -49,7 +33,7 @@
             </Style.Triggers>
            
         </Style>
-
+      
         <Style TargetType="TextBox">
             <Setter Property="FontFamily" Value="Monotype Corsiva"/>
             <Setter Property="BorderBrush" Value="DarkSalmon"/>

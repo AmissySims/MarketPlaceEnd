@@ -7,6 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProductsPage"
+     Loaded="Page_Loaded"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Page.Resources>
         <Style x:Key="FocusVisual">
@@ -311,7 +312,10 @@
                              Width="250"
                              Margin="5"/>
                 </StackPanel>
-
+                <Button x:Name="AddPrBt"
+                        Style="{StaticResource Buttons}"
+                        Content="Добавить товар"
+                        Margin="5"/>
             </StackPanel>
             <ListView x:Name="ListProducts"
                       Margin="5"
@@ -336,12 +340,16 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Margin="5">
                                     <Image x:Name="MainImage"
-                                   Width="120"
+                                   Width="140"
                                    Height="120" Source="{Binding MainPhoto}"/>
                                     <TextBlock Text="{Binding Title}" HorizontalAlignment="Center" />
                                     <TextBlock Text="{Binding Price, StringFormat='{}{0} руб.'}" HorizontalAlignment="Center"/>
                                     <TextBlock Text="{Binding TypeProduct.Title}" HorizontalAlignment="Center"/>
                                     <TextBlock Text="{Binding Provider.Title}" HorizontalAlignment="Center"/>
+                                    <Button Style="{StaticResource Buttons}"
+                                            Content="Удалить"
+                                            x:Name="RemovePrBt"
+                                            Click="RemovePrBt_Click"/>
                                 </StackPanel>
 
                             </Grid>

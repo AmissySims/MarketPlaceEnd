@@ -24,5 +24,18 @@ namespace MarketPlaceEnd.Pages
         {
             InitializeComponent();
         }
+         private void Refresh()
+         {
+            ListProducts.ItemsSource = App.db.Product.ToList();
+         }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
+
+        private void RemovePrBt_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
