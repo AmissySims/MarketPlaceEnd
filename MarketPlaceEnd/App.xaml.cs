@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MarketPlaceEnd.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,6 @@ namespace MarketPlaceEnd
     /// </summary>
     public partial class App : Application
     {
+        public static  MarketPlaceEntities db = new MarketPlaceEntities();
     }
 }

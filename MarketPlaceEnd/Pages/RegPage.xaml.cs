@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using MarketPlaceEnd.Models;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
@@ -16,7 +18,49 @@ namespace MarketPlaceEnd.Pages
 
         private void RegBt_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Регистрация выполнена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+            var check = App.db.User.FirstOrDefault(x => x.Login == LoginTb.Text);
+            if (string.IsNullOrWhiteSpace(NameTb.Text.Trim()))
+            {
+                MessageBox.Show("Заполните поле имени", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(LoginTb.Text.Trim()))
+            {
+                MessageBox.Show("Заполните поле логина", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(PasswordTb.Text.Trim()))
+            {
+                MessageBox.Show("Заполните поле пароля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(FNameTb.Text.Trim()))
+            {
+                MessageBox.Show("Заполните поле фамилии", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+          
+            if (check == null)
+            {
+
+                User user = new User
+                {
+                    Name = NameTb.Text,
+                    Password = PasswordTb.Text,
+                    FName = FNameTb.Text,
+                    RoleId = 3,
+                    Login = LoginTb.Text
+                };
+                App.db.User.Add(user);
+                App.db.SaveChanges();
+                MessageBox.Show("Регистрация выполнена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Пользователь уже существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+           
         }
 
         private void EnterBt_Click(object sender, RoutedEventArgs e)

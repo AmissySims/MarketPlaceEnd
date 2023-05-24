@@ -28,12 +28,12 @@
                            HorizontalAlignment="Center"/>
                 <TextBox x:Name="LoginTb" 
                           Margin="5"
-                         Height="20"/>
+                         Height="25"/>
                 <TextBlock Text="Пароль"
                            HorizontalAlignment="Center"/>
                 <TextBox x:Name="PasswordTb"
                           Margin="5"
-                         Height="20"/>
+                         Height="25"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="EnterBt"
@@ -44,6 +44,7 @@
                     Content=" Регистрация "
                         Style="{StaticResource Buttons}"
                         Margin="5" Click="RegBt_Click"/>
+               
             </StackPanel>
           
         </StackPanel>

@@ -33,8 +33,32 @@ namespace MarketPlaceEnd.Pages
 
         private void EnterBt_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Вход выполнен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-            NavigationService.Navigate(new MainPage());
+            var login = LoginTb.Text;
+            var password = PasswordTb.Text;
+            var user = App.db.User.FirstOrDefault(us => us.Login == login && us.Password == password);
+            if (string.IsNullOrWhiteSpace(login))
+            {
+                MessageBox.Show("Заполните поле логина", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Заполните поле пароля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (user == null)
+            {
+                MessageBox.Show("Такого пользователя не существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; 
+            }
+            
+           
+            else
+            {
+                MessageBox.Show("Вход выполнен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.Navigate(new MainPage());
+            }
+           
         }
     }
 }

@@ -16,11 +16,40 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="13*"/>
         </Grid.RowDefinitions>
+        <Rectangle Fill="White" Grid.Row="0"/>
         <Image Source="\Resources\logo.png"
                Grid.Row="0" 
                RenderOptions.BitmapScalingMode="Fant"
                HorizontalAlignment="Left"
                Margin="5"/>
-        
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="0"
+                    HorizontalAlignment="Right" Margin="25 0">
+
+            <Button Style="{StaticResource 1Button}"
+                    Content="Товары"
+                    x:Name="ProductsBt"
+                     Margin="5 0"
+                    Width="100"
+                    Click="ProductsBt_Click"/>
+            <Button Style="{StaticResource 1Button}"
+                    Content="Корзина"
+                    x:Name="BucketBt"
+                    Margin="5 0"
+                     Width="100"
+                    Click="BucketBt_Click"/>
+            <Button Style="{StaticResource 1Button}"
+                    Content="Профиль"
+                    x:Name="UserBt"
+                    Margin="5 0"
+                     Width="100"
+                    Click="AccountBt_Click"/>
+            <Button Style="{StaticResource 1Button}"
+                    Content="Поставщики"
+                    x:Name="ProvBt"
+                    Margin="5 0"
+                     Width="100"
+                    Click="ProvBt_Click"/>
+        </StackPanel>
     </Grid>
 </Page>
