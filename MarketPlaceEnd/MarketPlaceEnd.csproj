@@ -41,6 +41,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -153,6 +154,8 @@
     <Compile Include="Models\OrderProduct.cs">
       <DependentUpon>MarketPlaceModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Partials\Product.cs" />
+    <Compile Include="Models\Partials\User.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>MarketPlaceModel.tt</DependentUpon>
     </Compile>
@@ -246,9 +249,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Partials\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\BACKS1.jpg" />
   </ItemGroup>

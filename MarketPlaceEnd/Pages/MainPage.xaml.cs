@@ -34,19 +34,19 @@ namespace MarketPlaceEnd.Pages
 
         private void AccountBt_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new PersAccountPage());
+            Frame2.NavigationService.Navigate(new PersAccountPage());
 
         }
 
         private void ProvBt_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ProvidersPage());
+            Frame2.NavigationService.Navigate(new ProvidersPage());
 
         }
 
         private void ProductsBt_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ProductsPage());
+            Frame2.NavigationService.Navigate(new ProductsPage());
         }
     }
 }
