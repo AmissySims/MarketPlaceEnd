@@ -9,6 +9,98 @@
       Title="AddEditProductPage">
 
     <Grid>
-        
+        <StackPanel HorizontalAlignment="Center" >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Название" Margin="5"/>
+                    <TextBox Text="{Binding Title}" Width="250"
+                             TextWrapping="Wrap"
+                             Margin="5"
+                             x:Name="TitleTb"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Описание"
+                                Margin="5"/>
+                    <TextBox Text="{Binding Description}"
+                            Height="60" 
+                             Width="250"
+                             TextWrapping="Wrap"
+                             Margin="5"
+                              x:Name="DescTb"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Стоимость"
+                               Margin="5"/>
+                    <TextBox Text="{Binding Price}"
+                             TextWrapping="Wrap"
+                             Margin="5"
+                             Width="70"
+                              x:Name="PriceTb"/>
+                    <TextBlock Text="Количество"
+                               Margin="5"/>
+                    <TextBox Text="{Binding Count}"
+                             TextWrapping="Wrap"
+                             Margin="5"
+                              Width="70"
+                              x:Name="CountTb"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Тип товара"
+                               Margin="5"/>
+                    <ComboBox x:Name="CbType"  
+                              Margin="5"
+                            DisplayMemberPath="Title"
+                            SelectedItem="{Binding TypeProduct}"
+                              Width="200"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Поставщик"
+                               Margin="5"/>
+                    <ComboBox x:Name="CbProv"  
+                              Margin="5"
+                            DisplayMemberPath="Title"
+                            SelectedItem="{Binding Provider}"
+                              Width="200"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="SaveBt"
+                            Content=" Сохранить "
+                            Margin="5"
+                            Style="{StaticResource Buttons}"
+                            Click="SaveBt_Click"/>
+                    <Button x:Name="CancelBt"
+                            Content=" Отмена "
+                            Margin="5"
+                            Style="{StaticResource Buttons}"
+                            Click="CancelBt_Click"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Margin="5">
+                <DockPanel Grid.Column="1" Margin="5">
+                    <Button x:Name="ImageBt" Content="Добавить фото"
+                             DockPanel.Dock="Bottom"
+                            Style="{StaticResource Buttons}"
+                        Click="ImageBt_Click"/>
+                    <ListView x:Name="LVPhoto" d:ItemsSource="{d:SampleData ItemCount=6}">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Image}"
+                                         Width="90"
+                                       Height="90"
+                                RenderOptions.BitmapScalingMode="Fant"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+
+                </DockPanel>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

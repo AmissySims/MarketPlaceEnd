@@ -1,5 +1,9 @@
-﻿using System;
+﻿using MarketPlaceEnd.Models;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +24,99 @@ namespace MarketPlaceEnd.Pages.AddEditPages
     /// </summary>
     public partial class AddEditProductPage : Page
     {
-        public AddEditProductPage()
+        Product contextProduct;
+        public AddEditProductPage(Product product)
         {
             InitializeComponent();
+            CbType.ItemsSource = App.db.TypeProduct.ToList();
+            CbProv.ItemsSource = App.db.Provider.ToList();
+            contextProduct = product;
+            DataContext = contextProduct;
+            Refresh();
+          
+
+        }
+
+        private void ImageBt_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog() { Multiselect = true };
+            if (dialog.ShowDialog().GetValueOrDefault())
+            {
+                foreach (var item in dialog.FileNames)
+                {
+                    contextProduct.ProductPhoto.Add(new ProductPhoto()
+                    {
+                        Image = File.ReadAllBytes(item),
+                        Product = contextProduct
+                    });
+                }
+
+                Refresh();
+                DataContext = null;
+                DataContext = contextProduct;
+            }
+        }
+
+        private void Refresh()
+        {
+            LVPhoto.ItemsSource = contextProduct.ProductPhoto.ToList();
+        }
+
+        private void SaveBt_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (string.IsNullOrWhiteSpace(contextProduct.Title))
+            {
+                MessageBox.Show("Заполните поле названия", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (string.IsNullOrEmpty(contextProduct.Description))
+            {
+                MessageBox.Show("Заполните поле описания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (contextProduct.Price == null)
+            {
+                MessageBox.Show("Заполните поле стоимости", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+
+            }
+
+            if (contextProduct.Provider == null)
+            {
+                MessageBox.Show("Выберите поставщика", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+
+            }
+            if (contextProduct.Count == null)
+            {
+                MessageBox.Show("Заполните поле количества", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+
+            }
+            if (contextProduct.TypeProduct == null)
+            {
+                MessageBox.Show("Выберите тип продукта", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else
+            {
+                if (contextProduct.Id == 0)
+                {
+                    App.db.Product.Add(contextProduct);
+                }
+                App.db.SaveChanges();
+                MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.GoBack();
+            }
+           
+        }
+
+    
+        private void CancelBt_Click(object sender, RoutedEventArgs e)
+        {
+            
+            NavigationService.Navigate(new ProductsPage());
         }
     }
 }
