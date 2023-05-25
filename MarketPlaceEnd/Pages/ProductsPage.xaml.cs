@@ -14,6 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MarketPlaceEnd.Pages.AddEditPages;
+using System.Data.Entity.Infrastructure;
+using System.Collections.ObjectModel;
+using System.Data.Entity;
 
 namespace MarketPlaceEnd.Pages
 {
@@ -23,8 +26,8 @@ namespace MarketPlaceEnd.Pages
     public partial class ProductsPage : Page
     {
         MarketPlaceEntities _context = new MarketPlaceEntities();
-    
-    
+
+       
         public ProductsPage()
         {
             InitializeComponent();
@@ -56,7 +59,29 @@ namespace MarketPlaceEnd.Pages
                 listProd = listProd.Where(x => x.Title.ToLower().Contains(searchString.ToLower())).ToList();
                 ListProducts.ItemsSource = listProd;
             }
-
+            //if (FiltrCb.SelectedItem != null)
+            //{
+            //    switch ((FiltrCb.SelectedItem as ComboBoxItem).Tag)
+            //    {
+            //        case "All":
+            //            listProd = _context.Product.ToList();
+            //            break;
+            //        case "MinPrice":
+            //            listProd = listProd.OrderBy(x => x.Price).ToList();
+            //            break;
+            //        case "MaxPrice":
+            //            listProd = listProd.OrderByDescending(x => x.Price).ToList();
+            //            break;
+            //        case "TitleAlfaA":
+            //            listProd = listProd.OrderBy(x => x.Title).ToList();
+            //            break;
+            //        case "TitleAlfaZ":
+            //            listProd = listProd.OrderByDescending(x => x.Title).ToList();
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //}
             ListProducts.ItemsSource = listProd;
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -66,7 +91,11 @@ namespace MarketPlaceEnd.Pages
 
         private void RemovePrBt_Click(object sender, RoutedEventArgs e)
         {
-
+            var selProd = (sender as Button).DataContext as Product;
+            App.db.Product.Remove(selProd);
+            App.db.SaveChanges();
+            MessageBox.Show("Удалено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+            Refresh();
         }
 
         private void EditPrPrBt_Click(object sender, RoutedEventArgs e)
@@ -90,5 +119,21 @@ namespace MarketPlaceEnd.Pages
             NavigationService.Navigate(new AddEditProductPage(new Product()));
 
         }
+
+        private void LookPrBt_Click(object sender, RoutedEventArgs e)
+        {
+            var selProd = (sender as Button).DataContext as Product;
+            NavigationService.Navigate(new LookProductPage(selProd));
+        }
+
+        private void AddInBucketBt_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //private void FiltrCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    Sort();
+        //}
     }
 }

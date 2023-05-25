@@ -25,6 +25,7 @@ namespace MarketPlaceEnd.Pages.AddEditPages
     public partial class AddEditProductPage : Page
     {
         Product contextProduct;
+        DbPropertyValues oldValues;
         public AddEditProductPage(Product product)
         {
             InitializeComponent();
@@ -33,7 +34,10 @@ namespace MarketPlaceEnd.Pages.AddEditPages
             contextProduct = product;
             DataContext = contextProduct;
             Refresh();
-          
+            if (contextProduct.Id != 0)
+            {
+                oldValues = App.db.Entry(contextProduct).CurrentValues.Clone();
+            }
 
         }
 
@@ -112,11 +116,16 @@ namespace MarketPlaceEnd.Pages.AddEditPages
            
         }
 
-    
+
         private void CancelBt_Click(object sender, RoutedEventArgs e)
         {
-            
-            NavigationService.Navigate(new ProductsPage());
+
+            if (oldValues != null)
+            {
+                App.db.Entry(contextProduct).CurrentValues.SetValues(oldValues);
+
+            }
+            NavigationService.GoBack();
         }
     }
 }

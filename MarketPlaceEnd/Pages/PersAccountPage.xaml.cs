@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MarketPlaceEnd.Windows;
+using MarketPlaceEnd.Models;
+
+
 
 namespace MarketPlaceEnd.Pages
 {
@@ -20,9 +24,24 @@ namespace MarketPlaceEnd.Pages
     /// </summary>
     public partial class PersAccountPage : Page
     {
+        public static List<User> UserList { get; set; }
         public PersAccountPage()
         {
+           
             InitializeComponent();
+            UserList = App.db.User.Where(z => z.Id == Account.AuthUser.Id).ToList();
+            ListUse.ItemsSource = UserList;
+
+
+        }
+
+        private void EditBt_Click(object sender, RoutedEventArgs e)
+        {
+            
+            EditUserWindow selUser = new EditUserWindow((sender as Button).DataContext as User);
+            selUser.ShowDialog();
+            ListUse.ItemsSource = UserList;
+           
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MarketPlaceEnd.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +37,8 @@ namespace MarketPlaceEnd.Pages
         {
             var login = LoginTb.Text;
             var password = PasswordTb.Text;
-            var user = App.db.User.FirstOrDefault(us => us.Login == login && us.Password == password);
+            Account.AuthUser = App.db.User.ToList().Find(x => x.Login == login && x.Password == password);
+            var user = Account.AuthUser;
             if (string.IsNullOrWhiteSpace(login))
             {
                 MessageBox.Show("Заполните поле логина", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -55,6 +58,7 @@ namespace MarketPlaceEnd.Pages
            
             else
             {
+                Account.isAuth = true;
                 MessageBox.Show("Вход выполнен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 NavigationService.Navigate(new MainPage());
             }
