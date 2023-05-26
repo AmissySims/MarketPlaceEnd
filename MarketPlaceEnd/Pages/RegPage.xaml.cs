@@ -1,4 +1,5 @@
 ﻿using MarketPlaceEnd.Models;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -66,6 +67,23 @@ namespace MarketPlaceEnd.Pages
         private void EnterBt_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AuthPage());
+        }
+
+        private void NameTb_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            if (!Char.IsLetter(e.Text, 0))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void FNameTb_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+
+            if (!Char.IsLetter(e.Text, 0))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

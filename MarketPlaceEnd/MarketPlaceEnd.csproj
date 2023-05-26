@@ -66,6 +66,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Partials\Account.cs" />
+    <Compile Include="Models\Partials\Order.cs" />
     <Compile Include="Pages\LookProductPage.xaml.cs">
       <DependentUpon>LookProductPage.xaml</DependentUpon>
     </Compile>
@@ -285,6 +286,7 @@
       <DependentUpon>MarketPlaceModel.edmx</DependentUpon>
       <LastGenOutput>MarketPlaceModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\orders.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

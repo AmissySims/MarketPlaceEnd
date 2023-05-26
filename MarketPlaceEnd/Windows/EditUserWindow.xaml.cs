@@ -1,6 +1,8 @@
 ﻿using MarketPlaceEnd.Models;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +34,13 @@ namespace MarketPlaceEnd.Windows
 
         private void AddImageBt_Click(object sender, RoutedEventArgs e)
         {
-
+            var dialog = new OpenFileDialog();
+            if(dialog.ShowDialog().GetValueOrDefault())
+            {
+                contextUser.Photo = File.ReadAllBytes(dialog.FileName);
+                DataContext = null;
+                DataContext = contextUser;
+            }
         }
 
         private void SaveBt_Click(object sender, RoutedEventArgs e)

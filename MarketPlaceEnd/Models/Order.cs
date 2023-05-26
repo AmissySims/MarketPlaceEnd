@@ -27,6 +27,7 @@ namespace MarketPlaceEnd.Models
         public Nullable<int> DeliveryTypeId { get; set; }
         public Nullable<int> DeliveryPointId { get; set; }
         public string AdressDelivery { get; set; }
+        public Nullable<decimal> Price { get; set; }
     
         public virtual DeliveryPoint DeliveryPoint { get; set; }
         public virtual DeliveryType DeliveryType { get; set; }

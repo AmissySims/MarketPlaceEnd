@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MarketPlaceEnd.Windows;
 using MarketPlaceEnd.Models;
+using MarketPlaceEnd.Pages;
 
 
 
@@ -40,8 +41,20 @@ namespace MarketPlaceEnd.Pages
             
             EditUserWindow selUser = new EditUserWindow((sender as Button).DataContext as User);
             selUser.ShowDialog();
+            UserList = App.db.User.Where(z => z.Id == Account.AuthUser.Id).ToList();
             ListUse.ItemsSource = UserList;
-           
+
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ListUse.ItemsSource = UserList;
+
+        }
+
+        private void OrdersPage_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new OrdersPage());
         }
     }
 }

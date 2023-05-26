@@ -35,14 +35,16 @@
                              TextWrapping="Wrap"
                              Margin="5"
                              Width="70"
-                              x:Name="PriceTb"/>
+                              x:Name="PriceTb"
+                             PreviewTextInput="PriceTb_PreviewTextInput"/>
                     <TextBlock Text="Количество"
                                Margin="5"/>
                     <TextBox Text="{Binding Count}"
                              TextWrapping="Wrap"
                              Margin="5"
                               Width="70"
-                              x:Name="CountTb"/>
+                              x:Name="CountTb"
+                             PreviewTextInput="CountTb_PreviewTextInput"/>
                 </StackPanel>
                 
                 <StackPanel Orientation="Horizontal">

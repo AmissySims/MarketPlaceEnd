@@ -32,12 +32,14 @@
                            HorizontalAlignment="Center"/>
                 <TextBox x:Name="NameTb"
                           Margin="5"
-                         Height="20"/>
+                         Height="20"
+                         PreviewTextInput="NameTb_PreviewTextInput"/>
                 <TextBlock Text="Фамилия"
                            HorizontalAlignment="Center"/>
                 <TextBox x:Name="FNameTb"
                           Margin="5"
-                         Height="20"/>
+                         Height="20"
+                         PreviewTextInput="FNameTb_PreviewTextInput"/>
                 <TextBlock Text="Логин"
                            HorizontalAlignment="Center"/>
                 <TextBox x:Name="LoginTb" 

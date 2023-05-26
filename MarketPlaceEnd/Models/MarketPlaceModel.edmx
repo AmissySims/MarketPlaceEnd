@@ -30,6 +30,7 @@
           <Property Name="DeliveryTypeId" Type="int" />
           <Property Name="DeliveryPointId" Type="int" />
           <Property Name="AdressDelivery" Type="nvarchar(max)" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
@@ -109,6 +110,7 @@
           <Property Name="Login" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="RoleId" Type="int" />
+          <Property Name="Photo" Type="image" />
         </EntityType>
         <Association Name="FK_Order_DeliveryPoint">
           <End Role="DeliveryPoint" Type="Self.DeliveryPoint" Multiplicity="0..1" />
@@ -371,6 +373,7 @@
           <Property Name="DeliveryTypeId" Type="Int32" />
           <Property Name="DeliveryPointId" Type="Int32" />
           <Property Name="AdressDelivery" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="DeliveryPoint" Relationship="MarketPlaceModel.FK_Order_DeliveryPoint" FromRole="Order" ToRole="DeliveryPoint" />
           <NavigationProperty Name="DeliveryType" Relationship="MarketPlaceModel.FK_Order_DeliveryType" FromRole="Order" ToRole="DeliveryType" />
           <NavigationProperty Name="StatusOrder" Relationship="MarketPlaceModel.FK_Order_StatusOrder" FromRole="Order" ToRole="StatusOrder" />
@@ -466,6 +469,7 @@
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RoleId" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Order" Relationship="MarketPlaceModel.FK_Order_User" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="Role" Relationship="MarketPlaceModel.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
@@ -591,7 +595,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -616,6 +620,7 @@
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="MarketPlaceModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="AdressDelivery" ColumnName="AdressDelivery" />
                 <ScalarProperty Name="DeliveryPointId" ColumnName="DeliveryPointId" />
                 <ScalarProperty Name="DeliveryTypeId" ColumnName="DeliveryTypeId" />
@@ -705,6 +710,7 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="MarketPlaceModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Login" ColumnName="Login" />

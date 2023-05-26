@@ -5,21 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MarketPlaceEnd.Windows"
         mc:Ignorable="d"
-        Title="EditUserWindow" Height="640" Width="600">
+        Title="EditUserWindow" Height="540" Width="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="8*"/>
             <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Margin="5">
-            <Image Source="{Binding Image}"
-                   Width="300"
-                   Height="300"/>
+            <Image Source="{Binding Photo}"
+                   Width="250"
+                   Height="250"
+                   RenderOptions.BitmapScalingMode="Fant"/>
             <Button x:Name="AddImageBt" Content=" Изменить фото "
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Margin="5"
-                    Style="{StaticResource Buttons}" Click="AddImageBt_Click"/>
+                    Style="{StaticResource Buttons}" 
+                    Click="AddImageBt_Click"/>
+            
         </StackPanel>
         <StackPanel HorizontalAlignment="Center"
                             VerticalAlignment="Center"

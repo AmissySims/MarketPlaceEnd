@@ -34,22 +34,7 @@
                               SelectedIndex="0"
                               Height="30"/>
                 </StackPanel>
-            <!--<StackPanel Orientation="Horizontal">
-                <TextBlock Text="Фильтр"
-                               Margin="10"/>
-                <ComboBox
-                              x:Name="FiltrCb" 
-                              Margin="5"
-                              Width="90" SelectionChanged="FiltrCb_SelectionChanged"
-                              SelectedIndex="0"
-                              Height="30">
-                    <ComboBoxItem  Tag="All" Content="Все"/>
-                    <ComboBoxItem Tag="MinPrice" Content="Мин. цена"/>
-                    <ComboBoxItem Tag="MaxPrice" Content="Макс. цена"/>
-                    <ComboBoxItem Tag="TitleAlfaA" Content="А-Я"/>
-                    <ComboBoxItem Tag="TitleAlfaZ" Content="Я-А"/>
-                </ComboBox>
-            </StackPanel>-->
+          
             <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Поиск"
                                Margin="10"/>
