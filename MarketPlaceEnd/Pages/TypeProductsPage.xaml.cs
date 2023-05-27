@@ -27,8 +27,16 @@ namespace MarketPlaceEnd.Pages
         {
             InitializeComponent();
             Sort();
-           
-           
+            if (Account.AuthUser.RoleId == 1)
+            {
+                AddTypeBt.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AddTypeBt.Visibility = Visibility.Collapsed;
+            }
+
+
         }
 
         public void Sort()

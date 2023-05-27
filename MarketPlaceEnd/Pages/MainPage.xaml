@@ -24,38 +24,44 @@
                Margin="5"/>
         <StackPanel Orientation="Horizontal"
                     Grid.Row="0"
-                    HorizontalAlignment="Right" Margin="25 0">
+                    HorizontalAlignment="Right" Margin="5 0">
 
             <Button Style="{StaticResource 1Button}"
                     Content="Товары"
                     x:Name="ProductsBt"
                      Margin="5 0"
-                    Width="100"
+                    Width="90"
                     Click="ProductsBt_Click"/>
             <Button Style="{StaticResource 1Button}"
                     Content="Корзина"
                     x:Name="BucketBt"
                     Margin="5 0"
-                     Width="100"
+                     Width="90"
                     Click="BucketBt_Click"/>
             <Button Style="{StaticResource 1Button}"
                     Content="Профиль"
                     x:Name="UserBt"
                     Margin="5 0"
-                     Width="100"
+                     Width="90"
                     Click="AccountBt_Click"/>
             <Button Style="{StaticResource 1Button}"
                     Content="Поставщики"
                     x:Name="ProvBt"
                     Margin="5 0"
-                     Width="100"
+                     Width="90"
                     Click="ProvBt_Click"/>
             <Button Style="{StaticResource 1Button}"
                     Content="Категории"
                     x:Name="TypesBt"
                     Margin="5 0"
-                     Width="100"
+                     Width="90"
                     Click="TypesBt_Click"/>
+            <Button Style="{StaticResource 1Button}"
+                    Content="Выход из системы"
+                    x:Name="EnterBt"
+                    Margin="5 0"
+                     Width="90"
+                    Click="EnterBt_Click"/>
         </StackPanel>
         <Frame Grid.Row="1" x:Name="Frame2" NavigationUIVisibility="Hidden"/>
     </Grid>

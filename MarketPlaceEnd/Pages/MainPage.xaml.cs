@@ -24,13 +24,23 @@ namespace MarketPlaceEnd.Pages
         public MainPage()
         {
             InitializeComponent();
+            if(Account.AuthUser.RoleId == 3 )
+            {
+                ProvBt.Visibility = Visibility.Collapsed;
+                TypesBt.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                ProvBt.Visibility = Visibility.Visible;
+                TypesBt.Visibility = Visibility.Visible;
+            }
         }
 
         
 
         private void BucketBt_Click(object sender, RoutedEventArgs e)
         {
-           
+            Frame2.NavigationService.Navigate(new BusketPage());
         }
 
         private void AccountBt_Click(object sender, RoutedEventArgs e)
@@ -53,6 +63,11 @@ namespace MarketPlaceEnd.Pages
         private void TypesBt_Click(object sender, RoutedEventArgs e)
         {
             Frame2.NavigationService.Navigate(new TypeProductsPage());
+        }
+
+        private void EnterBt_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AuthPage());
         }
     }
 }

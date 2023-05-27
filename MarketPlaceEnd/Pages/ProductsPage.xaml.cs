@@ -38,6 +38,14 @@ namespace MarketPlaceEnd.Pages
            TypeProdCb.ItemsSource = listTypes;
             TypeProdCb.SelectedIndex = 0;
             Sort();
+            if (Account.AuthUser.RoleId == 1)
+            {
+                AddPrBt.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AddPrBt.Visibility = Visibility.Collapsed;
+            }
 
         }
          private void Refresh()

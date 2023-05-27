@@ -21,16 +21,7 @@ namespace MarketPlaceEnd.Models
                 return null;
             }
         }
-        //public string IsAvalib 
-            //{
-            //    get
-            //    {
-            //        if(Count == 0)
-            //        {
-            //            return ""
-            //        }
-            //    }
-            //}
+    
         public Visibility BtnVisible 
         { 
             get

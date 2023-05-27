@@ -67,6 +67,9 @@
     </ApplicationDefinition>
     <Compile Include="Models\Partials\Account.cs" />
     <Compile Include="Models\Partials\Order.cs" />
+    <Compile Include="Pages\BusketPage.xaml.cs">
+      <DependentUpon>BusketPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LookProductPage.xaml.cs">
       <DependentUpon>LookProductPage.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AuthPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BusketPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
