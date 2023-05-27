@@ -48,9 +48,9 @@
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Фамилия"
-                                   Margin="5"/>
+                                   Margin="5 "/>
                                         <TextBlock Text="{Binding FName}"
-                                   Margin="5"/>
+                                   Margin="5 "/>
 
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
