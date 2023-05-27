@@ -49,5 +49,10 @@ namespace MarketPlaceEnd.Pages
         {
             Frame2.NavigationService.Navigate(new ProductsPage());
         }
+
+        private void TypesBt_Click(object sender, RoutedEventArgs e)
+        {
+            Frame2.NavigationService.Navigate(new TypeProductsPage());
+        }
     }
 }

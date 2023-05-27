@@ -50,6 +50,12 @@
                     Margin="5 0"
                      Width="100"
                     Click="ProvBt_Click"/>
+            <Button Style="{StaticResource 1Button}"
+                    Content="Категории"
+                    x:Name="TypesBt"
+                    Margin="5 0"
+                     Width="100"
+                    Click="TypesBt_Click"/>
         </StackPanel>
         <Frame Grid.Row="1" x:Name="Frame2" NavigationUIVisibility="Hidden"/>
     </Grid>

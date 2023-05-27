@@ -5,10 +5,72 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MarketPlaceEnd.Pages"
       mc:Ignorable="d" 
+      Loaded="Page_Loaded"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ProvidersPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="17*"/>
+        </Grid.RowDefinitions>
+        <Rectangle Fill="#FFD9C09F" Grid.Row="0" Margin="0 5"/>
+        <StackPanel Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Поиск"
+                               Margin="10"/>
+                <TextBox x:Name="FoundTb"
+                             Width="220"
+                             Margin="5" TextChanged="FoundTb_TextChanged"/>
+            </StackPanel>
+            <Button x:Name="AddProvBt"
+                        Style="{StaticResource Buttons}"
+                        Content=" Добавить поставщика "
+                        Margin="5" Click="AddProvBt_Click"/>
+        </StackPanel>
+        <ListView d:ItemsSource="{d:SampleData ItemCount=5}"
+                  HorizontalAlignment="Center"
+                  Grid.Row="1"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  Margin="10"
+                  x:Name="ProvidersList">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="White" BorderBrush="Gold" BorderThickness="2" Padding="3" Margin="5 5">
+                        <Grid>
+                            <StackPanel >
+                                <TextBlock Text="{Binding Title}"
+                                           HorizontalAlignment="Center"/>
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="Адрес" />
+                                    <TextBlock Text="{Binding Adress}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Удалить"
+                                            Style="{StaticResource Buttons}"
+                                            Margin="5"
+                                            x:Name="DeleteProveBt"
+                                            Click="DeleteProveBt_Click"/>
+                                    <Button Content="Редактировать"
+                                            Style="{StaticResource Buttons}"
+                                            Margin="5"
+                                            x:Name="EditProvBt"
+                                            Click="EditProvBt_Click"/>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView> 
     </Grid>
 </Page>

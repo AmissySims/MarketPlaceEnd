@@ -48,7 +48,7 @@
                 </StackPanel>
                 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Тип товара"
+                    <TextBlock Text="Категория товара"
                                Margin="5"/>
                     <ComboBox x:Name="CbType"  
                               Margin="5"

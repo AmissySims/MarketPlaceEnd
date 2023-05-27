@@ -9,6 +9,29 @@
       Title="AddEditProviderPage">
 
     <Grid>
-        
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Название" HorizontalAlignment="Center"
+                       Margin="5"/>
+            <TextBox Width="200"
+                     Margin="5"
+                      x:Name="TitleTb"
+                     Text="{Binding Title}"/>
+            <TextBlock Text="Адрес" HorizontalAlignment="Center"
+                       Margin="5"/>
+            <TextBox Width="200"
+                     Margin="5"
+                      x:Name="AdressTb"
+                     Text="{Binding Adress}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Style="{StaticResource Buttons}"
+                        x:Name="SaveBt"
+                        Content="Сохранить"
+                        Margin="5" Click="SaveBt_Click"/>
+                <Button Style="{StaticResource Buttons}"
+                        x:Name="CancelBt"
+                        Content="Отмена"
+                        Margin="5" Click="CancelBt_Click"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

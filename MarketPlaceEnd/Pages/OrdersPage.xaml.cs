@@ -1,18 +1,8 @@
 ﻿using MarketPlaceEnd.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MarketPlaceEnd.Pages
 {
@@ -25,18 +15,30 @@ namespace MarketPlaceEnd.Pages
         public OrdersPage()
         {
             InitializeComponent();
-            if(Account.AuthUser.RoleId == 3)
+           
+            List<StatusOrder> listStatus = _context.StatusOrder.ToList();
+
+            listStatus.Insert(0, new StatusOrder {Title = "Все"});
+
+            StatusCb.ItemsSource = listStatus;
+            StatusCb.SelectedIndex = 0;
+            Sort();
+
+
+        }
+        public void Refresh()
+        {
+            if (Account.AuthUser.RoleId == 3)
             {
                 OrderList.ItemsSource = App.db.Order.Where(z => z.UserId == Account.AuthUser.Id).ToList();
+                Sort();
             }
             else
             {
                 OrderList.ItemsSource = App.db.Order.ToList();
+                Sort();
             }
-            Sort();
-           
         }
-
         private void Sort()
         {
             List<Order> listOrder = _context.Order.ToList();
@@ -46,12 +48,16 @@ namespace MarketPlaceEnd.Pages
                 StatusOrder selOrder = (StatusOrder)StatusCb.SelectedItem;
                 listOrder = listOrder.Where(x => x.StatusOrderId == selOrder.Id).ToList();
             }
+            OrderList.ItemsSource = listOrder;
         }
         private void StatusCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Sort();
         }
 
-      
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MarketPlaceEnd.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,52 @@ namespace MarketPlaceEnd.Pages.AddEditPages
     /// </summary>
     public partial class AddEditProviderPage : Page
     {
-        public AddEditProviderPage()
+        Provider contextProv;
+        DbPropertyValues oldValues;
+        public AddEditProviderPage(Provider prov)
         {
             InitializeComponent();
+            contextProv = prov;
+            DataContext = contextProv;
+
+            if (contextProv.Id != 0)
+            {
+                oldValues = App.db.Entry(contextProv).CurrentValues.Clone();
+            }
+        }
+
+        private void CancelBt_Click(object sender, RoutedEventArgs e)
+        {
+            if (oldValues != null)
+            {
+                App.db.Entry(contextProv).CurrentValues.SetValues(oldValues);
+
+            }
+            NavigationService.GoBack();
+        }
+
+        private void SaveBt_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(contextProv.Title))
+            {
+                MessageBox.Show("Заполните поле названия", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(contextProv.Adress))
+            {
+                MessageBox.Show("Заполните поле адреса", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else
+            {
+                if (contextProv .Id == 0)
+                {
+                    App.db.Provider.Add(contextProv);
+                }
+                App.db.SaveChanges();
+                MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.GoBack();
+            }
         }
     }
 }

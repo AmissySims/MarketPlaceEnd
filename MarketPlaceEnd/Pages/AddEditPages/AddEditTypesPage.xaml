@@ -5,10 +5,28 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MarketPlaceEnd.Pages.AddEditPages"
       mc:Ignorable="d" 
+     
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddEditTypesPage">
 
     <Grid>
-        
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Название" HorizontalAlignment="Center"
+                       Margin="5"/>
+            <TextBox Width="200"
+                     Margin="5"
+                     x:Name="TitleTb"
+                     Text="{Binding Title}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Style="{StaticResource Buttons}"
+                        x:Name="SaveBt"
+                        Content="Сохранить"
+                        Margin="5" Click="SaveBt_Click"/>
+                <Button Style="{StaticResource Buttons}"
+                        x:Name="CancelBt"
+                        Content="Отмена"
+                        Margin="5" Click="CancelBt_Click"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

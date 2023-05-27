@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MarketPlaceEnd.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,47 @@ namespace MarketPlaceEnd.Pages.AddEditPages
     /// </summary>
     public partial class AddEditTypesPage : Page
     {
-        public AddEditTypesPage()
+        TypeProduct contextType;
+        DbPropertyValues oldValues;
+        public AddEditTypesPage(TypeProduct type)
         {
             InitializeComponent();
+            contextType = type;
+            DataContext = contextType;
+            
+            if (contextType.Id != 0)
+            {
+                oldValues = App.db.Entry(contextType).CurrentValues.Clone();
+            }
+        }
+
+        private void SaveBt_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(contextType.Title))
+            {
+                MessageBox.Show("Заполните поле названия", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            else
+            {
+                if (contextType.Id == 0)
+                {
+                    App.db.TypeProduct.Add(contextType);
+                }
+                App.db.SaveChanges();
+                MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.GoBack();
+            }
+        }
+
+        private void CancelBt_Click(object sender, RoutedEventArgs e)
+        {
+            if (oldValues != null)
+            {
+                App.db.Entry(contextType).CurrentValues.SetValues(oldValues);
+
+            }
+            NavigationService.GoBack();
         }
     }
 }

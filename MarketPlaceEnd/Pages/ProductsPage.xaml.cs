@@ -59,29 +59,7 @@ namespace MarketPlaceEnd.Pages
                 listProd = listProd.Where(x => x.Title.ToLower().Contains(searchString.ToLower())).ToList();
                 ListProducts.ItemsSource = listProd;
             }
-            //if (FiltrCb.SelectedItem != null)
-            //{
-            //    switch ((FiltrCb.SelectedItem as ComboBoxItem).Tag)
-            //    {
-            //        case "All":
-            //            listProd = _context.Product.ToList();
-            //            break;
-            //        case "MinPrice":
-            //            listProd = listProd.OrderBy(x => x.Price).ToList();
-            //            break;
-            //        case "MaxPrice":
-            //            listProd = listProd.OrderByDescending(x => x.Price).ToList();
-            //            break;
-            //        case "TitleAlfaA":
-            //            listProd = listProd.OrderBy(x => x.Title).ToList();
-            //            break;
-            //        case "TitleAlfaZ":
-            //            listProd = listProd.OrderByDescending(x => x.Title).ToList();
-            //            break;
-            //        default:
-            //            break;
-            //    }
-            //}
+           
             ListProducts.ItemsSource = listProd;
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -131,9 +109,6 @@ namespace MarketPlaceEnd.Pages
 
         }
 
-        //private void FiltrCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    Sort();
-        //}
+       
     }
 }
