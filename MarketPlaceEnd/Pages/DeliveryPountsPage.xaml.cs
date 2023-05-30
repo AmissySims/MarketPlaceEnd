@@ -25,5 +25,15 @@ namespace MarketPlaceEnd.Pages
             InitializeComponent();
             PointsList.ItemsSource = App.db.DeliveryPoint.ToList();
         }
+
+        private void EditPoint_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeletePoint_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
