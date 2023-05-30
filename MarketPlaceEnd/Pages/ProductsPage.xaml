@@ -38,7 +38,7 @@
                         Content="Косметика" Click="CosmeticBt_Click"/>
                 <Button Style="{StaticResource 1Button}"
                         x:Name="ClothesBt" 
-                        Margin="5"
+                        Margin="5 0"
                         Content="Одежда" Click="ClothesBt_Click"/>
                 <Button Style="{StaticResource 1Button}" 
                         x:Name="SportBt" 
@@ -60,7 +60,7 @@
                 </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Фильтр"
-                               Margin="10"/>
+                               Margin="6 11"/>
                 <ComboBox x:Name="FilterCb" 
                               Margin="5"
                               Width="50" SelectionChanged="FilterCb_SelectionChanged"
@@ -70,7 +70,7 @@
 
             <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Поиск"
-                               Margin="10"/>
+                               Margin="6 11"/>
                     <TextBox x:Name="FoundTb"
                              Width="90"
                              Margin="5" TextChanged="FoundTb_TextChanged"/>

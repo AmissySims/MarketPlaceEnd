@@ -22,12 +22,6 @@ namespace MarketPlaceEnd.Models
                 return this.OrderProduct.Sum(x => x.Count * x.Product.Price);
             }
         }
-        public decimal? TotalTotalPrice
-        {
-            get
-            {
-                return this.OrderProduct.Sum(x => x.Order.TotalPrice);
-            }
-        }
+        
     }
 }

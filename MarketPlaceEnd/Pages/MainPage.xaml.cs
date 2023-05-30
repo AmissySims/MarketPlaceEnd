@@ -28,11 +28,13 @@ namespace MarketPlaceEnd.Pages
             {
                 ProvBt.Visibility = Visibility.Collapsed;
                 TypesBt.Visibility = Visibility.Collapsed;
+                DeliveryBt.Visibility = Visibility.Collapsed;
             }
             else
             {
                 ProvBt.Visibility = Visibility.Visible;
                 TypesBt.Visibility = Visibility.Visible;
+                DeliveryBt.Visibility = Visibility.Visible;
             }
         }
 
@@ -74,6 +76,11 @@ namespace MarketPlaceEnd.Pages
         {
 
             Frame2.NavigationService.Navigate(new DeliveryPountsPage());
+        }
+
+        private void MainBt_Click(object sender, RoutedEventArgs e)
+        {
+            Frame2.NavigationService.Navigate(new MainPage());
         }
     }
 }
