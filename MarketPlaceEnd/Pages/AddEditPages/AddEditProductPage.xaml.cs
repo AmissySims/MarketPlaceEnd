@@ -33,11 +33,12 @@ namespace MarketPlaceEnd.Pages.AddEditPages
             CbProv.ItemsSource = App.db.Provider.ToList();
             contextProduct = product;
             DataContext = contextProduct;
-            Refresh();
             if (contextProduct.Id != 0)
             {
                 oldValues = App.db.Entry(contextProduct).CurrentValues.Clone();
             }
+            Refresh();
+         
 
         }
 

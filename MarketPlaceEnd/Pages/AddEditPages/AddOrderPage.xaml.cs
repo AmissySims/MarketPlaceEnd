@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MarketPlaceEnd.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,76 @@ namespace MarketPlaceEnd.Pages.AddEditPages
     /// </summary>
     public partial class AddOrderPage : Page
     {
-        public AddOrderPage()
+        public Order Order { get; set; }
+        public AddOrderPage(Order _order)
         {
+            Order = _order;
             InitializeComponent();
+            var points = App.db.DeliveryPoint.ToList();
+            DeliveryPointCb.ItemsSource = points;
+            var types = App.db.DeliveryType.ToList();
+            DateTb.Text = DateTime.Now.ToString();
+            NameTb.Text = Account.AuthUser.FullName;
+           
+            
+        }
+
+        private void DeliveryCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void DeliveryPointCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Pickup_Checked(object sender, RoutedEventArgs e)
+        {
+            IfPickup.Visibility = Visibility.Visible;
+        }
+
+        private void Pickup_Unchecked(object sender, RoutedEventArgs e)
+        {
+            IfPickup.Visibility = Visibility.Hidden;
+        }
+
+        private void Courier_Checked(object sender, RoutedEventArgs e)
+        {
+            IfPickup.Visibility = Visibility.Hidden;
+        }
+
+        private void Courier_Unchecked(object sender, RoutedEventArgs e)
+        {
+            IfPickup.Visibility = Visibility.Visible;
+        }
+
+        private void OrderBt_Click(object sender, RoutedEventArgs e)
+        {
+            Order ord = new Order();
+            {
+                ord.UserId = Account.AuthUser.Id;
+                ord.AdressDelivery = AdressTb.Text;
+                ord.StatusOrderId = 1;
+                ord.DeliveryPointId = (DeliveryPointCb.SelectedItem as DeliveryPoint).Id;
+                if (Courier.IsChecked == true)
+                {
+                    ord.DeliveryTypeId = 2;
+                }
+                else if(Pickup.IsChecked == true)
+                {
+                    ord.DeliveryTypeId = 1;
+                }
+                else
+                {
+                    MessageBox.Show("Выберите тип доставки", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); 
+                    return;
+                }
+                    
+                ord.Date = DateTime.Now;
+                
+                
+            }
         }
     }
 }

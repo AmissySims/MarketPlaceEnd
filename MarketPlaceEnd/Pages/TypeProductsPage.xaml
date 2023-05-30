@@ -60,6 +60,7 @@
                                             Margin="5"
                                             x:Name="EditTypeBt"
                                             Click="EditTypeBt_Click"/>
+                                   
                                 </StackPanel>
                                
                             </StackPanel>

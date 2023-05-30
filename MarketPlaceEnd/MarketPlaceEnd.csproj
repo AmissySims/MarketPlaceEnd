@@ -66,9 +66,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Partials\Account.cs" />
+    <Compile Include="Models\Partials\DeliveryPoint.cs" />
     <Compile Include="Models\Partials\Order.cs" />
+    <Compile Include="Pages\AddEditPages\AddDeliveryPointPage.xaml.cs">
+      <DependentUpon>AddDeliveryPointPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BusketPage.xaml.cs">
       <DependentUpon>BusketPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DeliveryPountsPage.xaml.cs">
+      <DependentUpon>DeliveryPountsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LookProductPage.xaml.cs">
       <DependentUpon>LookProductPage.xaml</DependentUpon>
@@ -88,6 +95,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\AddEditPages\AddDeliveryPointPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AddEditPages\AddEditProductPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -109,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\BusketPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DeliveryPountsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

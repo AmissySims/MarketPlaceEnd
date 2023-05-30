@@ -69,5 +69,11 @@ namespace MarketPlaceEnd.Pages
         {
             NavigationService.Navigate(new AuthPage());
         }
+
+        private void DeliveryBt_Click(object sender, RoutedEventArgs e)
+        {
+
+            Frame2.NavigationService.Navigate(new DeliveryPountsPage());
+        }
     }
 }

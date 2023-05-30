@@ -26,17 +26,17 @@ namespace MarketPlaceEnd.Pages
     public partial class ProductsPage : Page
     {
         MarketPlaceEntities _context = new MarketPlaceEntities();
-
-       
+      
         public ProductsPage()
         {
             InitializeComponent();
+        
             List<TypeProduct> listTypes = _context.TypeProduct.ToList();
 
             listTypes.Insert(0, new TypeProduct { Title = "Все" });
 
-           TypeProdCb.ItemsSource = listTypes;
-            TypeProdCb.SelectedIndex = 0;
+           //TypeProdCb.ItemsSource = listTypes;
+           // TypeProdCb.SelectedIndex = 0;
             Sort();
             if (Account.AuthUser.RoleId == 1)
             {
@@ -46,21 +46,27 @@ namespace MarketPlaceEnd.Pages
             {
                 AddPrBt.Visibility = Visibility.Collapsed;
             }
+            FilterCb.Items.Add("Все");
+            FilterCb.Items.Add("от 0 до 500 руб.");
+            FilterCb.Items.Add("от 500 до 1500 руб.");
+            FilterCb.Items.Add("от 1500 руб.");
 
         }
          private void Refresh()
          {
             ListProducts.ItemsSource = App.db.Product.ToList();
+            Sort();
          }
         private void Sort()
         {
             List<Product> listProd = _context.Product.ToList();
 
-            if (TypeProdCb.SelectedIndex != 0)
-            {
-                TypeProduct selProd = (TypeProduct)TypeProdCb.SelectedItem;
-                listProd = listProd.Where(x => x.TypeProductId == selProd.Id).ToList();
-            }
+            //if (TypeProdCb.SelectedIndex != 0)
+            //{
+            //    TypeProduct selProd = (TypeProduct)TypeProdCb.SelectedItem;
+            //    listProd = listProd.Where(x => x.TypeProductId == selProd.Id).ToList();
+            //}
+            
             var searchString = FoundTb.Text;
             if (!string.IsNullOrWhiteSpace(searchString))
             {
@@ -68,6 +74,19 @@ namespace MarketPlaceEnd.Pages
                 ListProducts.ItemsSource = listProd;
             }
            
+            if(FilterCb.SelectedIndex == 1)
+            {
+                listProd = listProd.Where(p => p.Price < 500).ToList();
+            }
+            if (FilterCb.SelectedIndex == 2)
+            {
+                listProd = listProd.Where(p => p.Price >= 500 && p.Price < 2000).ToList();
+            }
+            if (FilterCb.SelectedIndex == 3)
+            {
+                listProd = listProd.Where(p => p.Price >= 2000).ToList();
+            }
+
             ListProducts.ItemsSource = listProd;
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -117,6 +136,44 @@ namespace MarketPlaceEnd.Pages
 
         }
 
-       
+        private void FilterCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Sort();
+        }
+
+        private void ElectBt_Click(object sender, RoutedEventArgs e)
+        {
+            ListProducts.ItemsSource = App.db.Product.Where(x => x.TypeProductId == 1).ToList();
+            
+        }
+    
+
+        private void ClothesBt_Click(object sender, RoutedEventArgs e)
+        {
+            ListProducts.ItemsSource = App.db.Product.Where(x => x.TypeProductId == 2).ToList();
+            
+        }
+
+        private void AllBt_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
+
+        private void CosmeticBt_Click(object sender, RoutedEventArgs e)
+        {
+            ListProducts.ItemsSource = App.db.Product.Where(x => x.TypeProductId == 3).ToList();
+          
+        }
+    
+
+        private void SportBt_Click(object sender, RoutedEventArgs e)
+        {
+            ListProducts.ItemsSource = App.db.Product.Where(x => x.TypeProductId == 5).ToList();
+        }
+
+        private void FoodBt_Click(object sender, RoutedEventArgs e)
+        {
+            ListProducts.ItemsSource = App.db.Product.Where(x => x.TypeProductId == 4).ToList();
+        }
     }
 }

@@ -24,27 +24,60 @@
                         Orientation="Horizontal" Margin="5"
                         HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Категория товаров"
+                    <Button Style="{StaticResource 1Button}"
+                            x:Name="AllBt" 
+                            Content="Все"
+                            Margin="5" Click="AllBt_Click"/>
+                <Button Style="{StaticResource 1Button}"
+                        x:Name="ElectBt"
+                        Margin="5"
+                        Content="Электроника" Click="ElectBt_Click"/>
+                <Button Style="{StaticResource 1Button}"
+                        x:Name="CosmeticBt" 
+                        Margin="5"
+                        Content="Косметика" Click="CosmeticBt_Click"/>
+                <Button Style="{StaticResource 1Button}"
+                        x:Name="ClothesBt" 
+                        Margin="5"
+                        Content="Одежда" Click="ClothesBt_Click"/>
+                <Button Style="{StaticResource 1Button}" 
+                        x:Name="SportBt" 
+                        Margin="5"
+                        Content="Спортивные товары" Click="SportBt_Click"/>
+                <Button Style="{StaticResource 1Button}"
+                        x:Name="FoodBt"
+                        Margin="5"
+                        Content="Продукты" Click="FoodBt_Click"/>
+                <!--<TextBlock Text="Категория товаров"
                                Margin="10"/>
                     <ComboBox
                               x:Name="TypeProdCb" 
                               Margin="5"
                                DisplayMemberPath="Title"
-                              Width="150" SelectionChanged="TypeProdCb_SelectionChanged"
+                              Width="120" SelectionChanged="TypeProdCb_SelectionChanged"
+                              SelectedIndex="0"
+                              Height="30"/>-->
+                </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Фильтр"
+                               Margin="10"/>
+                <ComboBox x:Name="FilterCb" 
+                              Margin="5"
+                              Width="50" SelectionChanged="FilterCb_SelectionChanged"
                               SelectedIndex="0"
                               Height="30"/>
-                </StackPanel>
-          
+            </StackPanel>
+
             <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Поиск"
                                Margin="10"/>
                     <TextBox x:Name="FoundTb"
-                             Width="220"
+                             Width="90"
                              Margin="5" TextChanged="FoundTb_TextChanged"/>
                 </StackPanel>
                 <Button x:Name="AddPrBt"
                         Style="{StaticResource Buttons}"
-                        Content=" Добавить товар "
+                        Content=" Добавить "
                         Margin="5" Click="AddPrBt_Click"/>
             </StackPanel>
             <ListView x:Name="ListProducts"
