@@ -1,4 +1,5 @@
 ﻿using MarketPlaceEnd.Models;
+using MarketPlaceEnd.Windows;
 using System.Collections.Generic;
 using System.IO.Packaging;
 using System.Linq;
@@ -12,16 +13,11 @@ namespace MarketPlaceEnd.Pages
     /// </summary>
     public partial class OrdersPage : Page
     {
-        MarketPlaceEntities _context = new MarketPlaceEntities();
+        
         public OrdersPage()
         {
             InitializeComponent();
             
-           
-           
-
-
-
         }
         public void Refresh()
         {
@@ -40,6 +36,15 @@ namespace MarketPlaceEnd.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
            Refresh();
+        }
+
+        private void EditOrder_Click(object sender, RoutedEventArgs e)
+        {
+            EditOrderWindow selOrder = new EditOrderWindow((sender as Button).DataContext as Order);
+            selOrder.ShowDialog();
+            Refresh();
+
+
         }
     }
 }

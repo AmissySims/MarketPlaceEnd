@@ -88,6 +88,7 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                 }
                     
                 ord.Date = DateTime.Now;
+                ord.Price = ord.TotalPrice;
                 
                 
             }

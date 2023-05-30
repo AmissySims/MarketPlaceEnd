@@ -80,7 +80,7 @@ namespace MarketPlaceEnd.Pages
 
         private void MainBt_Click(object sender, RoutedEventArgs e)
         {
-            Frame2.NavigationService.Navigate(new MainPage());
+            NavigationService.Navigate(new MainPage());
         }
     }
 }
