@@ -33,7 +33,7 @@
                     Width="90"
                     Click="ProductsBt_Click"/>
             <Button Style="{StaticResource 1Button}"
-                    Content="Выход из системы"
+                    Content="Пункты выдачи"
                     x:Name="DeliveryBt"
                     Margin="5 0"
                      Width="90"
