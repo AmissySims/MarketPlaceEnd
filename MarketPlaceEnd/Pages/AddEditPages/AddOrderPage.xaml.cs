@@ -21,23 +21,23 @@ namespace MarketPlaceEnd.Pages.AddEditPages
     /// </summary>
     public partial class AddOrderPage : Page
     {
-        public Order Order { get; set; }
-        public AddOrderPage(Order _order)
+        private List<Product> bucketList;
+        public List<Product> Bucket { get; set; }
+
+        public AddOrderPage(List<Product> bucketList)
         {
-            Order = _order;
             InitializeComponent();
+            Bucket = bucketList;
             var points = App.db.DeliveryPoint.ToList();
             DeliveryPointCb.ItemsSource = points;
             var types = App.db.DeliveryType.ToList();
             DateTb.Text = DateTime.Now.ToString();
             NameTb.Text = Account.AuthUser.FullName;
-           
-            
         }
 
         private void DeliveryCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
 
         private void DeliveryPointCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -67,31 +67,59 @@ namespace MarketPlaceEnd.Pages.AddEditPages
 
         private void OrderBt_Click(object sender, RoutedEventArgs e)
         {
-            Order ord = new Order();
+            try
             {
-                ord.UserId = Account.AuthUser.Id;
-                ord.AdressDelivery = AdressTb.Text;
-                ord.StatusOrderId = 1;
-                ord.DeliveryPointId = (DeliveryPointCb.SelectedItem as DeliveryPoint).Id;
-                if (Courier.IsChecked == true)
+                Order ord = new Order();
                 {
-                    ord.DeliveryTypeId = 2;
+                    ord.UserId = Account.AuthUser.Id;
+                    ord.AdressDelivery = AdressTb.Text;
+                    ord.StatusOrderId = 1;
+                    ord.DeliveryPointId = (DeliveryPointCb.SelectedItem as DeliveryPoint).Id;
+                    if (Courier.IsChecked == true)
+                    {
+                        ord.DeliveryTypeId = 2;
+                    }
+                    else if (Pickup.IsChecked == true)
+                    {
+                        ord.DeliveryTypeId = 1;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Выберите тип доставки", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    ord.Date = DateTime.Now;
+                    ord.Price = Bucket.Sum(b => b.Count * b.Price);
                 }
-                else if(Pickup.IsChecked == true)
+                //Добавление в Order
+                App.db.Order.Add(ord);
+
+                //Удаление корзины
+                var bucketsToRemove = App.db.Bucket.Where(b => b.UserId == Account.AuthUser.Id).ToList();
+                App.db.Bucket.RemoveRange(bucketsToRemove);
+
+                //Добавление в OrderProduct
+                foreach (var b in bucketsToRemove)
                 {
-                    ord.DeliveryTypeId = 1;
+                    var orderProduct = new OrderProduct
+                    {
+                        ProductId = b.ProductId,
+                        Count = b.Quantity,
+                        OrderId = ord.Id
+                    };
+                    App.db.OrderProduct.Add(orderProduct);
                 }
-                else
-                {
-                    MessageBox.Show("Выберите тип доставки", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); 
-                    return;
-                }
-                    
-                ord.Date = DateTime.Now;
-                ord.Price = ord.TotalPrice;
-                
-                
+
+                //Сохранение
+                App.db.SaveChanges();
+                MessageBox.Show("Заказ успешно добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Произошла ошибка при оформлении заказа: " + ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
     }
 }

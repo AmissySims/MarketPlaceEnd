@@ -41,7 +41,30 @@ namespace MarketPlaceEnd.Pages
 
         private void BucketBt_Click(object sender, RoutedEventArgs e)
         {
+            //Добавление товара в коризну
+            try
+            {
+                var selectedProduct = (sender as Button).DataContext as Product;
+                Bucket bucket = new Bucket
+                {
+                    Quantity = (int)selectedProduct.Count,
+                    UserId = Account.AuthUser.Id,
+                    ProductId = selectedProduct.Id
+                };
+                App.db.Bucket.Add(bucket);
+                App.db.SaveChanges();
+                MessageBoxResult result = MessageBox.Show("Товар добавлен в корзину. Хотите перейти в корзину сейчас?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+                // Если пользователь выбрал "Да", перейти на вкладку корзины
+                if (result == MessageBoxResult.Yes)
+                {
+                    NavigationService.Navigate(new BusketPage());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при добавлении в корзину: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

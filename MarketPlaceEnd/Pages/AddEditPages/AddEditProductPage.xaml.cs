@@ -44,22 +44,33 @@ namespace MarketPlaceEnd.Pages.AddEditPages
 
         private void ImageBt_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new OpenFileDialog() { Multiselect = true };
-            if (dialog.ShowDialog().GetValueOrDefault())
+            try
             {
-                foreach (var item in dialog.FileNames)
+                var dialog = new OpenFileDialog() { Multiselect = true };
+                if (dialog.ShowDialog().GetValueOrDefault())
                 {
-                    contextProduct.ProductPhoto.Add(new ProductPhoto()
+                    if (dialog.FileNames.Length > 0)
                     {
-                        Image = File.ReadAllBytes(item),
-                        Product = contextProduct
-                    });
-                }
+                        foreach (var item in dialog.FileNames)
+                        {
+                            contextProduct.ProductPhoto.Add(new ProductPhoto()
+                            {
+                                Image = File.ReadAllBytes(item),
+                                Product = contextProduct
+                            });
+                        }
 
-                Refresh();
-                DataContext = null;
-                DataContext = contextProduct;
+                        Refresh();
+                        DataContext = null;
+                        DataContext = contextProduct;
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Произошла ошибка: " + ex.Message);
+            }
+
         }
 
         private void Refresh()

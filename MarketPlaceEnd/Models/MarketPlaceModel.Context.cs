@@ -34,8 +34,8 @@ namespace MarketPlaceEnd.Models
         public virtual DbSet<Provider> Provider { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<StatusOrder> StatusOrder { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TypeProduct> TypeProduct { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Bucket> Bucket { get; set; }
     }
 }

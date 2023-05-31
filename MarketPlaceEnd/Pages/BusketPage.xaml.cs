@@ -22,18 +22,35 @@ namespace MarketPlaceEnd.Pages
     /// </summary>
     public partial class BusketPage : Page
     {
-        public static List<Product> productList { get; set; }
+        private decimal TotalPrice;
+        public static List<Product> bucketList { get; set; }
         public BusketPage()
         {
             InitializeComponent();
-            //LIstBucket.ItemsSource = App.db.OrderProduct.ToList();
-            productList = new List<Product>();
+            //Отображение корзины конкретного пользователя
+            bucketList = new List<Product>();
+            bucketList = App.db.Bucket
+                    .Where(b => b.ProductId == b.Product.Id || b.UserId == Account.AuthUser.Id)
+                    .Select(b => b.Product) 
+                    .ToList();
 
+            foreach (var item in bucketList)
+            {
+                decimal totalPrice = (decimal)(item.Price * item.Count);
+
+                TotalPrice = totalPrice;
+            }
+            LIstBucket.ItemsSource = bucketList;
         }
 
         private void OrderBt_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddOrderPage(new Order()));
+            NavigationService.Navigate(new AddOrderPage(bucketList));
+        }
+
+        private void DeleteCommand(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

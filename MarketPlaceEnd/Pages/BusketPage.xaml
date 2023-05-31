@@ -43,33 +43,42 @@
                                 <ColumnDefinition Width="19*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Margin="5">
-                                <Image Source="{Binding Product.MainPhoto}"
+                                <Image Source="{Binding MainPhoto}"
                                    Width="100"
                                    Height="100"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1">
                                 <StackPanel>
-                                    <TextBlock Text="{Binding Product.Title}"
-                                           Margin="5"/>
+                                    <TextBlock Text="{Binding Title}"
+                                    Margin="5"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" >
-                                    <TextBlock Text="Cost" Margin="10 0"/>
-                                    <TextBlock Text="{Binding Product.TotalPrice}"
-                                               Margin="10 0"/>
+                                    <TextBlock Text="Цена за штуку" Margin="10 0"/>
+                                    <TextBlock Text="{Binding Price}"
+                                     Margin="10 0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Text="Сумма" Margin="10 0"/>
+                                    <TextBlock Text="{Binding TotalPrice}"
+                                     Margin="10 0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Count" Margin="10 0"/>
+                                    <TextBlock Text="Количество" Margin="10 0"/>
                                     <TextBox x:Name="CountTb"
-                                          Width="60"/>
+                                        Width="60"
+                                        Text="{Binding Count}"/>
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Grid.Column="2">
                                 <Button x:Name="DeleteBt"
-                                            Content=" Удалить из корзины "
-                                            Margin="10"
-                                            Style="{StaticResource Buttons}"/>
+                                    Content=" Удалить из корзины "
+                                    Margin="10"
+                                    Style="{StaticResource Buttons}"
+                                    Command="{Binding DeleteCommand}"
+                                    CommandParameter="{Binding Product}"/>
                             </StackPanel>
                         </Grid>
+
                     </Border>
               
                 </DataTemplate>

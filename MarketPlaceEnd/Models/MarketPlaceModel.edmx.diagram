@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="56c74aff4e6d44bcb74a8a86094610c2" Name="Diagram1">
+      <Diagram DiagramId="56c74aff4e6d44bcb74a8a86094610c2" Name="Diagram1" ZoomLevel="72">
         <EntityTypeShape EntityType="MarketPlaceModel.DeliveryPoint" Width="1.5" PointX="3" PointY="5.125" />
         <EntityTypeShape EntityType="MarketPlaceModel.DeliveryType" Width="1.5" PointX="3" PointY="7.5" />
         <EntityTypeShape EntityType="MarketPlaceModel.Order" Width="1.5" PointX="5.25" PointY="1" />
@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="MarketPlaceModel.Provider" Width="1.5" PointX="3" PointY="15" />
         <EntityTypeShape EntityType="MarketPlaceModel.Role" Width="1.5" PointX="0.75" PointY="2" />
         <EntityTypeShape EntityType="MarketPlaceModel.StatusOrder" Width="1.5" PointX="3" PointY="9.75" />
-        <EntityTypeShape EntityType="MarketPlaceModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" />
         <EntityTypeShape EntityType="MarketPlaceModel.TypeProduct" Width="1.5" PointX="3" PointY="12.625" />
         <EntityTypeShape EntityType="MarketPlaceModel.User" Width="1.5" PointX="3" PointY="1.375" />
         <AssociationConnector Association="MarketPlaceModel.FK_Order_DeliveryPoint" />
@@ -27,6 +26,9 @@
         <AssociationConnector Association="MarketPlaceModel.FK_Product_TypeProduct" />
         <AssociationConnector Association="MarketPlaceModel.FK_ProductPhoto_Product" />
         <AssociationConnector Association="MarketPlaceModel.FK_User_Role" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Bucket" Width="1.5" PointX="7.5" PointY="16.875" />
+        <AssociationConnector Association="MarketPlaceModel.FK__Bucket__ProductI__4316F928" />
+        <AssociationConnector Association="MarketPlaceModel.FK__Bucket__UserId__45F365D3" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

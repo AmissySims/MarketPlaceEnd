@@ -16,6 +16,7 @@
                     <TextBox Text="{Binding Title}" Width="250"
                              TextWrapping="Wrap"
                              Margin="5"
+                             MaxLength="50"
                              x:Name="TitleTb"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -26,6 +27,7 @@
                              Width="250"
                              TextWrapping="Wrap"
                              Margin="5"
+                             MaxLength="2000"
                               x:Name="DescTb"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -34,6 +36,7 @@
                     <TextBox Text="{Binding Price}"
                              TextWrapping="Wrap"
                              Margin="5"
+                             MaxLength="18"
                              Width="70"
                               x:Name="PriceTb"
                              PreviewTextInput="PriceTb_PreviewTextInput"/>
@@ -42,6 +45,7 @@
                     <TextBox Text="{Binding Count}"
                              TextWrapping="Wrap"
                              Margin="5"
+                             MaxLength="6"
                               Width="70"
                               x:Name="CountTb"
                              PreviewTextInput="CountTb_PreviewTextInput"/>

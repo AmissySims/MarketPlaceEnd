@@ -65,7 +65,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Bucket.cs">
+      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Partials\Account.cs" />
+    <Compile Include="Models\Partials\Busket.cs" />
     <Compile Include="Models\Partials\DeliveryPoint.cs" />
     <Compile Include="Models\Partials\Order.cs" />
     <Compile Include="Pages\AddEditPages\AddDeliveryPointPage.xaml.cs">
@@ -214,9 +218,6 @@
       <DependentUpon>MarketPlaceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StatusOrder.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>MarketPlaceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TypeProduct.cs">

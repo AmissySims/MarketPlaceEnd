@@ -49,15 +49,15 @@ namespace MarketPlaceEnd.Pages
             FilterCb.Items.Add("от 0 до 500 руб.");
             FilterCb.Items.Add("от 500 до 1500 руб.");
             FilterCb.Items.Add("от 1500 руб.");
-           
+
 
         }
-         private void Refresh()
-         {
+        private void Refresh()
+        {
 
             var products = App.db.Product.ToList();
             var searchString = FoundTb.Text;
-            if(selType != null)
+            if (selType != null)
             {
                 products = products.Where(x => x.TypeProductId == selType.Id).ToList();
             }
@@ -79,15 +79,38 @@ namespace MarketPlaceEnd.Pages
             }
             ListProducts.ItemsSource = products;
         }
-        
-       
+
+
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Refresh();
         }
         private void AddInBucketBt_Click(object sender, RoutedEventArgs e)
         {
+            try 
+            { 
+                //Добавление товара в коризну
+                var selectedProduct = (sender as Button).DataContext as Product;
+                Bucket bucket = new Bucket
+                {
+                    Quantity = (int)selectedProduct.Count,
+                    UserId = Account.AuthUser.Id,
+                    ProductId = selectedProduct.Id
+                };
+                App.db.Bucket.Add(bucket);
+                App.db.SaveChanges();
+                MessageBoxResult result = MessageBox.Show("Товар добавлен в корзину. Хотите перейти в корзину сейчас?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+                // Если пользователь выбрал "Да", перейти на вкладку корзины
+                if (result == MessageBoxResult.Yes)
+                {
+                    NavigationService.Navigate(new BusketPage());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при добавлении в корзину: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private void RemovePrBt_Click(object sender, RoutedEventArgs e)
         {
