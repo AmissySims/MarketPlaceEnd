@@ -49,6 +49,21 @@ namespace MarketPlaceEnd.Pages
 
         private void OrderBt_Click(object sender, RoutedEventArgs e)
         {
+            foreach (var buc in productList)
+            {
+                int countProd = App.db.Product.Where(p => p.Id == buc.Id).Select(p => p.Count).First() ?? -1;
+                if (countProd < buc.Count)
+                {
+                    MessageBox.Show($"Остаток на складе {countProd}, укажите верное количество", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else if (countProd == -1)
+                {
+                    MessageBox.Show("Ошибка товара на складе", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
             NavigationService.Navigate(new AddOrderPage(productList));
         }
 
