@@ -22,7 +22,7 @@ namespace MarketPlaceEnd.Pages
     /// </summary>
     public partial class BusketPage : Page
     {
-        private decimal TotalPrice;
+        public decimal TotalPrice;
         public static List<Product> bucketList { get; set; }
         public BusketPage()
         {
@@ -33,24 +33,50 @@ namespace MarketPlaceEnd.Pages
                     .Where(b => b.ProductId == b.Product.Id || b.UserId == Account.AuthUser.Id)
                     .Select(b => b.Product) 
                     .ToList();
-
-            foreach (var item in bucketList)
-            {
-                decimal totalPrice = (decimal)(item.Price * item.Count);
-
-                TotalPrice = totalPrice;
-            }
             LIstBucket.ItemsSource = bucketList;
         }
 
         private void OrderBt_Click(object sender, RoutedEventArgs e)
         {
+            foreach(var buc in bucketList)
+            {
+                int countProd = App.db.Product.Where(p => p.Id == buc.Id).Select(p => p.Count).First() ?? -1;
+                if (countProd < buc.Count)
+                {
+                    MessageBox.Show($"Остаток на складе {countProd}, укажите верное количество", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else if (countProd == -1)
+                {
+                    MessageBox.Show("Ошибка товара на складе", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
             NavigationService.Navigate(new AddOrderPage(bucketList));
         }
 
         private void DeleteCommand(object sender, RoutedEventArgs e)
         {
-            
+            var selectedProduct = (sender as Button).DataContext as Product;
+            if (selectedProduct != null)
+            {
+                try
+                {
+                    var rm = App.db.Bucket.Where(b => b.ProductId == selectedProduct.Id).FirstOrDefault();
+                    App.db.Bucket.Remove(rm);
+                    App.db.SaveChanges();
+                    bucketList.Remove(selectedProduct);
+                    LIstBucket.ItemsSource = null;
+                    LIstBucket.ItemsSource = bucketList;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Не удалось удалить товар из корзины. Ошибка: {ex}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+            }
         }
+
     }
 }

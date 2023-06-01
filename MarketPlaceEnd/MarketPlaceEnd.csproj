@@ -69,7 +69,6 @@
       <DependentUpon>MarketPlaceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Partials\Account.cs" />
-    <Compile Include="Models\Partials\Busket.cs" />
     <Compile Include="Models\Partials\DeliveryPoint.cs" />
     <Compile Include="Models\Partials\Order.cs" />
     <Compile Include="Pages\AddEditPages\AddDeliveryPointPage.xaml.cs">

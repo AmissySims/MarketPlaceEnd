@@ -74,8 +74,8 @@
                                     Content=" Удалить из корзины "
                                     Margin="10"
                                     Style="{StaticResource Buttons}"
-                                    Command="{Binding DeleteCommand}"
-                                    CommandParameter="{Binding Product}"/>
+                                    Click="DeleteCommand"
+                                    CommandParameter="{Binding Product}" />
                             </StackPanel>
                         </Grid>
 

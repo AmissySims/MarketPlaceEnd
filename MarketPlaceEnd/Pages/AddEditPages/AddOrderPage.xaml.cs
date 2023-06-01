@@ -107,6 +107,11 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                         Count = b.Quantity,
                         OrderId = ord.Id
                     };
+
+                    //Минус товар на складе
+                    var selectedProd = App.db.Product.Where(p => p.Id == orderProduct.ProductId).Select(p => p).First();
+                    selectedProd.Count--;
+
                     App.db.OrderProduct.Add(orderProduct);
                 }
 

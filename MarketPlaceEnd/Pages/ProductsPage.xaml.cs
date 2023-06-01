@@ -55,7 +55,7 @@ namespace MarketPlaceEnd.Pages
         private void Refresh()
         {
 
-            var products = App.db.Product.ToList();
+            var products = App.db.Product.Where(p => p.Count > 0).ToList();
             var searchString = FoundTb.Text;
             if (selType != null)
             {
@@ -91,12 +91,17 @@ namespace MarketPlaceEnd.Pages
             { 
                 //Добавление товара в коризну
                 var selectedProduct = (sender as Button).DataContext as Product;
+                
                 Bucket bucket = new Bucket
                 {
-                    Quantity = (int)selectedProduct.Count,
+                    Quantity = 1,
                     UserId = Account.AuthUser.Id,
                     ProductId = selectedProduct.Id
                 };
+
+                var prodInBucket = App.db.Bucket.Where(b => b.ProductId == bucket.ProductId).FirstOrDefault();
+                if (prodInBucket != null) { MessageBox.Show("Данный товар уже присутствует в корзине", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information); return; };
+
                 App.db.Bucket.Add(bucket);
                 App.db.SaveChanges();
                 MessageBoxResult result = MessageBox.Show("Товар добавлен в корзину. Хотите перейти в корзину сейчас?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
