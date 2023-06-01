@@ -75,8 +75,15 @@
 
                                     </StackPanel>
                                     <Button x:Name="EditBt"
-                            Content=" Редактировать "
-                            Style="{StaticResource Buttons}" Click="EditBt_Click"/>
+                                            Content=" Редактировать "
+                                            Style="{StaticResource Buttons}"
+                                            Margin="5"
+                                            Click="EditBt_Click"/>
+                                    <Button x:Name="StatBt"
+                                            Content=" Посмотреть графики "
+                                            Margin="5 0"
+                                            Visibility="{Binding BtnVisible}"
+                                            Style="{StaticResource Buttons}" Click="StatBt_Click"/>
                                 </StackPanel>
                             </StackPanel>
 

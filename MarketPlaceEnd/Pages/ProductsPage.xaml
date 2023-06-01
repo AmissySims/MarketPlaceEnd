@@ -28,23 +28,23 @@
                             x:Name="AllBt" 
                             Content="Все"
                             Margin="5" Click="AllBt_Click"/>
-                <Button Style="{StaticResource 1Button}"
+                    <Button Style="{StaticResource 1Button}"
                         x:Name="ElectBt"
                         Margin="5"
                         Content="Электроника" Click="ElectBt_Click"/>
-                <Button Style="{StaticResource 1Button}"
+                    <Button Style="{StaticResource 1Button}"
                         x:Name="CosmeticBt" 
                         Margin="5"
                         Content="Косметика" Click="CosmeticBt_Click"/>
-                <Button Style="{StaticResource 1Button}"
+                    <Button Style="{StaticResource 1Button}"
                         x:Name="ClothesBt" 
                         Margin="5 0"
                         Content="Одежда" Click="ClothesBt_Click"/>
-                <Button Style="{StaticResource 1Button}" 
+                    <Button Style="{StaticResource 1Button}" 
                         x:Name="SportBt" 
                         Margin="5"
                         Content="Спортивные товары" Click="SportBt_Click"/>
-                <Button Style="{StaticResource 1Button}"
+                    <Button Style="{StaticResource 1Button}"
                         x:Name="FoodBt"
                         Margin="5"
                         Content="Продукты" Click="FoodBt_Click"/>
@@ -93,7 +93,7 @@
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="White" BorderBrush="Gold" BorderThickness="2" Padding="3"
+                        <Border Background="{Binding ColorCount1}" BorderBrush="Gold" BorderThickness="2" Padding="3"
                                 Margin="5 5">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -110,7 +110,8 @@
                                         Text="{Binding Title}" 
                                         HorizontalAlignment="Center" />
                                     <TextBlock Text="{Binding Price, StringFormat='{}{0} руб.'}" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="{Binding TypeProduct.Title}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Availability}" HorizontalAlignment="Center" Foreground="{Binding ColorCount}"/>
+                                <TextBlock Text="{Binding TypeProduct.Title}" HorizontalAlignment="Center"/>
                                     <TextBlock Text="{Binding Provider.Title}" 
                                                TextWrapping="Wrap"
                                                HorizontalAlignment="Center"/>

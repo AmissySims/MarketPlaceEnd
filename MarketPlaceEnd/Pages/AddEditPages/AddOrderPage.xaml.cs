@@ -1,4 +1,5 @@
 ﻿using MarketPlaceEnd.Models;
+using MarketPlaceEnd.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,18 +22,28 @@ namespace MarketPlaceEnd.Pages.AddEditPages
     /// </summary>
     public partial class AddOrderPage : Page
     {
-        public Order Order { get; set; }
-        public AddOrderPage(Order _order)
+        public List<Product> bucketList;
+        public List<Product> Bucket { get; set; }
+       
+        //public Order Order { get; set; }
+        public AddOrderPage(List<Product> bucketList)
         {
-            Order = _order;
+           
             InitializeComponent();
+            Bucket = bucketList;
             var points = App.db.DeliveryPoint.ToList();
             DeliveryPointCb.ItemsSource = points;
             var types = App.db.DeliveryType.ToList();
             DateTb.Text = DateTime.Now.ToString();
             NameTb.Text = Account.AuthUser.FullName;
-           
-            
+            var cards = App.db.Cards.Where(x => x.UserId == Account.AuthUser.Id).ToList();
+            CardCb.ItemsSource = cards;
+            PriceTb.Text = $"{Convert.ToString(Bucket.Sum(b => b.Count * b.Price))} руб.";
+
+
+
+
+
         }
 
         private void DeliveryCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -88,10 +99,52 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                 }
                     
                 ord.Date = DateTime.Now;
-                ord.Price = ord.TotalPrice;
-                
-                
+                ord.Price =  Bucket.Sum(b => b.Count * b.Price) ;
+
+
             }
+            //Добавление в Order
+            App.db.Order.Add(ord);
+
+            //Удаление корзины
+            var bucketsToRemove = App.db.Bucket.Where(b => b.UserId == Account.AuthUser.Id).ToList();
+            App.db.Bucket.RemoveRange(bucketsToRemove);
+
+            //Добавление в OrderProduct
+            foreach (var b in bucketsToRemove)
+            {
+                var orderProduct = new OrderProduct
+                {
+                    ProductId = b.ProductId,
+                    Count = b.Quantity,
+                    OrderId = ord.Id
+
+                };
+                App.db.OrderProduct.Add(orderProduct);
+                
+      
+            }
+
+            //Сохранение
+            var selCard = (CardCb.SelectedItem as Cards);
+            selCard.Balance -= Bucket.Sum(b => b.Count * b.Price);
+            App.db.SaveChanges();
+            MessageBox.Show("Заказ успешно добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+            NavigationService.Navigate(new ProductsPage());
+        }
+
+        private void CardCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void AddCardBt_Click(object sender, RoutedEventArgs e)
+        {
+            AddCardWindow card = new AddCardWindow((sender as Button).DataContext as Cards);
+            card.ShowDialog();
+            var cards = App.db.Cards.Where(x => x.UserId == Account.AuthUser.Id).ToList();
+            CardCb.ItemsSource = cards;
+
         }
     }
 }

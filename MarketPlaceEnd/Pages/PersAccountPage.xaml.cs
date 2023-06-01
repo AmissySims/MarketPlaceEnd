@@ -56,5 +56,10 @@ namespace MarketPlaceEnd.Pages
         {
             NavigationService.Navigate(new OrdersPage());
         }
+
+        private void StatBt_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new GraficsPage());
+        }
     }
 }

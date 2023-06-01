@@ -25,6 +25,8 @@ namespace MarketPlaceEnd.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Bucket> Bucket { get; set; }
+        public virtual DbSet<Cards> Cards { get; set; }
         public virtual DbSet<DeliveryPoint> DeliveryPoint { get; set; }
         public virtual DbSet<DeliveryType> DeliveryType { get; set; }
         public virtual DbSet<Order> Order { get; set; }

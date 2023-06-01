@@ -17,6 +17,7 @@ namespace MarketPlaceEnd.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
+            this.Bucket = new HashSet<Bucket>();
             this.OrderProduct = new HashSet<OrderProduct>();
             this.ProductPhoto = new HashSet<ProductPhoto>();
         }
@@ -29,6 +30,8 @@ namespace MarketPlaceEnd.Models
         public Nullable<int> TypeProductId { get; set; }
         public Nullable<int> ProviderId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bucket> Bucket { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderProduct> OrderProduct { get; set; }
         public virtual Provider Provider { get; set; }
