@@ -31,14 +31,20 @@ namespace MarketPlaceEnd.Pages
             bucketList = new List<Product>();
             bucketList = App.db.Bucket
                     .Where(b => b.ProductId == b.Product.Id || b.UserId == Account.AuthUser.Id)
-                    .Select(b => b.Product) 
+                    .Select(b => b.Product)
                     .ToList();
+
+            foreach (var b in bucketList)
+            {
+                b.Count = 1;
+            }
+
             LIstBucket.ItemsSource = bucketList;
         }
 
         private void OrderBt_Click(object sender, RoutedEventArgs e)
         {
-            foreach(var buc in bucketList)
+            foreach (var buc in bucketList)
             {
                 int countProd = App.db.Product.Where(p => p.Id == buc.Id).Select(p => p.Count).First() ?? -1;
                 if (countProd < buc.Count)
@@ -77,6 +83,38 @@ namespace MarketPlaceEnd.Pages
 
             }
         }
+
+        private void CountTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            TextBox currentTextBox = (TextBox)sender;
+            TextBlock totalPriceTextBlock = FindTotalPriceTextBlock(currentTextBox);
+            if (totalPriceTextBlock.DataContext is Product product)
+            {
+                if (Decimal.TryParse(currentTextBox.Text, out decimal currentCount))
+                {
+                    totalPriceTextBlock.Text = (product.Price * currentCount).ToString();
+                } else
+                {
+                    totalPriceTextBlock.Text = Decimal.Zero.ToString();
+                }
+            }
+        }
+
+        private TextBlock FindTotalPriceTextBlock(TextBox currentTextBox)
+        {
+            FrameworkElement parent = currentTextBox;
+            while (parent != null)
+            {
+                if (parent.FindName("TotalPriceTb") is TextBlock totalPriceTextBlock)
+                {
+                    return totalPriceTextBlock;
+                }
+                parent = parent.Parent as FrameworkElement;
+            }
+            return null;
+        }
+
 
     }
 }

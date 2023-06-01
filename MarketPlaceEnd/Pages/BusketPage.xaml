@@ -59,14 +59,17 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" >
                                     <TextBlock Text="Сумма" Margin="10 0"/>
-                                    <TextBlock Text="{Binding TotalPrice}"
-                                     Margin="10 0"/>
+                                    <TextBlock 
+                                        x:Name="TotalPriceTb"
+                                        Text="{Binding TotalPrice}"
+                                        Margin="10 0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Количество" Margin="10 0"/>
                                     <TextBox x:Name="CountTb"
                                         Width="60"
-                                        Text="{Binding Count}"/>
+                                        Text="{Binding Count}"
+                                        TextChanged="CountTb_TextChanged" />
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Grid.Column="2">

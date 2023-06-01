@@ -21,7 +21,6 @@ namespace MarketPlaceEnd.Pages.AddEditPages
     /// </summary>
     public partial class AddOrderPage : Page
     {
-        private List<Product> bucketList;
         public List<Product> Bucket { get; set; }
 
         public AddOrderPage(List<Product> bucketList)
