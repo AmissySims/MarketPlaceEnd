@@ -51,4 +51,10 @@ namespace MarketPlaceEnd.Models
             }
         }
     }
+    public class BucketItem
+    {
+        public Product Product { get; set; }
+        public int Quantity { get; set; }
+    }
+
 }

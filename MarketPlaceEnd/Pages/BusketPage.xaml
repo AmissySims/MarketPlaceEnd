@@ -44,18 +44,18 @@
                                 <ColumnDefinition Width="19*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Margin="5">
-                                <Image Source="{Binding MainPhoto}"
+                                <Image Source="{Binding Product.MainPhoto}"
                                    Width="100"
                                    Height="100"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1">
                                 <StackPanel>
-                                    <TextBlock Text="{Binding Title}"
+                                    <TextBlock Text="{Binding Product.Title}"
                                     Margin="5"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" >
                                     <TextBlock Text="Цена за штуку" Margin="10 0"/>
-                                    <TextBlock Text="{Binding Price}"
+                                    <TextBlock Text="{Binding Product.Price}"
                                      Margin="10 0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" >
@@ -69,7 +69,7 @@
                                     <TextBlock Text="Количество" Margin="10 0"/>
                                     <TextBox x:Name="CountTb"
                                         Width="60"
-                                        Text="{Binding Count}"
+                                        Text="{Binding Quantity}"
                                         TextChanged="CountTb_TextChanged" />
                                 </StackPanel>
                             </StackPanel>

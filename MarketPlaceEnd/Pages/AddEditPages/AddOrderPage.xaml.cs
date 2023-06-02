@@ -21,9 +21,9 @@ namespace MarketPlaceEnd.Pages.AddEditPages
     /// </summary>
     public partial class AddOrderPage : Page
     {
-        public List<Product> Bucket { get; set; }
+        public List<BucketItem> Bucket { get; set; }
 
-        public AddOrderPage(List<Product> bucketList)
+        public AddOrderPage(List<BucketItem> bucketList)
         {
             InitializeComponent();
             Bucket = bucketList;
@@ -98,7 +98,7 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                         return;
                     }
                     ord.Date = DateTime.Now;
-                    ord.Price = Bucket.Sum(b => b.Count * b.Price);
+                    ord.Price = Bucket.Sum(b => b.Product.Count * b.Product.Price);
                 }
                 //Добавление в Order
                 App.db.Order.Add(ord);
@@ -112,15 +112,21 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                 {
                     var orderProduct = new OrderProduct
                     {
-                        ProductId = b.Id,
-                        Count = b.Count,
+                        ProductId = b.Product.Id,
+                        Count = b.Quantity,
                         OrderId = ord.Id
                     };
 
                     //Минус товар на складе
-                    var selectedProd = App.db.Product.Where(p => p.Id == orderProduct.ProductId).Select(p => p).FirstOrDefault();
-                    selectedProd.Count -= b.Count; 
-
+                    BucketItem selectedProd = App.db.Product
+                            .Where(p => p.Id == orderProduct.ProductId)
+                            .Select(p => new BucketItem
+                            {
+                                Product = p,
+                                Quantity = (int)p.Count
+                            })
+                            .FirstOrDefault();
+                    selectedProd.Product.Count -= b.Quantity;
                     App.db.OrderProduct.Add(orderProduct);
                 }
 

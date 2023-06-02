@@ -22,26 +22,31 @@ namespace MarketPlaceEnd.Pages
     /// </summary>
     public partial class BusketPage : Page
     {
-        public static List<Product> bucketList { get; set; }
+        public static List<BucketItem> bucketList { get; set; }
         public BusketPage()
         {
             InitializeComponent();
             //Отображение корзины конкретного пользователя
-            bucketList = new List<Product>();
+
             bucketList = App.db.Bucket
                     .Where(b => b.ProductId == b.Product.Id || b.UserId == Account.AuthUser.Id)
-                    .Select(b => b.Product)
+                    .Select(b => new BucketItem
+                    {
+                        Product = b.Product,
+                        Quantity = b.Quantity
+                    })
                     .ToList();
 
             LIstBucket.ItemsSource = bucketList;
+
         }
 
         private void OrderBt_Click(object sender, RoutedEventArgs e)
         {
             foreach (var buc in bucketList)
             {
-                int countProd = App.db.Product.Where(p => p.Id == buc.Id).Select(p => p.Count).First() ?? -1;
-                if (countProd < buc.Count)
+                int countProd = App.db.Product.Where(p => p.Id == buc.Product.Id).Select(p => p.Count).FirstOrDefault() ?? -1;
+                if (countProd < buc.Product.Count)
                 {
                     MessageBox.Show($"Остаток на складе {countProd}, укажите верное количество", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
@@ -58,12 +63,12 @@ namespace MarketPlaceEnd.Pages
 
         private void DeleteCommand(object sender, RoutedEventArgs e)
         {
-            var selectedProduct = (sender as Button).DataContext as Product;
+            var selectedProduct = (sender as Button).DataContext as BucketItem;
             if (selectedProduct != null)
             {
                 try
                 {
-                    var rm = App.db.Bucket.Where(b => b.ProductId == selectedProduct.Id).FirstOrDefault();
+                    var rm = App.db.Bucket.Where(b => b.ProductId == selectedProduct.Product.Id).FirstOrDefault();
                     App.db.Bucket.Remove(rm);
                     App.db.SaveChanges();
                     bucketList.Remove(selectedProduct);
@@ -81,11 +86,11 @@ namespace MarketPlaceEnd.Pages
         {
             TextBox currentTextBox = (TextBox)sender;
             TextBlock totalPriceTextBlock = FindTotalPriceTextBlock(currentTextBox);
-            if (totalPriceTextBlock.DataContext is Product product)
+            if (totalPriceTextBlock.DataContext is BucketItem product)
             {
                 if (Int32.TryParse(currentTextBox.Text, out Int32 currentCount))
                 {
-                    var productInBucket = App.db.Bucket.FirstOrDefault(b => b.ProductId == product.Id);
+                    var productInBucket = App.db.Bucket.FirstOrDefault(b => b.ProductId == product.Product.Id);
                     if (productInBucket != null)
                     {
                         productInBucket.Quantity = currentCount;
@@ -95,8 +100,8 @@ namespace MarketPlaceEnd.Pages
                     {
                         return;
                     }
-                    product.Count = currentCount;
-                    totalPriceTextBlock.Text = (product.Price * currentCount).ToString();
+
+                    totalPriceTextBlock.Text = (product.Product.Price * currentCount).ToString();
                 } else
                 {
                     totalPriceTextBlock.Text = 0.ToString();
@@ -156,7 +161,6 @@ namespace MarketPlaceEnd.Pages
                         {
                             if (int.TryParse(countTextBox.Text, out int currentCount))
                             {
-                                product.Count = currentCount;
                                 totalPriceTextBlock.Text = (product.Price * currentCount).ToString();
                             }
                             else
