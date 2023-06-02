@@ -91,12 +91,13 @@ namespace MarketPlaceEnd.Pages
             TextBlock totalPriceTextBlock = FindTotalPriceTextBlock(currentTextBox);
             if (totalPriceTextBlock.DataContext is Product product)
             {
-                if (Decimal.TryParse(currentTextBox.Text, out decimal currentCount))
+                if (Int32.TryParse(currentTextBox.Text, out Int32 currentCount))
                 {
+                    product.Count = currentCount;
                     totalPriceTextBlock.Text = (product.Price * currentCount).ToString();
                 } else
                 {
-                    totalPriceTextBlock.Text = Decimal.Zero.ToString();
+                    totalPriceTextBlock.Text = 0.ToString();
                 }
             }
         }

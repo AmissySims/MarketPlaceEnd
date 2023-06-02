@@ -68,6 +68,12 @@ namespace MarketPlaceEnd.Pages.AddEditPages
         {
             try
             {
+                if (App.db.Bucket.ToList().Count <= 0)
+                {
+                    MessageBox.Show("Ваша корзина пуста", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+                
                 Order ord = new Order();
                 {
                     ord.UserId = Account.AuthUser.Id;
@@ -98,18 +104,18 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                 App.db.Bucket.RemoveRange(bucketsToRemove);
 
                 //Добавление в OrderProduct
-                foreach (var b in bucketsToRemove)
+                foreach (var b in Bucket)
                 {
                     var orderProduct = new OrderProduct
                     {
-                        ProductId = b.ProductId,
-                        Count = b.Quantity,
+                        ProductId = b.Id,
+                        Count = b.Count,
                         OrderId = ord.Id
                     };
 
                     //Минус товар на складе
-                    var selectedProd = App.db.Product.Where(p => p.Id == orderProduct.ProductId).Select(p => p).First();
-                    selectedProd.Count--;
+                    var selectedProd = App.db.Product.Where(p => p.Id == orderProduct.ProductId).Select(p => p).FirstOrDefault();
+                    selectedProd.Count -= orderProduct.Count; 
 
                     App.db.OrderProduct.Add(orderProduct);
                 }
