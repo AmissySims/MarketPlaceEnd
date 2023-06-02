@@ -145,7 +145,6 @@ namespace MarketPlaceEnd.Pages
 
         private void LIstBucket_Loaded(object sender, RoutedEventArgs e)
         {
-            return;
             ListView listView = (ListView)sender;
             foreach (var item in listView.Items)
             {
@@ -157,11 +156,11 @@ namespace MarketPlaceEnd.Pages
 
                     if (countTextBox != null && totalPriceTextBlock != null)
                     {
-                        if (countTextBox.DataContext is Product product)
+                        if (countTextBox.DataContext is BucketItem product)
                         {
                             if (int.TryParse(countTextBox.Text, out int currentCount))
                             {
-                                totalPriceTextBlock.Text = (product.Price * currentCount).ToString();
+                                totalPriceTextBlock.Text = (product.Product.Price * currentCount).ToString();
                             }
                             else
                             {

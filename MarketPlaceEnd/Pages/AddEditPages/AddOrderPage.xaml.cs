@@ -61,6 +61,7 @@ namespace MarketPlaceEnd.Pages.AddEditPages
         private void Courier_Checked(object sender, RoutedEventArgs e)
         {
             IfPickup.Visibility = Visibility.Hidden;
+            Adress.Visibility = Visibility.Visible;
         }
 
         private void Courier_Unchecked(object sender, RoutedEventArgs e)
