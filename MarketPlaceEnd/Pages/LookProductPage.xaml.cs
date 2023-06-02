@@ -27,6 +27,12 @@ namespace MarketPlaceEnd.Pages
             InitializeComponent();
             contextProduct = product;
             DataContext = contextProduct;
+            if(contextProduct.Count > 0)
+            {
+                BucketBt.Visibility = Visibility.Visible;
+            }
+            else
+                BucketBt.Visibility = Visibility.Collapsed;
             Refresh();
 
         }
@@ -45,26 +51,39 @@ namespace MarketPlaceEnd.Pages
             {
                 //Добавление товара в коризну
                 var selectedProduct = (sender as Button).DataContext as Product;
-
-                Bucket bucket = new Bucket
+                if (selectedProduct.Count > 0)
                 {
-                    Quantity = 1,
-                    UserId = Account.AuthUser.Id,
-                    ProductId = selectedProduct.Id
-                };
+                    Bucket bucket = new Bucket
+                    {
+                        Quantity = 1,
+                        UserId = Account.AuthUser.Id,
+                        ProductId = selectedProduct.Id
+                    };
 
-                var prodInBucket = App.db.Bucket.Where(b => b.ProductId == bucket.ProductId).FirstOrDefault();
-                if (prodInBucket != null) { MessageBox.Show("Данный товар уже присутствует в корзине", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information); return; };
+                    var prodInBucket = App.db.Bucket.Where(b => b.ProductId == bucket.ProductId).FirstOrDefault();
+                    if (prodInBucket != null)
+                    {
+                        MessageBox.Show("Данный товар уже присутствует в корзине", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
 
-                App.db.Bucket.Add(bucket);
-                App.db.SaveChanges();
-                MessageBoxResult result = MessageBox.Show("Товар добавлен в корзину. Хотите перейти в корзину сейчас?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    App.db.Bucket.Add(bucket);
+                    App.db.SaveChanges();
+                    MessageBoxResult result = MessageBox.Show("Товар добавлен в корзину. Хотите перейти в корзину сейчас?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                // Если пользователь выбрал "Да", перейти на вкладку корзины
-                if (result == MessageBoxResult.Yes)
-                {
-                    NavigationService.Navigate(new BusketPage());
+                    // Если пользователь выбрал "Да", перейти на вкладку корзины
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        NavigationService.Navigate(new BusketPage());
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("Товара нет в наличии", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+
             }
             catch (Exception ex)
             {

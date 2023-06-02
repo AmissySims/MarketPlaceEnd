@@ -28,13 +28,26 @@ namespace MarketPlaceEnd.Models
         {
             get
             {
-                if (StatusOrderId == 7)
+                if (StatusOrderId == 7 || StatusOrderId == 6 || Account.AuthUser.RoleId == 4 || Account.AuthUser.RoleId == 5 || Account.AuthUser.RoleId == 3)
                 {
                     return Visibility.Collapsed;
 
                 }
                 else
                 { return Visibility.Visible; }
+
+            }
+        }
+        public Visibility BtnVisible1
+        {
+            get
+            {
+                if (StatusOrderId == 5 && (Account.AuthUser.RoleId == 4 || Account.AuthUser.RoleId == 5 ))
+                {
+                    return Visibility.Visible;
+
+                }
+                else { return Visibility.Collapsed; }
 
             }
         }

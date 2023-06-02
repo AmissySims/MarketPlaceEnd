@@ -139,6 +139,7 @@
                                                 Margin="5"/>
                                     <Button Style="{StaticResource Buttons}"
                                             Content=" В корзину "
+                                            Visibility="{Binding BtnVisible2}"
                                             x:Name="AddInBucketBt"
                                             Click="AddInBucketBt_Click"
                                                 Margin="5"/>

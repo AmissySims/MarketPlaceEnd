@@ -51,7 +51,21 @@ namespace MarketPlaceEnd.Models
                 { return Visibility.Collapsed; }
 
             }
-        } 
+        }
+        public Visibility BtnVisible2
+        {
+            get
+            {
+                if (Account.AuthUser.RoleId == 4 || Account.AuthUser.RoleId == 5)
+                {
+                    return Visibility.Collapsed;
+
+                }
+                else
+                { return Visibility.Visible; }
+
+            }
+        }
         public string Availability
         {
             get

@@ -52,6 +52,9 @@
             <Setter Property="BorderBrush" Value="Gold"/>
             
         </Style>
+        <Style TargetType="ListBox">
+            <Setter Property="BorderBrush" Value="DarkSalmon"/>
+        </Style>
         <!--#region ForCombobox -->
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">

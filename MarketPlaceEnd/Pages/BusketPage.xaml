@@ -67,22 +67,26 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" >
                                     <TextBlock Text="Сумма" Margin="10 0"/>
-                                    <TextBlock Text="{Binding TotalCost}"
-                                     Margin="10 0"/>
+                                    <TextBlock 
+                                        x:Name="TotalPriceTb"
+                                        Text="{Binding TotalPrice}"
+                                        Margin="10 0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Количество" Margin="10 0"/>
                                     <TextBox x:Name="CountTb"
                                         Width="60"
-                                       Text="{Binding Quanity}" />
+                                        Text="{Binding Count}"
+                                        TextChanged="CountTb_TextChanged" />
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Grid.Column="2">
                                 <Button x:Name="DeleteBt"
                                     Content=" Удалить из корзины "
                                     Margin="10"
-                                    Style="{StaticResource Buttons}" Click="DeleteBt_Click"
-                                        />
+                                    Style="{StaticResource Buttons}"
+                                    Click="DeleteCommand"
+                                    CommandParameter="{Binding Product}" />
                             </StackPanel>
                         </Grid>
 

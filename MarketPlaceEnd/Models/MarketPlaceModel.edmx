@@ -31,6 +31,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Adress" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="DeliveryType">
           <Key>
@@ -164,6 +165,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Cards">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryPoint_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="DeliveryPoint" Type="Self.DeliveryPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryPoint">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -317,6 +330,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="Cards" EntitySet="Cards" />
           </AssociationSet>
+          <AssociationSet Name="FK_DeliveryPoint_User" Association="Self.FK_DeliveryPoint_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DeliveryPoint" EntitySet="DeliveryPoint" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_DeliveryPoint" Association="Self.FK_Order_DeliveryPoint">
             <End Role="DeliveryPoint" EntitySet="DeliveryPoint" />
             <End Role="Order" EntitySet="Order" />
@@ -389,6 +406,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="Cards" EntitySet="Cards" />
           </AssociationSet>
+          <AssociationSet Name="FK_DeliveryPoint_User" Association="MarketPlaceModel.FK_DeliveryPoint_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DeliveryPoint" EntitySet="DeliveryPoint" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_DeliveryPoint" Association="MarketPlaceModel.FK_Order_DeliveryPoint">
             <End Role="DeliveryPoint" EntitySet="DeliveryPoint" />
             <End Role="Order" EntitySet="Order" />
@@ -459,6 +480,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="MarketPlaceModel.FK_DeliveryPoint_User" FromRole="DeliveryPoint" ToRole="User" />
           <NavigationProperty Name="Order" Relationship="MarketPlaceModel.FK_Order_DeliveryPoint" FromRole="DeliveryPoint" ToRole="Order" />
         </EntityType>
         <EntityType Name="DeliveryType">
@@ -580,6 +603,7 @@
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Bucket" Relationship="MarketPlaceModel.FK__Bucket__UserId__02FC7413" FromRole="User" ToRole="Bucket" />
           <NavigationProperty Name="Cards" Relationship="MarketPlaceModel.FK_Cards_User" FromRole="User" ToRole="Cards" />
+          <NavigationProperty Name="DeliveryPoint" Relationship="MarketPlaceModel.FK_DeliveryPoint_User" FromRole="User" ToRole="DeliveryPoint" />
           <NavigationProperty Name="Order" Relationship="MarketPlaceModel.FK_Order_User" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="Role" Relationship="MarketPlaceModel.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
@@ -615,6 +639,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Cards">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryPoint_User">
+          <End Type="MarketPlaceModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="MarketPlaceModel.DeliveryPoint" Role="DeliveryPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryPoint">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -772,6 +808,7 @@
           <EntitySetMapping Name="DeliveryPoint">
             <EntityTypeMapping TypeName="MarketPlaceModel.DeliveryPoint">
               <MappingFragment StoreEntitySet="DeliveryPoint">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Adress" ColumnName="Adress" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

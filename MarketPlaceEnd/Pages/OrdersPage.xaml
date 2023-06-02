@@ -82,14 +82,23 @@
                                        Margin="5"/>
                                        
                                     </StackPanel>
-                                  
-                                   
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <TextBlock Text="Адрес" 
+                                       Margin="10 5"/>
+                                        <TextBlock Text="{Binding AdressDelivery}"
+                                       Margin="5"/>
+
+                                    </StackPanel>
+
+
                                 </StackPanel>
                               
                                 <StackPanel Grid.Column="1">
                                  
 
-                                    <ListBox Grid.Column="1" ItemsSource="{Binding OrderProduct}" Margin="5" Height="90">
+                                    <ListBox Grid.Column="1" ItemsSource="{Binding OrderProduct}" Margin="5" Height="90"
+                                             ScrollViewer.HorizontalScrollBarVisibility="Auto">
                                         <ListBox.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <WrapPanel HorizontalAlignment="Center"/>
@@ -101,19 +110,24 @@
                                                     <StackPanel>
                                                         <TextBlock Text="{Binding Product.Title}"/>
                                                         <TextBlock Text="{Binding Count, StringFormat='{}{0} шт.'}"/>
-
-
                                                     </StackPanel>
                                                 </Border>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
                                     </ListBox>
-                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                                         <Button x:Name="EditOrder"
-                                        Content=" Редактировать "
-                                        Style="{StaticResource Buttons}"
+                                                Content=" Редактировать "
+                                                Style="{StaticResource Buttons}"
                                                 Visibility="{Binding BtnVisible}"
-                                        Margin="10" Click="EditOrder_Click"/>
+                                                Margin="10" Click="EditOrder_Click"/>
+
+                                        <Button x:Name="CorierOrder"
+                                                Content=" Выдано "
+                                                Style="{StaticResource Buttons}"
+                                                Visibility="{Binding BtnVisible1}"
+                                                Margin="10" Click="CorierOrder_Click"/>
+
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>

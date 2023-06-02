@@ -81,68 +81,80 @@ namespace MarketPlaceEnd.Pages.AddEditPages
 
         private void OrderBt_Click(object sender, RoutedEventArgs e)
         {
-            Order ord = new Order();
+            try
             {
-                ord.UserId = Account.AuthUser.Id;
-                ord.AdressDelivery = AdressTb.Text;
-                ord.StatusOrderId = 1;
-                ord.DeliveryPointId = (DeliveryPointCb.SelectedItem as DeliveryPoint).Id;
-                if (Courier.IsChecked == true)
+                Order ord = new Order();
                 {
-                    ord.DeliveryTypeId = 2;
+                    ord.UserId = Account.AuthUser.Id;
+                    ord.AdressDelivery = AdressTb.Text;
+                    ord.StatusOrderId = 1;
+                   
+                    if (Courier.IsChecked == true)
+                    {
+                        ord.DeliveryTypeId = 2;
+                        ord.DeliveryPointId = null;
+                    }
+                    else if (Pickup.IsChecked == true)
+                    {
+                        ord.DeliveryTypeId = 1;
+                        ord.DeliveryPointId = (DeliveryPointCb.SelectedItem as DeliveryPoint).Id;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Выберите тип доставки", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    ord.Date = DateTime.Now;
+                    ord.Price = TotalCost;
+
+
                 }
-                else if(Pickup.IsChecked == true)
+                //Добавление в Order
+                App.db.Order.Add(ord);
+
+                //Удаление корзины
+                var bucketsToRemove = App.db.Bucket.Where(b => b.UserId == Account.AuthUser.Id).ToList();
+                App.db.Bucket.RemoveRange(bucketsToRemove);
+
+                //Добавление в OrderProduct
+                foreach (var b in bucketsToRemove)
                 {
-                    ord.DeliveryTypeId = 1;
+                    var orderProduct = new OrderProduct
+                    {
+                        ProductId = b.ProductId,
+                        Count = b.Quantity,
+                        OrderId = ord.Id
+                    };
+
+                    //Минус товар на складе
+                    var selectedProd = App.db.Product.Where(p => p.Id == orderProduct.ProductId).Select(p => p).First();
+                    selectedProd.Count -= orderProduct.Count;
+
+                    App.db.OrderProduct.Add(orderProduct);
+                    App.db.SaveChanges();
+                }
+
+                //Сохранение
+                var selCard = (CardCb.SelectedItem as Cards);
+                if (selCard.Balance >= TotalCost)
+                {
+                    selCard.Balance -= TotalCost;
+                    App.db.SaveChanges();
+                    MessageBox.Show("Заказ успешно добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    NavigationService.Navigate(new ProductsPage());
                 }
                 else
                 {
-                    MessageBox.Show("Выберите тип доставки", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); 
+                    MessageBox.Show("На карте недостаточно средств! Выберите другую карту", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                    
-                ord.Date = DateTime.Now;
-                ord.Price = TotalCost;
-
-
             }
-            //Добавление в Order
-            App.db.Order.Add(ord);
-
-            //Удаление корзины
-            var bucketsToRemove = App.db.Bucket.Where(b => b.UserId == Account.AuthUser.Id).ToList();
-            App.db.Bucket.RemoveRange(bucketsToRemove);
-
-            //Добавление в OrderProduct
-            foreach (var b in bucketsToRemove)
+            catch(Exception ex)
             {
-                var orderProduct = new OrderProduct
-                {
-                    ProductId = b.ProductId,
-                    Count = b.Quantity,
-                    OrderId = ord.Id
-
-                };
-                App.db.OrderProduct.Add(orderProduct);
-                App.db.SaveChanges();
-
-
+                MessageBox.Show("Произошла ошибка при оформлении заказа: " + ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            //Сохранение
-            var selCard = (CardCb.SelectedItem as Cards);
-            if (selCard.Balance >= TotalCost)
-            {
-                selCard.Balance -= TotalCost;
-                App.db.SaveChanges();
-                MessageBox.Show("Заказ успешно добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.Navigate(new ProductsPage());
-            }
-            else
-            {
-                MessageBox.Show("На карте недостаточно средств! Выберите другую карту", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+           
             
            
         }

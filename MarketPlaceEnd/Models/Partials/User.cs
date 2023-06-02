@@ -23,7 +23,7 @@ namespace MarketPlaceEnd.Models
         {
             get
             {
-                if (Account.AuthUser.Id == 1)
+                if (Account.AuthUser.RoleId == 1)
                 {
                     return Visibility.Visible;
 

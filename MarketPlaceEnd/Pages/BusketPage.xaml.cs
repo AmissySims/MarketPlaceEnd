@@ -22,7 +22,7 @@ namespace MarketPlaceEnd.Pages
     /// </summary>
     public partial class BusketPage : Page
     {
-        private decimal TotalPrice;
+        public decimal TotalPrice;
         public static List<Product> productList { get; set; }
         public BusketPage()
         {
@@ -38,11 +38,8 @@ namespace MarketPlaceEnd.Pages
             
             foreach (var item in productList)
             {
-                decimal totalPrice = (decimal)(item.Price * item.Count);
-
-                TotalPrice = totalPrice;
+                item.Count = 1;
                 
-
             }
             LIstBucket.ItemsSource = productList;
            
@@ -69,13 +66,57 @@ namespace MarketPlaceEnd.Pages
             NavigationService.Navigate(new AddOrderPage(productList));
         }
 
-        private void DeleteBt_Click(object sender, RoutedEventArgs e)
+        private void DeleteCommand(object sender, RoutedEventArgs e)
         {
-            var selProd = (sender as Button).DataContext as Product;
-            productList.Remove(selProd);
-            LIstBucket.ItemsSource = productList;
+            var selectedProduct = (sender as Button).DataContext as Product;
+            if (selectedProduct != null)
+            {
+                try
+                {
+                    var rm = App.db.Bucket.Where(b => b.ProductId == selectedProduct.Id).FirstOrDefault();
+                    App.db.Bucket.Remove(rm);
+                    App.db.SaveChanges();
+                    productList.Remove(selectedProduct);
+                    LIstBucket.ItemsSource = null;
+                    LIstBucket.ItemsSource = productList;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Не удалось удалить товар из корзины. Ошибка: {ex}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
 
+            }
+        }
 
+        private void CountTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            TextBox currentTextBox = (TextBox)sender;
+            TextBlock totalPriceTextBlock = FindTotalPriceTextBlock(currentTextBox);
+            if (totalPriceTextBlock.DataContext is Product product)
+            {
+                if (Decimal.TryParse(currentTextBox.Text, out decimal currentCount))
+                {
+                    totalPriceTextBlock.Text = (product.Price * currentCount).ToString();
+                }
+                else
+                {
+                    totalPriceTextBlock.Text = Decimal.Zero.ToString();
+                }
+            }
+        }
+        private TextBlock FindTotalPriceTextBlock(TextBox currentTextBox)
+        {
+            FrameworkElement parent = currentTextBox;
+            while (parent != null)
+            {
+                if (parent.FindName("TotalPriceTb") is TextBlock totalPriceTextBlock)
+                {
+                    return totalPriceTextBlock;
+                }
+                parent = parent.Parent as FrameworkElement;
+            }
+            return null;
         }
     }
 }
