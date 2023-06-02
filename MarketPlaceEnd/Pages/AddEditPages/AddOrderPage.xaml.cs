@@ -32,6 +32,8 @@ namespace MarketPlaceEnd.Pages.AddEditPages
             var types = App.db.DeliveryType.ToList();
             DateTb.Text = DateTime.Now.ToString();
             NameTb.Text = Account.AuthUser.FullName;
+            Adress.Visibility = Visibility.Hidden;
+            IfPickup.Visibility = Visibility.Hidden;
         }
 
         private void DeliveryCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -47,11 +49,13 @@ namespace MarketPlaceEnd.Pages.AddEditPages
         private void Pickup_Checked(object sender, RoutedEventArgs e)
         {
             IfPickup.Visibility = Visibility.Visible;
+            Adress.Visibility = Visibility.Hidden;
         }
 
         private void Pickup_Unchecked(object sender, RoutedEventArgs e)
         {
-            IfPickup.Visibility = Visibility.Hidden;
+            IfPickup.Visibility = Visibility.Visible;
+            Adress.Visibility = Visibility.Visible;
         }
 
         private void Courier_Checked(object sender, RoutedEventArgs e)
@@ -115,7 +119,7 @@ namespace MarketPlaceEnd.Pages.AddEditPages
 
                     //Минус товар на складе
                     var selectedProd = App.db.Product.Where(p => p.Id == orderProduct.ProductId).Select(p => p).FirstOrDefault();
-                    selectedProd.Count -= orderProduct.Count; 
+                    selectedProd.Count -= b.Count; 
 
                     App.db.OrderProduct.Add(orderProduct);
                 }

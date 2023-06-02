@@ -22,7 +22,6 @@ namespace MarketPlaceEnd.Pages
     /// </summary>
     public partial class BusketPage : Page
     {
-        public decimal TotalPrice;
         public static List<Product> bucketList { get; set; }
         public BusketPage()
         {
@@ -33,11 +32,6 @@ namespace MarketPlaceEnd.Pages
                     .Where(b => b.ProductId == b.Product.Id || b.UserId == Account.AuthUser.Id)
                     .Select(b => b.Product)
                     .ToList();
-
-            foreach (var b in bucketList)
-            {
-                b.Count = 1;
-            }
 
             LIstBucket.ItemsSource = bucketList;
         }
@@ -80,19 +74,27 @@ namespace MarketPlaceEnd.Pages
                 {
                     MessageBox.Show($"Не удалось удалить товар из корзины. Ошибка: {ex}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
             }
         }
 
         private void CountTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-
             TextBox currentTextBox = (TextBox)sender;
             TextBlock totalPriceTextBlock = FindTotalPriceTextBlock(currentTextBox);
             if (totalPriceTextBlock.DataContext is Product product)
             {
                 if (Int32.TryParse(currentTextBox.Text, out Int32 currentCount))
                 {
+                    var productInBucket = App.db.Bucket.FirstOrDefault(b => b.ProductId == product.Id);
+                    if (productInBucket != null)
+                    {
+                        productInBucket.Quantity = currentCount;
+                        App.db.SaveChanges();
+                    }
+                    else
+                    {
+                        return;
+                    }
                     product.Count = currentCount;
                     totalPriceTextBlock.Text = (product.Price * currentCount).ToString();
                 } else
@@ -116,6 +118,55 @@ namespace MarketPlaceEnd.Pages
             return null;
         }
 
+        private T FindVisualChild<T>(DependencyObject parent, string name) where T : FrameworkElement
+        {
+            int childCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < childCount; i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                if (child is T element && element.Name == name)
+                {
+                    return element;
+                }
+                else
+                {
+                    T foundElement = FindVisualChild<T>(child, name);
+                    if (foundElement != null)
+                        return foundElement;
+                }
+            }
+            return null;
+        }
 
+        private void LIstBucket_Loaded(object sender, RoutedEventArgs e)
+        {
+            return;
+            ListView listView = (ListView)sender;
+            foreach (var item in listView.Items)
+            {
+                ListViewItem listViewItem = (ListViewItem)listView.ItemContainerGenerator.ContainerFromItem(item);
+                if (listViewItem != null)
+                {
+                    TextBox countTextBox = FindVisualChild<TextBox>(listViewItem, "CountTb");
+                    TextBlock totalPriceTextBlock = FindVisualChild<TextBlock>(listViewItem, "TotalPriceTb");
+
+                    if (countTextBox != null && totalPriceTextBlock != null)
+                    {
+                        if (countTextBox.DataContext is Product product)
+                        {
+                            if (int.TryParse(countTextBox.Text, out int currentCount))
+                            {
+                                product.Count = currentCount;
+                                totalPriceTextBlock.Text = (product.Price * currentCount).ToString();
+                            }
+                            else
+                            {
+                                totalPriceTextBlock.Text = "0";
+                            }
+                        }
+                    }
+                }
+            }          
+        }
     }
 }

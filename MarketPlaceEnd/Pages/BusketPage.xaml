@@ -32,7 +32,8 @@
                   d:ItemsSource="{d:SampleData ItemCount=5}" 
                   x:Name="LIstBucket"
                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  HorizontalAlignment="Center">
+                  HorizontalAlignment="Center"
+                  Loaded="LIstBucket_Loaded">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border Background="White" BorderBrush="Gold" BorderThickness="2" Padding="3" Margin="5 5">

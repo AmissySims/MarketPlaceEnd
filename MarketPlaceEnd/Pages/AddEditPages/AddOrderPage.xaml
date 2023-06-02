@@ -64,7 +64,7 @@
                       DisplayMemberPath="Adress" 
                           SelectionChanged="DeliveryPointCb_SelectionChanged" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel x:Name="Adress" Orientation="Horizontal">
                 <TextBlock Text="Адрес доставки"
                            Margin="5"/>
                 <TextBox Text="{Binding AdressDelivery}"
