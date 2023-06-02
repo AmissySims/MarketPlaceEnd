@@ -28,9 +28,9 @@
                     Margin="10 0"
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Center">
-            <!--<TextBlock 
+            <TextBlock 
                        x:Name="PriceTb"
-                       Margin="10 0"/>-->
+                       Margin="10 0"/>
             <Button x:Name="OrderBt"
                         Content=" Оформить заказ "
                         Style="{StaticResource Buttons}" Click="OrderBt_Click"/>

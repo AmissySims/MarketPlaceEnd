@@ -23,6 +23,8 @@ namespace MarketPlaceEnd.Pages.AddEditPages
     public partial class AddOrderPage : Page
     {
         public List<Product> bucketList;
+        public decimal? TotalCost;
+
         public List<Product> Bucket { get; set; }
        
         //public Order Order { get; set; }
@@ -38,7 +40,8 @@ namespace MarketPlaceEnd.Pages.AddEditPages
             NameTb.Text = Account.AuthUser.FullName;
             var cards = App.db.Cards.Where(x => x.UserId == Account.AuthUser.Id).ToList();
             CardCb.ItemsSource = cards;
-            PriceTb.Text = $"{Convert.ToString(Bucket.Sum(b => b.Count * b.Price))} руб.";
+            TotalCost = Bucket.Sum(b => b.Count * b.Price);
+            PriceTb.Text = $"{Convert.ToString(TotalCost)} руб.";
 
 
 
@@ -99,7 +102,7 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                 }
                     
                 ord.Date = DateTime.Now;
-                ord.Price =  Bucket.Sum(b => b.Count * b.Price) ;
+                ord.Price = TotalCost;
 
 
             }
@@ -121,16 +124,27 @@ namespace MarketPlaceEnd.Pages.AddEditPages
 
                 };
                 App.db.OrderProduct.Add(orderProduct);
-                
-      
+                App.db.SaveChanges();
+
+
             }
 
             //Сохранение
             var selCard = (CardCb.SelectedItem as Cards);
-            selCard.Balance -= Bucket.Sum(b => b.Count * b.Price);
-            App.db.SaveChanges();
-            MessageBox.Show("Заказ успешно добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-            NavigationService.Navigate(new ProductsPage());
+            if (selCard.Balance >= TotalCost)
+            {
+                selCard.Balance -= TotalCost;
+                App.db.SaveChanges();
+                MessageBox.Show("Заказ успешно добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.Navigate(new ProductsPage());
+            }
+            else
+            {
+                MessageBox.Show("На карте недостаточно средств! Выберите другую карту", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            
+           
         }
 
         private void CardCb_SelectionChanged(object sender, SelectionChangedEventArgs e)

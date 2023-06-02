@@ -28,6 +28,7 @@ namespace MarketPlaceEnd.Pages
         {
             InitializeComponent();
            
+
             //LIstBucket.ItemsSource = App.db.OrderProduct.ToList();
             productList = new List<Product>();
             productList = App.db.Bucket
@@ -40,6 +41,7 @@ namespace MarketPlaceEnd.Pages
                 decimal totalPrice = (decimal)(item.Price * item.Count);
 
                 TotalPrice = totalPrice;
+                
 
             }
             LIstBucket.ItemsSource = productList;
