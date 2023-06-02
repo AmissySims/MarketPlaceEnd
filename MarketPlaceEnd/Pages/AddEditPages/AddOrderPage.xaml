@@ -50,7 +50,8 @@
                              />
                 <RadioButton GroupName="Delivery"  
                              Margin="5"
-                             Content="Курьер" x:Name="Courier" Checked="Courier_Checked" Unchecked="Courier_Unchecked"/>
+                             Content="Курьер" x:Name="Courier" Checked="Courier_Checked" 
+                             Unchecked="Courier_Unchecked"/>
                
             </StackPanel>
             <StackPanel x:Name="IfPickup" Orientation="Horizontal">

@@ -48,15 +48,7 @@
                         x:Name="FoodBt"
                         Margin="5"
                         Content="Продукты" Click="FoodBt_Click"/>
-                <!--<TextBlock Text="Категория товаров"
-                               Margin="10"/>
-                    <ComboBox
-                              x:Name="TypeProdCb" 
-                              Margin="5"
-                               DisplayMemberPath="Title"
-                              Width="120" SelectionChanged="TypeProdCb_SelectionChanged"
-                              SelectedIndex="0"
-                              Height="30"/>-->
+                
                 </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Фильтр"
