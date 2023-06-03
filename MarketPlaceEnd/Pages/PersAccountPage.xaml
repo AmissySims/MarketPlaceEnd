@@ -34,7 +34,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Orientation="Horizontal" Margin="20">
-                                <Image Source="{Binding Photo}" Width="150" Height="150"
+                                <Image Source="{Binding Photo}" Width="120" Height="150"
                                         RenderOptions.BitmapScalingMode="Fant"
                                        Margin="5"/>
                                 <StackPanel HorizontalAlignment="Center"

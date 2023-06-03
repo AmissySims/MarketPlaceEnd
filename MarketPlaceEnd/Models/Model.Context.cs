@@ -13,10 +13,10 @@ namespace MarketPlaceEnd.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MarketPlaceEntities : DbContext
+    public partial class MarketPlaceEntities1 : DbContext
     {
-        public MarketPlaceEntities()
-            : base("name=MarketPlaceEntities")
+        public MarketPlaceEntities1()
+            : base("name=MarketPlaceEntities1")
         {
         }
     

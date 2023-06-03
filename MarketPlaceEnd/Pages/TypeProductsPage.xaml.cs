@@ -22,7 +22,7 @@ namespace MarketPlaceEnd.Pages
     /// </summary>
     public partial class TypeProductsPage : Page
     {
-        MarketPlaceEntities _context = new MarketPlaceEntities();
+        MarketPlaceEntities1 _context = new MarketPlaceEntities1();
         public TypeProductsPage()
         {
             InitializeComponent();

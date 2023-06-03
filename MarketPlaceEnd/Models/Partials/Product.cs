@@ -42,7 +42,7 @@ namespace MarketPlaceEnd.Models
         {
             get
             {
-                if (Count != 0)
+                if (Count > 0)
                 {
                     return $"В наличии";
                 }
@@ -77,23 +77,13 @@ namespace MarketPlaceEnd.Models
 
             }
         }
-        public string Availability
-        {
-            get
-            {
-                if(Count != 0)
-                {
-                    return $"В наличии" ;
-                }
-                else { return $"Нет в наличии"; }
-            }
-        }
+      
         public SolidColorBrush ColorCount
         {
             get
             {
 
-                if (Count != 0)
+                if (Count > 0)
                     return Brushes.Green;
                 else
                     return Brushes.Red;
@@ -106,7 +96,7 @@ namespace MarketPlaceEnd.Models
             get
             {
 
-                if (Count != 0)
+                if (Count > 0)
                     return "White";
                 else
                     return "BurlyWood";
@@ -114,5 +104,10 @@ namespace MarketPlaceEnd.Models
 
         }
     }
-//# FFD9C09F
+
+    public class BucketItem
+    {
+        public Product Product { get; set; }
+        public int Quantity { get; set; }
+    }
 }

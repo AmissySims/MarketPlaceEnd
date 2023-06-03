@@ -101,10 +101,10 @@ namespace MarketPlaceEnd.Pages
                     };
 
                     var prodInBucket = App.db.Bucket.Where(b => b.ProductId == bucket.ProductId).FirstOrDefault();
-                    if (prodInBucket != null) 
-                    { 
-                        MessageBox.Show("Данный товар уже присутствует в корзине", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information); 
-                        return; 
+                    if (prodInBucket != null)
+                    {
+                        MessageBox.Show("Данный товар уже присутствует в корзине", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
                     }
                     App.db.Bucket.Add(bucket);
                     App.db.SaveChanges();
@@ -128,12 +128,6 @@ namespace MarketPlaceEnd.Pages
                 MessageBox.Show($"Ошибка при добавлении в корзину: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
-                
-
-
-}
-            
-}
         }
         private void RemovePrBt_Click(object sender, RoutedEventArgs e)
         {
@@ -172,7 +166,7 @@ namespace MarketPlaceEnd.Pages
             NavigationService.Navigate(new LookProductPage(selProd));
         }
 
-   
+
 
         private void FilterCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -183,13 +177,13 @@ namespace MarketPlaceEnd.Pages
         {
             selType = App.db.TypeProduct.FirstOrDefault(x => x.Id == 1);
             Refresh();
-            
+
         }
-    
+
 
         private void ClothesBt_Click(object sender, RoutedEventArgs e)
         {
-           
+
             selType = App.db.TypeProduct.FirstOrDefault(x => x.Id == 2);
             Refresh();
 
@@ -208,7 +202,7 @@ namespace MarketPlaceEnd.Pages
             Refresh();
 
         }
-    
+
 
         private void SportBt_Click(object sender, RoutedEventArgs e)
         {
@@ -223,5 +217,8 @@ namespace MarketPlaceEnd.Pages
             selType = App.db.TypeProduct.FirstOrDefault(x => x.Id == 4);
             Refresh();
         }
+
+
     }
 }
+            

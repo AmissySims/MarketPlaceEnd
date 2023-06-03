@@ -83,8 +83,13 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                     MessageBox.Show("Ваша корзина пуста", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
                 }
-                
-                Order ord = new Order();
+                var selCard = (CardCb.SelectedItem as Cards);
+                if (selCard.Balance < Bucket.Sum(b => b.Quantity * b.Product.Price))
+                {
+                    MessageBox.Show("На карте недостаточно средств! Выберите другую карту", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                 Order ord = new Order();
                 {
                     ord.UserId = Account.AuthUser.Id;
                     ord.AdressDelivery = AdressTb.Text;
@@ -136,22 +141,16 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                             .FirstOrDefault();
                     selectedProd.Product.Count -= b.Quantity;
                     App.db.OrderProduct.Add(orderProduct);
+                    
                 }
 
                 //Сохранение
-                var selCard = (CardCb.SelectedItem as Cards);
-                if (selCard.Balance >= Bucket.Sum(b => b.Quantity * b.Product.Price))
-                {
+              
                     selCard.Balance -= Bucket.Sum(b => b.Quantity * b.Product.Price);
                     App.db.SaveChanges();
                     MessageBox.Show("Заказ успешно добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                     NavigationService.Navigate(new ProductsPage());
-                }
-                else
-                {
-                    MessageBox.Show("На карте недостаточно средств! Выберите другую карту", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
+             
                
 
             }

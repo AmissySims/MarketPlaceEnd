@@ -52,7 +52,7 @@
                                 <ColumnDefinition Width="19*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Margin="5">
-                                <Image Source="{Binding MainPhoto}"
+                                <Image Source="{Binding Product.MainPhoto}"
                                    Width="100"
                                    Height="100"/>
                             </StackPanel>
@@ -62,19 +62,19 @@
                                     Margin="5"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" >
-                                    <TextBlock Text="Цена за штуку" Margin="10 0"/>
-                                    <TextBlock Text="{Binding Product.Price}"
-                                     Margin="10 0"/>
+                                    <TextBlock Text="Цена за штуку" Margin="5 0"/>
+                                    <TextBlock Text="{Binding Product.Price, StringFormat='{}{0} руб.'}"
+                                     Margin="5 0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" >
-                                    <TextBlock Text="Сумма" Margin="10 0"/>
+                                    <TextBlock Text="Сумма" Margin="5 0"/>
                                     <TextBlock 
                                         x:Name="TotalPriceTb"
-                                        Text="{Binding TotalPrice}"
-                                        Margin="10 0"/>
+                                        Text="{Binding TotalPrice,StringFormat='{}{0} руб.'}"
+                                        Margin="5 0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Количество" Margin="10 0"/>
+                                    <TextBlock Text="Количество" Margin="5 0"/>
                                     <TextBox x:Name="CountTb"
                                         Width="60"
                                         Text="{Binding Quantity}"

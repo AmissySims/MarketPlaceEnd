@@ -73,17 +73,65 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Bucket.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cards.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeliveryPoint.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DeliveryType.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderProduct.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Partials\Account.cs" />
     <Compile Include="Models\Partials\Bucket.cs" />
     <Compile Include="Models\Partials\DeliveryPoint.cs" />
     <Compile Include="Models\Partials\Order.cs" />
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductPhoto.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Provider.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StatusOrder.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TypeProduct.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Pages\AddEditPages\AddDeliveryPointPage.xaml.cs">
       <DependentUpon>AddDeliveryPointPage.xaml</DependentUpon>
@@ -203,56 +251,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\DeliveryPoint.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DeliveryType.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MarketPlaceModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MarketPlaceModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MarketPlaceModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MarketPlaceModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MarketPlaceModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Order.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OrderProduct.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Partials\Product.cs" />
     <Compile Include="Models\Partials\User.cs" />
-    <Compile Include="Models\Product.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProductPhoto.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Provider.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Role.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StatusOrder.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TypeProduct.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Pages\AddEditPages\AddEditProductPage.xaml.cs">
       <DependentUpon>AddEditProductPage.xaml</DependentUpon>
     </Compile>
@@ -306,12 +306,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Models\MarketPlaceModel.edmx">
+    <EntityDeploy Include="Models\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MarketPlaceModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\MarketPlaceModel.edmx.diagram">
-      <DependentUpon>MarketPlaceModel.edmx</DependentUpon>
+    <None Include="Models\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -322,7 +322,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Models\Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\BACKS1.jpg" />
   </ItemGroup>
@@ -333,16 +344,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\MarketPlaceModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MarketPlaceModel.edmx</DependentUpon>
-      <LastGenOutput>MarketPlaceModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\MarketPlaceModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MarketPlaceModel.edmx</DependentUpon>
-      <LastGenOutput>MarketPlaceModel.cs</LastGenOutput>
-    </Content>
     <Resource Include="Resources\orders.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

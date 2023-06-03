@@ -14,6 +14,6 @@ namespace MarketPlaceEnd
     /// </summary>
     public partial class App : Application
     {
-        public static  MarketPlaceEntities db = new MarketPlaceEntities();
+        public static  MarketPlaceEntities1 db = new MarketPlaceEntities1();
     }
 }
