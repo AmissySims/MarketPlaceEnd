@@ -91,7 +91,7 @@ namespace MarketPlaceEnd.Pages
             {
                 //Добавление товара в коризну
                 var selectedProduct = (sender as Button).DataContext as Product;
-                if (selectedProduct.Count != 0)
+                if (selectedProduct.Count > 0)
                 {
                     Bucket bucket = new Bucket
                     {
@@ -101,8 +101,39 @@ namespace MarketPlaceEnd.Pages
                     };
 
                     var prodInBucket = App.db.Bucket.Where(b => b.ProductId == bucket.ProductId).FirstOrDefault();
-                    if (prodInBucket != null) { MessageBox.Show("Данный товар уже присутствует в корзине", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information); return; };
+                    if (prodInBucket != null) 
+                    { 
+                        MessageBox.Show("Данный товар уже присутствует в корзине", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information); 
+                        return; 
+                    }
+                    App.db.Bucket.Add(bucket);
+                    App.db.SaveChanges();
+                    MessageBoxResult result = MessageBox.Show("Товар добавлен в корзину. Хотите перейти в корзину сейчас?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+                    // Если пользователь выбрал "Да", перейти на вкладку корзины
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        NavigationService.Navigate(new BusketPage());
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Товара нет в наличии", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при добавлении в корзину: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+                
+
+
+}
+            
+}
         }
         private void RemovePrBt_Click(object sender, RoutedEventArgs e)
         {
