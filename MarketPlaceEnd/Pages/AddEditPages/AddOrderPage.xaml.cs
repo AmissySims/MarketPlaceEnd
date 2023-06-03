@@ -1,4 +1,5 @@
 ﻿using MarketPlaceEnd.Models;
+using MarketPlaceEnd.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,10 @@ namespace MarketPlaceEnd.Pages.AddEditPages
             NameTb.Text = Account.AuthUser.FullName;
             Adress.Visibility = Visibility.Hidden;
             IfPickup.Visibility = Visibility.Hidden;
+            var cards = App.db.Cards.Where(x => x.UserId == Account.AuthUser.Id).ToList();
+            CardCb.ItemsSource = cards;
+
+            PriceTb.Text = $"{Convert.ToString(Bucket.Sum(b => b.Quantity * b.Product.Price))} руб.";
         }
 
         private void DeliveryCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -84,14 +89,16 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                     ord.UserId = Account.AuthUser.Id;
                     ord.AdressDelivery = AdressTb.Text;
                     ord.StatusOrderId = 1;
-                    ord.DeliveryPointId = (DeliveryPointCb.SelectedItem as DeliveryPoint).Id;
+                  
                     if (Courier.IsChecked == true)
                     {
                         ord.DeliveryTypeId = 2;
+                        ord.DeliveryPointId = null;
                     }
                     else if (Pickup.IsChecked == true)
                     {
                         ord.DeliveryTypeId = 1;
+                        ord.DeliveryPointId = (DeliveryPointCb.SelectedItem as DeliveryPoint).Id;
                     }
                     else
                     {
@@ -99,7 +106,7 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                         return;
                     }
                     ord.Date = DateTime.Now;
-                    ord.Price = Bucket.Sum(b => b.Product.Count * b.Product.Price);
+                    ord.Price = Bucket.Sum(b => b.Quantity * b.Product.Price);
                 }
                 //Добавление в Order
                 App.db.Order.Add(ord);
@@ -132,14 +139,40 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                 }
 
                 //Сохранение
-                App.db.SaveChanges();
-                MessageBox.Show("Заказ успешно добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                var selCard = (CardCb.SelectedItem as Cards);
+                if (selCard.Balance >= Bucket.Sum(b => b.Quantity * b.Product.Price))
+                {
+                    selCard.Balance -= Bucket.Sum(b => b.Quantity * b.Product.Price);
+                    App.db.SaveChanges();
+                    MessageBox.Show("Заказ успешно добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    NavigationService.Navigate(new ProductsPage());
+                }
+                else
+                {
+                    MessageBox.Show("На карте недостаточно средств! Выберите другую карту", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+               
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Произошла ошибка при оформлении заказа: " + ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+        }
+
+        private void CardCb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void AddCardBt_Click(object sender, RoutedEventArgs e)
+        {
+            AddCardWindow card = new AddCardWindow((sender as Button).DataContext as Cards);
+            card.ShowDialog();
+            var cards = App.db.Cards.Where(x => x.UserId == Account.AuthUser.Id).ToList();
+            CardCb.ItemsSource = cards;
 
         }
     }

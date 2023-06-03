@@ -14,12 +14,24 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Cards">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="NumberCard" Type="varchar" MaxLength="50" />
+          <Property Name="DateCard" Type="nvarchar" MaxLength="50" />
+          <Property Name="CVC" Type="varchar" MaxLength="50" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
         <EntityType Name="DeliveryPoint">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Adress" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="DeliveryType">
           <Key>
@@ -92,6 +104,16 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="TypeProduct">
           <Key>
             <PropertyRef Name="Id" />
@@ -111,7 +133,7 @@
           <Property Name="RoleId" Type="int" />
           <Property Name="Photo" Type="image" />
         </EntityType>
-        <Association Name="FK__Bucket__ProductI__4E88ABD4">
+        <Association Name="FK__Bucket__ProductI__03F0984C">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="Bucket" Type="Self.Bucket" Multiplicity="*" />
           <ReferentialConstraint>
@@ -123,7 +145,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bucket__UserId__4D94879B">
+        <Association Name="FK__Bucket__UserId__02FC7413">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Bucket" Type="Self.Bucket" Multiplicity="*" />
           <ReferentialConstraint>
@@ -131,6 +153,30 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Bucket">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cards_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Cards" Type="Self.Cards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cards">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryPoint_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="DeliveryPoint" Type="Self.DeliveryPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryPoint">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -259,6 +305,7 @@
         </Association>
         <EntityContainer Name="Хранилище MarketPlaceModelContainer">
           <EntitySet Name="Bucket" EntityType="Self.Bucket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cards" EntityType="Self.Cards" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeliveryPoint" EntityType="Self.DeliveryPoint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeliveryType" EntityType="Self.DeliveryType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
@@ -268,15 +315,24 @@
           <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatusOrder" EntityType="Self.StatusOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeProduct" EntityType="Self.TypeProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Bucket__ProductI__4E88ABD4" Association="Self.FK__Bucket__ProductI__4E88ABD4">
+          <AssociationSet Name="FK__Bucket__ProductI__03F0984C" Association="Self.FK__Bucket__ProductI__03F0984C">
             <End Role="Product" EntitySet="Product" />
             <End Role="Bucket" EntitySet="Bucket" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bucket__UserId__4D94879B" Association="Self.FK__Bucket__UserId__4D94879B">
+          <AssociationSet Name="FK__Bucket__UserId__02FC7413" Association="Self.FK__Bucket__UserId__02FC7413">
             <End Role="User" EntitySet="User" />
             <End Role="Bucket" EntitySet="Bucket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cards_User" Association="Self.FK_Cards_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Cards" EntitySet="Cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryPoint_User" Association="Self.FK_DeliveryPoint_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DeliveryPoint" EntitySet="DeliveryPoint" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_DeliveryPoint" Association="Self.FK_Order_DeliveryPoint">
             <End Role="DeliveryPoint" EntitySet="DeliveryPoint" />
@@ -324,6 +380,8 @@
     <edmx:ConceptualModels>
       <Schema Namespace="MarketPlaceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="MarketPlaceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bucket" EntityType="MarketPlaceModel.Bucket" />
+          <EntitySet Name="Cards" EntityType="MarketPlaceModel.Cards" />
           <EntitySet Name="DeliveryPoint" EntityType="MarketPlaceModel.DeliveryPoint" />
           <EntitySet Name="DeliveryType" EntityType="MarketPlaceModel.DeliveryType" />
           <EntitySet Name="Order" EntityType="MarketPlaceModel.Order" />
@@ -333,8 +391,25 @@
           <EntitySet Name="Provider" EntityType="MarketPlaceModel.Provider" />
           <EntitySet Name="Role" EntityType="MarketPlaceModel.Role" />
           <EntitySet Name="StatusOrder" EntityType="MarketPlaceModel.StatusOrder" />
+          <EntitySet Name="sysdiagrams" EntityType="MarketPlaceModel.sysdiagrams" />
           <EntitySet Name="TypeProduct" EntityType="MarketPlaceModel.TypeProduct" />
           <EntitySet Name="User" EntityType="MarketPlaceModel.User" />
+          <AssociationSet Name="FK__Bucket__ProductI__03F0984C" Association="MarketPlaceModel.FK__Bucket__ProductI__03F0984C">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Bucket" EntitySet="Bucket" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Bucket__UserId__02FC7413" Association="MarketPlaceModel.FK__Bucket__UserId__02FC7413">
+            <End Role="User" EntitySet="User" />
+            <End Role="Bucket" EntitySet="Bucket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cards_User" Association="MarketPlaceModel.FK_Cards_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Cards" EntitySet="Cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryPoint_User" Association="MarketPlaceModel.FK_DeliveryPoint_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DeliveryPoint" EntitySet="DeliveryPoint" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_DeliveryPoint" Association="MarketPlaceModel.FK_Order_DeliveryPoint">
             <End Role="DeliveryPoint" EntitySet="DeliveryPoint" />
             <End Role="Order" EntitySet="Order" />
@@ -375,22 +450,38 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <EntitySet Name="Bucket" EntityType="MarketPlaceModel.Bucket" />
-          <AssociationSet Name="FK__Bucket__ProductI__4316F928" Association="MarketPlaceModel.FK__Bucket__ProductI__4316F928">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Bucket" EntitySet="Bucket" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Bucket__UserId__45F365D3" Association="MarketPlaceModel.FK__Bucket__UserId__45F365D3">
-            <End Role="User" EntitySet="User" />
-            <End Role="Bucket" EntitySet="Bucket" />
-          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Bucket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="MarketPlaceModel.FK__Bucket__ProductI__03F0984C" FromRole="Bucket" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="MarketPlaceModel.FK__Bucket__UserId__02FC7413" FromRole="Bucket" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Cards">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="NumberCard" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateCard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CVC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="User" Relationship="MarketPlaceModel.FK_Cards_User" FromRole="Cards" ToRole="User" />
+        </EntityType>
         <EntityType Name="DeliveryPoint">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="MarketPlaceModel.FK_DeliveryPoint_User" FromRole="DeliveryPoint" ToRole="User" />
           <NavigationProperty Name="Order" Relationship="MarketPlaceModel.FK_Order_DeliveryPoint" FromRole="DeliveryPoint" ToRole="Order" />
         </EntityType>
         <EntityType Name="DeliveryType">
@@ -441,11 +532,11 @@
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="TypeProductId" Type="Int32" />
           <Property Name="ProviderId" Type="Int32" />
+          <NavigationProperty Name="Bucket" Relationship="MarketPlaceModel.FK__Bucket__ProductI__03F0984C" FromRole="Product" ToRole="Bucket" />
           <NavigationProperty Name="OrderProduct" Relationship="MarketPlaceModel.FK_OrderProduct_Product" FromRole="Product" ToRole="OrderProduct" />
           <NavigationProperty Name="Provider" Relationship="MarketPlaceModel.FK_Product_Provider" FromRole="Product" ToRole="Provider" />
           <NavigationProperty Name="TypeProduct" Relationship="MarketPlaceModel.FK_Product_TypeProduct" FromRole="Product" ToRole="TypeProduct" />
           <NavigationProperty Name="ProductPhoto" Relationship="MarketPlaceModel.FK_ProductPhoto_Product" FromRole="Product" ToRole="ProductPhoto" />
-          <NavigationProperty Name="Bucket" Relationship="MarketPlaceModel.FK__Bucket__ProductI__4316F928" FromRole="Product" ToRole="Bucket" />
         </EntityType>
         <EntityType Name="ProductPhoto">
           <Key>
@@ -481,6 +572,16 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Order" Relationship="MarketPlaceModel.FK_Order_StatusOrder" FromRole="StatusOrder" ToRole="Order" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="TypeProduct">
           <Key>
             <PropertyRef Name="Id" />
@@ -500,10 +601,60 @@
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RoleId" Type="Int32" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Bucket" Relationship="MarketPlaceModel.FK__Bucket__UserId__02FC7413" FromRole="User" ToRole="Bucket" />
+          <NavigationProperty Name="Cards" Relationship="MarketPlaceModel.FK_Cards_User" FromRole="User" ToRole="Cards" />
+          <NavigationProperty Name="DeliveryPoint" Relationship="MarketPlaceModel.FK_DeliveryPoint_User" FromRole="User" ToRole="DeliveryPoint" />
           <NavigationProperty Name="Order" Relationship="MarketPlaceModel.FK_Order_User" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="Role" Relationship="MarketPlaceModel.FK_User_Role" FromRole="User" ToRole="Role" />
-          <NavigationProperty Name="Bucket" Relationship="MarketPlaceModel.FK__Bucket__UserId__45F365D3" FromRole="User" ToRole="Bucket" />
         </EntityType>
+        <Association Name="FK__Bucket__ProductI__03F0984C">
+          <End Type="MarketPlaceModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="MarketPlaceModel.Bucket" Role="Bucket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bucket">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Bucket__UserId__02FC7413">
+          <End Type="MarketPlaceModel.User" Role="User" Multiplicity="1" />
+          <End Type="MarketPlaceModel.Bucket" Role="Bucket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bucket">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cards_User">
+          <End Type="MarketPlaceModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="MarketPlaceModel.Cards" Role="Cards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cards">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryPoint_User">
+          <End Type="MarketPlaceModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="MarketPlaceModel.DeliveryPoint" Role="DeliveryPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryPoint">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Order_DeliveryPoint">
           <End Type="MarketPlaceModel.DeliveryPoint" Role="DeliveryPoint" Multiplicity="0..1" />
           <End Type="MarketPlaceModel.Order" Role="Order" Multiplicity="*" />
@@ -626,50 +777,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Bucket">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="MarketPlaceModel.FK__Bucket__ProductI__4316F928" FromRole="Bucket" ToRole="Product" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="MarketPlaceModel.FK__Bucket__UserId__45F365D3" FromRole="Bucket" ToRole="User" />
-        </EntityType>
-        <Association Name="FK__Bucket__ProductI__4316F928">
-          <End Type="MarketPlaceModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="MarketPlaceModel.Bucket" Role="Bucket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Bucket">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Bucket__UserId__45F365D3">
-          <End Type="MarketPlaceModel.User" Role="User" Multiplicity="1" />
-          <End Type="MarketPlaceModel.Bucket" Role="Bucket" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Bucket">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище MarketPlaceModelContainer" CdmEntityContainer="MarketPlaceEntities">
+          <EntitySetMapping Name="Bucket">
+            <EntityTypeMapping TypeName="MarketPlaceModel.Bucket">
+              <MappingFragment StoreEntitySet="Bucket">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cards">
+            <EntityTypeMapping TypeName="MarketPlaceModel.Cards">
+              <MappingFragment StoreEntitySet="Cards">
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="CVC" ColumnName="CVC" />
+                <ScalarProperty Name="DateCard" ColumnName="DateCard" />
+                <ScalarProperty Name="NumberCard" ColumnName="NumberCard" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="DeliveryPoint">
             <EntityTypeMapping TypeName="MarketPlaceModel.DeliveryPoint">
               <MappingFragment StoreEntitySet="DeliveryPoint">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Adress" ColumnName="Adress" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -754,6 +893,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MarketPlaceModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TypeProduct">
             <EntityTypeMapping TypeName="MarketPlaceModel.TypeProduct">
               <MappingFragment StoreEntitySet="TypeProduct">
@@ -771,16 +921,6 @@
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="FName" ColumnName="FName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Bucket">
-            <EntityTypeMapping TypeName="MarketPlaceModel.Bucket">
-              <MappingFragment StoreEntitySet="Bucket">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

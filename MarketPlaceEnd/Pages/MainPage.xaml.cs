@@ -24,11 +24,20 @@ namespace MarketPlaceEnd.Pages
         public MainPage()
         {
             InitializeComponent();
-            if(Account.AuthUser.RoleId == 3 )
+            if (Account.AuthUser.RoleId == 3)
             {
                 ProvBt.Visibility = Visibility.Collapsed;
                 TypesBt.Visibility = Visibility.Collapsed;
                 DeliveryBt.Visibility = Visibility.Collapsed;
+            }
+            else if (Account.AuthUser.RoleId == 4 || Account.AuthUser.RoleId == 5)
+            {
+                ProvBt.Visibility = Visibility.Collapsed;
+                TypesBt.Visibility = Visibility.Collapsed;
+                DeliveryBt.Visibility = Visibility.Collapsed;
+                BucketBt.Visibility = Visibility.Collapsed;
+
+
             }
             else
             {

@@ -12,14 +12,15 @@ namespace MarketPlaceEnd.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Bucket
+    public partial class Cards
     {
         public int Id { get; set; }
-        public int Quantity { get; set; }
-        public int UserId { get; set; }
-        public int ProductId { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public string NumberCard { get; set; }
+        public string DateCard { get; set; }
+        public string CVC { get; set; }
+        public Nullable<decimal> Balance { get; set; }
     
-        public virtual Product Product { get; set; }
         public virtual User User { get; set; }
     }
 }

@@ -93,7 +93,7 @@
                 </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="White" BorderBrush="Gold" BorderThickness="2" Padding="3"
+                        <Border Background="{Binding ColorCount1}" BorderBrush="Gold" BorderThickness="2" Padding="3"
                                 Margin="5 5">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -110,7 +110,8 @@
                                         Text="{Binding Title}" 
                                         HorizontalAlignment="Center" />
                                     <TextBlock Text="{Binding Price, StringFormat='{}{0} руб.'}" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="{Binding TypeProduct.Title}" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding Availability}" HorizontalAlignment="Center" Foreground="{Binding ColorCount}"/>
+                                <TextBlock Text="{Binding TypeProduct.Title}" HorizontalAlignment="Center"/>
                                     <TextBlock Text="{Binding Provider.Title}" 
                                                TextWrapping="Wrap"
                                                HorizontalAlignment="Center"/>

@@ -1,19 +1,12 @@
 ﻿using MarketPlaceEnd.Models;
+using MarketPlaceEnd.Pages.AddEditPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MarketPlaceEnd.Pages.AddEditPages;
 
 namespace MarketPlaceEnd.Pages
 {
@@ -27,7 +20,7 @@ namespace MarketPlaceEnd.Pages
         {
             InitializeComponent();
             //Отображение корзины конкретного пользователя
-
+           
             bucketList = App.db.Bucket
                     .Where(b => b.ProductId == b.Product.Id || b.UserId == Account.AuthUser.Id)
                     .Select(b => new BucketItem
@@ -102,7 +95,8 @@ namespace MarketPlaceEnd.Pages
                     }
 
                     totalPriceTextBlock.Text = (product.Product.Price * currentCount).ToString();
-                } else
+                }
+                else
                 {
                     totalPriceTextBlock.Text = 0.ToString();
                 }
@@ -169,7 +163,7 @@ namespace MarketPlaceEnd.Pages
                         }
                     }
                 }
-            }          
+            }
         }
     }
 }

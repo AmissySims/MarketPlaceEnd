@@ -77,12 +77,36 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Сумма"
                            Margin="5"/>
-                <TextBlock Text="{Binding Price, StringFormat='{}{0} руб.'}"
+                <TextBlock 
                          Margin="5"
                          Width="100"
-                           />
+                         x:Name="PriceTb"/>
 
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Карта для оплаты"
+                           Margin="5"/>
+                <ComboBox x:Name="CardCb"
+                      SelectedIndex="0"
+                          Margin="5" 
+                            Width="200"
+                      DisplayMemberPath="NumberCard" 
+                          SelectionChanged="CardCb_SelectionChanged"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Хотите добавить новую карту?" 
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"
+                           Margin="5"
+                          />
+                <Button x:Name="AddCardBt"
+                        Content=" Добавить карту "
+                        Margin="5"
+                        Style="{StaticResource Buttons}" Click="AddCardBt_Click"/>
+            </StackPanel>
+
+           
             <StackPanel>
                 <Button x:Name="OrderBt"
                         Content="Оформить заказ"

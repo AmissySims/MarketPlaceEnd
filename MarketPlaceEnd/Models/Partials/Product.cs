@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace MarketPlaceEnd.Models
 {
@@ -36,6 +37,17 @@ namespace MarketPlaceEnd.Models
                
             }
         }
+        public string Availability
+        {
+            get
+            {
+                if (Count != 0)
+                {
+                    return $"В наличии";
+                }
+                else { return $"Нет в наличии"; }
+            }
+        }
         public Visibility BtnVisible1
         {
             get
@@ -49,6 +61,31 @@ namespace MarketPlaceEnd.Models
                 { return Visibility.Collapsed; }
 
             }
+        }
+        public SolidColorBrush ColorCount
+        {
+            get
+            {
+
+                if (Count != 0)
+                    return Brushes.Green;
+                else
+                    return Brushes.Red;
+            }
+
+        }
+
+        public string ColorCount1
+        {
+            get
+            {
+
+                if (Count != 0)
+                    return "White";
+                else
+                    return "BurlyWood";
+            }
+
         }
     }
     public class BucketItem

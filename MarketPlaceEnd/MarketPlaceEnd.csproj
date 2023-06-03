@@ -41,12 +41,18 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Vbe.Interop.Forms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,6 +65,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -68,9 +75,15 @@
     <Compile Include="Models\Bucket.cs">
       <DependentUpon>MarketPlaceModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cards.cs">
+      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Partials\Account.cs" />
     <Compile Include="Models\Partials\DeliveryPoint.cs" />
     <Compile Include="Models\Partials\Order.cs" />
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>MarketPlaceModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AddEditPages\AddDeliveryPointPage.xaml.cs">
       <DependentUpon>AddDeliveryPointPage.xaml</DependentUpon>
     </Compile>
@@ -80,8 +93,14 @@
     <Compile Include="Pages\DeliveryPountsPage.xaml.cs">
       <DependentUpon>DeliveryPountsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\GrafficsPage.xaml.cs">
+      <DependentUpon>GrafficsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LookProductPage.xaml.cs">
       <DependentUpon>LookProductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddCardWindow.xaml.cs">
+      <DependentUpon>AddCardWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\EditOrderWindow.xaml.cs">
       <DependentUpon>EditOrderWindow.xaml</DependentUpon>
@@ -133,6 +152,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\GrafficsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\LookProductPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,6 +185,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TypeProductsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AddCardWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
