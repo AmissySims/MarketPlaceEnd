@@ -18,7 +18,8 @@
        
             <ListView x:Name="ListUse" Grid.Column="0" d:ItemsSource="{d:SampleData ItemCount=1}" 
                       VerticalAlignment="Center"
-                      HorizontalAlignment="Center">
+                      HorizontalAlignment="Center"
+                      ScrollViewer.VerticalScrollBarVisibility="Disabled">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                     <Border BorderBrush="#FFD9C09F"
@@ -159,7 +160,8 @@
                         <StackPanel HorizontalAlignment="Center"
                                 Orientation="Horizontal">
                             <Image Source="\Resources\orders.png" Width="200"
-                           Height="160"/>
+                                   RenderOptions.BitmapScalingMode="Fant"
+                                    Height="160"/>
                             <TextBlock Text="Заказы"
                            Margin="5"
                            VerticalAlignment="Center"

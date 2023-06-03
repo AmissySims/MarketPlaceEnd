@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -62,6 +63,31 @@ namespace MarketPlaceEnd.Models
 
             }
         }
+        public Visibility BtnVisible2
+        {
+            get
+            {
+                if (Account.AuthUser.RoleId == 4 || Account.AuthUser.RoleId == 5)
+                {
+                    return Visibility.Collapsed;
+
+                }
+                else
+                { return Visibility.Visible; }
+
+            }
+        }
+        public string Availability
+        {
+            get
+            {
+                if(Count != 0)
+                {
+                    return $"В наличии" ;
+                }
+                else { return $"Нет в наличии"; }
+            }
+        }
         public SolidColorBrush ColorCount
         {
             get
@@ -88,10 +114,5 @@ namespace MarketPlaceEnd.Models
 
         }
     }
-    public class BucketItem
-    {
-        public Product Product { get; set; }
-        public int Quantity { get; set; }
-    }
-
+//# FFD9C09F
 }

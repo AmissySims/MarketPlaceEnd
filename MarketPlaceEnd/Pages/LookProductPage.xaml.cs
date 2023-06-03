@@ -27,6 +27,12 @@ namespace MarketPlaceEnd.Pages
             InitializeComponent();
             contextProduct = product;
             DataContext = contextProduct;
+            if(contextProduct.Count > 0)
+            {
+                BucketBt.Visibility = Visibility.Visible;
+            }
+            else
+                BucketBt.Visibility = Visibility.Collapsed;
             Refresh();
 
         }

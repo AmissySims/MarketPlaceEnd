@@ -81,6 +81,7 @@
                             Content=" В корзину "
                             Margin="5"
                             Style="{StaticResource Buttons}"
+                            Visibility="{Binding BtnVisible2}"
                             Click="BucketBt_Click"/>
                             <Button x:Name="BackBt"
                             Content=" Назад "

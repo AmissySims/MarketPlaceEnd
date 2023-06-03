@@ -16,16 +16,24 @@
         <Rectangle Fill="#FFD9C09F" Grid.Row="0" Margin="0 5"/>
         <StackPanel  Grid.Row="0"
                         Orientation="Horizontal" Margin="5"
-                        HorizontalAlignment="Center">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="Корзина"
+                        HorizontalAlignment="Center"
+                     VerticalAlignment="Center">
+            <TextBlock Text="Корзина"
                            FontSize="18"
                            Margin="10 0"/>
-                <Button x:Name="OrderBt"
+           
+
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" 
+                    Margin="10 0"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center">
+            <TextBlock 
+                       x:Name="PriceTb"
+                       Margin="10 0"/>
+            <Button x:Name="OrderBt"
                         Content=" Оформить заказ "
                         Style="{StaticResource Buttons}" Click="OrderBt_Click"/>
-                
-            </StackPanel>
 
         </StackPanel>
         <ListView Grid.Row="1" 
@@ -44,7 +52,7 @@
                                 <ColumnDefinition Width="19*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Margin="5">
-                                <Image Source="{Binding Product.MainPhoto}"
+                                <Image Source="{Binding MainPhoto}"
                                    Width="100"
                                    Height="100"/>
                             </StackPanel>
@@ -84,12 +92,12 @@
                         </Grid>
 
                     </Border>
-              
+
                 </DataTemplate>
             </ListView.ItemTemplate>
-            
+
         </ListView>
-      
-        
+
+
     </Grid>
 </Page>

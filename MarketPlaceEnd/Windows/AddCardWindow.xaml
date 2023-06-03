@@ -34,7 +34,7 @@
                          Width="50"
                          MaxLength="3"
                           PreviewTextInput="CVCTb_PreviewTextInput"/>
-
+                
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Баланс"

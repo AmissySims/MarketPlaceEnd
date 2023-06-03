@@ -35,13 +35,13 @@
             <Button Style="{StaticResource 1Button}"
                     Content="Товары"
                     x:Name="ProductsBt"
-                     Margin=" 0"
+                     Margin="0"
                     Width="90"
                     Click="ProductsBt_Click"/>
             <Button Style="{StaticResource 1Button}"
                     Content="Пункты выдачи"
                     x:Name="DeliveryBt"
-                    Margin="0"
+                    Margin="5 0"
                      Width="90"
                     Click="DeliveryBt_Click"/>
             <Button Style="{StaticResource 1Button}"

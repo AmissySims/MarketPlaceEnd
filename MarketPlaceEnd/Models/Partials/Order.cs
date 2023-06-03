@@ -23,6 +23,7 @@ namespace MarketPlaceEnd.Models
                 return this.OrderProduct.Sum(x => x.Count * x.Product.Price);
             }
         }
+      
         public Visibility BtnVisible
         {
             get

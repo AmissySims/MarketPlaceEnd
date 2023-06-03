@@ -79,6 +79,7 @@
       <DependentUpon>MarketPlaceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Partials\Account.cs" />
+    <Compile Include="Models\Partials\Bucket.cs" />
     <Compile Include="Models\Partials\DeliveryPoint.cs" />
     <Compile Include="Models\Partials\Order.cs" />
     <Compile Include="Models\sysdiagrams.cs">

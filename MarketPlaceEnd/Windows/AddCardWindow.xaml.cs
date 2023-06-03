@@ -20,12 +20,13 @@ namespace MarketPlaceEnd.Windows
     /// </summary>
     public partial class AddCardWindow : Window
     {
-        public Cards card { get; set; }
+     public Cards card { get; set; }    
         public AddCardWindow(Cards cards)
         {
             InitializeComponent();
             card = cards;
             BalanceTb.Text = "0";
+
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -90,7 +91,7 @@ namespace MarketPlaceEnd.Windows
                     card.DateCard = DateTb.Text;
                     card.UserId = Account.AuthUser.Id;
                     card.CVC = CVCTb.Text;
-                    card.Balance = Convert.ToDecimal(BalanceTb.Text);
+                    card.Balance = Convert.ToDecimal(BalanceTb.Text); 
                 }
 
                 App.db.Cards.Add(card);

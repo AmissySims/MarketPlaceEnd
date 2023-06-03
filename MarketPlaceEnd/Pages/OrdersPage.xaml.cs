@@ -5,6 +5,7 @@ using System.IO.Packaging;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms.VisualStyles;
 
 namespace MarketPlaceEnd.Pages
 {
@@ -26,6 +27,17 @@ namespace MarketPlaceEnd.Pages
                 OrderList.ItemsSource = App.db.Order.Where(z => z.UserId == Account.AuthUser.Id).ToList();
                
             }
+            else if (Account.AuthUser.RoleId == 4)
+            {
+                OrderList.ItemsSource = App.db.Order.Where(z => z.DeliveryTypeId == 2 && z.StatusOrderId == 5).ToList();
+
+            }
+            else if (Account.AuthUser.RoleId == 5)
+            {
+               
+                OrderList.ItemsSource = App.db.Order.Where(z => z.DeliveryTypeId == 1 && z.DeliveryPoint.UserId == Account.AuthUser.Id ).ToList();
+
+            }
             else
             {
                 OrderList.ItemsSource = App.db.Order.ToList();
@@ -45,6 +57,14 @@ namespace MarketPlaceEnd.Pages
             Refresh();
 
 
+        }
+
+        private void CorierOrder_Click(object sender, RoutedEventArgs e)
+        {
+            var selOrd = (sender as Button).DataContext as Order;
+            selOrd.StatusOrderId = 6;
+            App.db.SaveChanges();
+            Refresh();
         }
     }
 }
