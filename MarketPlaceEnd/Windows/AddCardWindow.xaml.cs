@@ -83,6 +83,12 @@ namespace MarketPlaceEnd.Windows
                 MessageBox.Show("Заполните поле CVC", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            //if(Convert.ToDecimal(BalanceTb.Text) < 0)
+            //{
+            //    MessageBox.Show("Баланс не может быть меньше 0", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return;
+
+            //}
             else
             {
                 Cards card = new Cards();
