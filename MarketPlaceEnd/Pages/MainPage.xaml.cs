@@ -24,6 +24,7 @@ namespace MarketPlaceEnd.Pages
         public MainPage()
         {
             InitializeComponent();
+            Frame2.NavigationService.Navigate(new MainMainPage());
             if (Account.AuthUser.RoleId == 3)
             {
                 ProvBt.Visibility = Visibility.Collapsed;
@@ -98,7 +99,7 @@ namespace MarketPlaceEnd.Pages
 
         private void MainBt_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MainPage());
+            Frame2.NavigationService.Navigate(new MainMainPage());
         }
     }
 }

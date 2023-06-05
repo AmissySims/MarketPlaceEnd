@@ -148,6 +148,9 @@
     <Compile Include="Pages\LookProductPage.xaml.cs">
       <DependentUpon>LookProductPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MainMainPage.xaml.cs">
+      <DependentUpon>MainMainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AddCardWindow.xaml.cs">
       <DependentUpon>AddCardWindow.xaml</DependentUpon>
     </Compile>
@@ -206,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\LookProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -333,6 +340,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\pokupki.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\BACKS1.jpg" />

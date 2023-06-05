@@ -76,6 +76,8 @@
                     Click="EnterBt_Click"/>
             
         </StackPanel>
+
+       
         <Frame Grid.Row="1" x:Name="Frame2" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Page>

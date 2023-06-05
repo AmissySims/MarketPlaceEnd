@@ -97,7 +97,7 @@ namespace MarketPlaceEnd.Windows
 
                 App.db.Cards.Add(card);
                 App.db.SaveChanges();
-                MessageBox.Show("Карта добавлена", "Уведомлние", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Карта добавлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;
             }
         }
