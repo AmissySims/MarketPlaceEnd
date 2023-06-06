@@ -156,5 +156,25 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                 e.Handled = true;
             }
         }
+
+        private void DeleteImageBt_Click(object sender, RoutedEventArgs e)
+        {
+            var sel = LVPhoto.SelectedItem as ProductPhoto;
+            if (sel != null)
+            {
+                if (MessageBox.Show("Точно хотите удалить?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    App.db.ProductPhoto.Remove(sel);
+                    App.db.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Выберите изображение", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                   
+                Refresh();
+            }
+        }
     }
 }

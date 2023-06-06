@@ -70,7 +70,7 @@
                                     <TextBlock Text="Сумма" Margin="5 0"/>
                                     <TextBlock 
                                         x:Name="TotalPriceTb"
-                                        Text="{Binding TotalPrice,StringFormat='{}{0} руб.'}"
+                                        Text="{Binding TotalPrice}"
                                         Margin="5 0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">

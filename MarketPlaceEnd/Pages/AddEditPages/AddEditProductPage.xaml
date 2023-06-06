@@ -84,10 +84,17 @@
             </StackPanel>
             <StackPanel Margin="5">
                 <DockPanel Grid.Column="1" Margin="5">
-                    <Button x:Name="ImageBt" Content="Добавить фото"
-                             DockPanel.Dock="Bottom"
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+                        <Button x:Name="ImageBt" Content="Добавить фото"
+                             Margin="5"
                             Style="{StaticResource Buttons}"
                         Click="ImageBt_Click"/>
+                        <Button x:Name="DeleteImageBt" Content="Удалить выбранное фото"
+                            Margin="5"
+                            Style="{StaticResource Buttons}"
+                        Click="DeleteImageBt_Click"/>
+                    </StackPanel>
+                   
                     <ListView x:Name="LVPhoto" d:ItemsSource="{d:SampleData ItemCount=6}">
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -103,9 +110,11 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    
 
 
                 </DockPanel>
+                
             </StackPanel>
         </StackPanel>
     </Grid>

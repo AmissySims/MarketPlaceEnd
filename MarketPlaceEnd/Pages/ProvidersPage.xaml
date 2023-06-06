@@ -57,6 +57,7 @@
                                     <Button Content="Удалить"
                                             Style="{StaticResource Buttons}"
                                             Margin="5"
+                                            Visibility="{Binding BtnVisible}"
                                             x:Name="DeleteProveBt"
                                             Click="DeleteProveBt_Click"/>
                                     <Button Content="Редактировать"

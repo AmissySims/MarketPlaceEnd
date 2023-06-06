@@ -22,7 +22,7 @@ namespace MarketPlaceEnd.Pages
             //Отображение корзины конкретного пользователя
            
             bucketList = App.db.Bucket
-                    .Where(b => b.ProductId == b.Product.Id || b.UserId == Account.AuthUser.Id)
+                    .Where(b => b.ProductId == b.Product.Id && b.UserId == Account.AuthUser.Id)
                     .Select(b => new BucketItem
                     {
                         Product = b.Product,

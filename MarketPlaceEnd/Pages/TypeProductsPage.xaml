@@ -54,6 +54,7 @@
                                             Style="{StaticResource Buttons}"
                                             Margin="5"
                                             x:Name="DeleteTypeBt"
+                                            Visibility="{Binding BtnVisible}"
                                             Click="DeleteTypeBt_Click"/>
                                     <Button Content="Редактировать"
                                             Style="{StaticResource Buttons}"

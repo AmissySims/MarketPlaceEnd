@@ -38,14 +38,7 @@ namespace MarketPlaceEnd.Pages
             PointsList.ItemsSource = App.db.DeliveryPoint.ToList();
 
         }
-        private void DeletePoint_Click(object sender, RoutedEventArgs e)
-        {
-            var selPoint = (sender as Button).DataContext as DeliveryPoint;
-            App.db.DeliveryPoint.Remove(selPoint);
-            App.db.SaveChanges();
-            MessageBox.Show("Удалено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-            Refresh();
-        }
+       
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {

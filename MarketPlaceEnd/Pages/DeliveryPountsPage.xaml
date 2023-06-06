@@ -59,11 +59,7 @@
                                             Visibility="{Binding BtnVisible1}"
                                         Style="{StaticResource Buttons}"
                                         Margin="10" Click="EditPoint_Click"/>
-                                    <Button x:Name="DeletePoint"
-                                        Content=" Удалить "
-                                            Visibility="{Binding BtnVisible1}"
-                                        Style="{StaticResource Buttons}"
-                                        Margin="10" Click="DeletePoint_Click"/>
+                                    
                                 </StackPanel>
 
                             </StackPanel>
