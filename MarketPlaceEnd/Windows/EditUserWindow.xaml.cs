@@ -26,8 +26,19 @@ namespace MarketPlaceEnd.Windows
         public EditUserWindow(User user)
         {
             InitializeComponent();
+            var roles = App.db.Role.ToList();
+            RoleCb.ItemsSource = roles;
             contextUser = user;
             DataContext = contextUser;
+            
+            if(contextUser.Id == 0 ) 
+            {
+                RoleStack.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                RoleStack.Visibility = Visibility.Collapsed;
+            }
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) =>
        DialogResult = true;
@@ -47,22 +58,30 @@ namespace MarketPlaceEnd.Windows
         {
             if (string.IsNullOrWhiteSpace(contextUser.Name))
             {
-                MessageBox.Show("Заполните поле названия", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Заполните поле имени", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (string.IsNullOrEmpty(contextUser.FName))
             {
-                MessageBox.Show("Заполните поле описания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Заполните поле фамилии", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (string.IsNullOrEmpty(contextUser.Login))
             {
-                MessageBox.Show("Заполните поле описания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Заполните поле логина", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (string.IsNullOrEmpty(contextUser.Password))
+            {
+                MessageBox.Show("Заполните поле паполя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else
             {
-               
+               if(contextUser.Id == 0)
+               {
+                    App.db.User.Add(contextUser);
+               }
                 App.db.SaveChanges();
                 MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;

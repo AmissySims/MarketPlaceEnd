@@ -29,9 +29,9 @@ namespace MarketPlaceEnd.Pages
             {
                 ProvBt.Visibility = Visibility.Collapsed;
                 TypesBt.Visibility = Visibility.Collapsed;
-                DeliveryBt.Visibility = Visibility.Collapsed;
+                DeliveryBt.Visibility = Visibility.Visible;
             }
-            else if (Account.AuthUser.RoleId == 4 || Account.AuthUser.RoleId == 5)
+            else if (Account.AuthUser.RoleId == 4 || Account.AuthUser.RoleId == 5 || Account.AuthUser.RoleId == 2)
             {
                 ProvBt.Visibility = Visibility.Collapsed;
                 TypesBt.Visibility = Visibility.Collapsed;
@@ -40,15 +40,7 @@ namespace MarketPlaceEnd.Pages
 
 
             }
-            else if(Account.AuthUser.RoleId == 4|| Account.AuthUser.RoleId == 5)
-            {
-                ProvBt.Visibility = Visibility.Collapsed;
-                TypesBt.Visibility = Visibility.Collapsed;
-                DeliveryBt.Visibility = Visibility.Collapsed;
-                BucketBt.Visibility = Visibility.Collapsed;
-
-
-            }
+          
             else
             {
                 ProvBt.Visibility = Visibility.Visible;

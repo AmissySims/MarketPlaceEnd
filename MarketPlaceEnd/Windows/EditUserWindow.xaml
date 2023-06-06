@@ -60,7 +60,14 @@
                              Width="200"/>
 
             </StackPanel>
-       
+            <StackPanel Orientation="Horizontal" x:Name="RoleStack">
+                <TextBlock Text="Роль" Margin="5" />
+                <ComboBox x:Name="RoleCb"
+                             Margin="5"
+                            DisplayMemberPath="Title"
+                            SelectedItem="{Binding Role}"
+                          Width="200"/>
+            </StackPanel>
             <Button x:Name="SaveBt"
                             Content=" Сохранить "
                             Style="{StaticResource Buttons}"

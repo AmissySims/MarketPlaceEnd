@@ -35,17 +35,18 @@
             <Border Background="White" BorderBrush="Gold" BorderThickness="2" Padding="3">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
                             <TextBlock Text="{Binding Title}" Width="250"
                              TextWrapping="Wrap"
                              Margin="5"
-                             FontSize="16" />
+                             FontSize="16" 
+                                       HorizontalAlignment="Center"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
                             <TextBlock Text="{Binding Description}"
-                            Height="30" 
+                            
                              Width="300"
                              TextWrapping="Wrap"
                              Margin="0 5"/>

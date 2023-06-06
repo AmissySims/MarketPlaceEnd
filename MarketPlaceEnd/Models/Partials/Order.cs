@@ -38,6 +38,20 @@ namespace MarketPlaceEnd.Models
 
             }
         }
+        public Visibility AdressVisible
+        {
+            get
+            {
+                if (DeliveryTypeId == 1 )
+                {
+                    return Visibility.Collapsed;
+
+                }
+                else
+                { return Visibility.Visible; }
+
+            }
+        }
         public Visibility BtnVisible1
         {
             get

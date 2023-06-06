@@ -35,10 +35,12 @@ namespace MarketPlaceEnd.Pages
 
         private void EnterBt_Click(object sender, RoutedEventArgs e)
         {
+            
             var login = LoginTb.Text;
             var password = PasswordTb.Text;
             Account.AuthUser = App.db.User.ToList().Find(x => x.Login == login && x.Password == password);
             var user = Account.AuthUser;
+
             if (string.IsNullOrWhiteSpace(login))
             {
                 MessageBox.Show("Заполните поле логина", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

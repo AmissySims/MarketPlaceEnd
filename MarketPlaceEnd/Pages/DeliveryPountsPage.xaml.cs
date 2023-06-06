@@ -25,7 +25,13 @@ namespace MarketPlaceEnd.Pages
         public DeliveryPountsPage()
         {
             InitializeComponent();
-          
+            if(Account.AuthUser.RoleId == 3)
+            { 
+                AddPointBt.Visibility = Visibility.Collapsed;
+            }
+            else
+                AddPointBt.Visibility = Visibility.Visible;
+
         }
 
         private void EditPoint_Click(object sender, RoutedEventArgs e)

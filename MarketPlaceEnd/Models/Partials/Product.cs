@@ -28,7 +28,7 @@ namespace MarketPlaceEnd.Models
         { 
             get
             {
-                if(Account.AuthUser.RoleId == 1)
+                if(Account.AuthUser.RoleId == 1 )
                 {
                     return Visibility.Visible;
                     
@@ -67,7 +67,7 @@ namespace MarketPlaceEnd.Models
         {
             get
             {
-                if (Account.AuthUser.RoleId == 4 || Account.AuthUser.RoleId == 5)
+                if (Account.AuthUser.RoleId == 4 || Account.AuthUser.RoleId == 5 || Account.AuthUser.RoleId == 2)
                 {
                     return Visibility.Collapsed;
 

@@ -92,18 +92,21 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                  Order ord = new Order();
                 {
                     ord.UserId = Account.AuthUser.Id;
-                    ord.AdressDelivery = AdressTb.Text;
+                   
                     ord.StatusOrderId = 1;
                   
                     if (Courier.IsChecked == true)
                     {
                         ord.DeliveryTypeId = 2;
                         ord.DeliveryPointId = null;
+                        ord.AdressDelivery = AdressTb.Text;
                     }
                     else if (Pickup.IsChecked == true)
                     {
                         ord.DeliveryTypeId = 1;
                         ord.DeliveryPointId = (DeliveryPointCb.SelectedItem as DeliveryPoint).Id;
+                        ord.AdressDelivery = null;
+
                     }
                     else
                     {

@@ -100,7 +100,7 @@ namespace MarketPlaceEnd.Pages
                         ProductId = selectedProduct.Id
                     };
 
-                    var prodInBucket = App.db.Bucket.Where(b => b.ProductId == bucket.ProductId).FirstOrDefault();
+                    var prodInBucket = App.db.Bucket.Where(b => b.ProductId == bucket.ProductId && b.UserId == Account.AuthUser.Id).FirstOrDefault();
                     if (prodInBucket != null)
                     {
                         MessageBox.Show("Данный товар уже присутствует в корзине", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);

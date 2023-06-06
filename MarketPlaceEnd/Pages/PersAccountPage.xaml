@@ -75,15 +75,24 @@
                                    Margin="5"/>
 
                                     </StackPanel>
-                                    <Button x:Name="EditBt"
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button x:Name="EditBt"
                                             Margin="5"
                                          Content=" Редактировать "
                                             Style="{StaticResource Buttons}" Click="EditBt_Click"/>
+                                        <Button x:Name="AddUserBt"
+                                            Content=" Добавить  "
+                                            Margin="5"
+                                            Visibility="{Binding BtnVisible}"
+                                            Style="{StaticResource Buttons}" Click="AddUserBt_Click"/>
+                                    </StackPanel>
+                                   
                                     <Button x:Name="StatBt"
                                             Content=" Посмотреть графики "
-                                            Margin="5 0"
+                                            Margin="5"
                                             Visibility="{Binding BtnVisible}"
                                             Style="{StaticResource Buttons}" Click="StatBt_Click"/>
+                                   
                                 </StackPanel>
                             </StackPanel>
 

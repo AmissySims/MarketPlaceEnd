@@ -28,6 +28,7 @@
                   ScrollViewer.HorizontalScrollBarVisibility="Visible"
                  Grid.Row="1" 
                   HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
                   x:Name="OrderList">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -53,7 +54,7 @@
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Дата" 
                                       Margin="10 5"/>
-                                        <TextBlock Text="{Binding Date}"
+                                        <TextBlock Text="{Binding Date, StringFormat=dd.MM.yyyy}"
                                        Margin="5 5"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
@@ -82,7 +83,7 @@
                                        Margin="5"/>
                                        
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal" Visibility="{Binding AdressVisible}">
 
                                         <TextBlock Text="Адрес" 
                                        Margin="10 5"/>
@@ -95,9 +96,11 @@
                                 </StackPanel>
                               
                                 <StackPanel Grid.Column="1">
-                                 
 
-                                    <ListBox Grid.Column="1" ItemsSource="{Binding OrderProduct}" Margin="5" Height="90"
+
+                                    <ListBox Grid.Column="1" ItemsSource="{Binding OrderProduct}" 
+                                             Margin="5" Height="90" 
+                                             d:ItemsSource="{d:SampleData ItemCount=7}"
                                              ScrollViewer.HorizontalScrollBarVisibility="Auto">
                                         <ListBox.ItemsPanel>
                                             <ItemsPanelTemplate>
