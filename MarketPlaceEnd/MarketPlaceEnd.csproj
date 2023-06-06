@@ -342,6 +342,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\ttt.jpg" />
     <Resource Include="Resources\pokupki.jpg" />
   </ItemGroup>
   <ItemGroup>

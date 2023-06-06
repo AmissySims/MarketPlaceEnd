@@ -28,8 +28,10 @@
 
                 </StackPanel>
             </Border>
-
-            <StackPanel>
+            <StackPanel Margin="5">
+                <Image Source="\Resources\ttt.jpg"  />
+            </StackPanel>
+            <!--<StackPanel>
                 <ListView d:ItemsSource="{d:SampleData ItemCount=4}"  
                           x:Name="MainList"
                           Margin="5">
@@ -68,7 +70,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
                 
-            </StackPanel>
+            </StackPanel>-->
         </StackPanel>
     </Grid>
 </Page>

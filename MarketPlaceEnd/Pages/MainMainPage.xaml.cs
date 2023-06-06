@@ -24,7 +24,7 @@ namespace MarketPlaceEnd.Pages
         {
             InitializeComponent();
             var products = App.db.Product.ToList();
-            MainList.ItemsSource = products;
+            //MainList.ItemsSource = products;
         }
     }
 }
