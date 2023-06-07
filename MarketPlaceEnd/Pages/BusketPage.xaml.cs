@@ -102,6 +102,7 @@ namespace MarketPlaceEnd.Pages
                 }
             }
         }
+       
 
         private TextBlock FindTotalPriceTextBlock(TextBox currentTextBox)
         {
@@ -116,6 +117,7 @@ namespace MarketPlaceEnd.Pages
             }
             return null;
         }
+
 
         private T FindVisualChild<T>(DependencyObject parent, string name) where T : FrameworkElement
         {
