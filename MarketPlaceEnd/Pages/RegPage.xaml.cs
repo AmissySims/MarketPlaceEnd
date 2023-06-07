@@ -55,6 +55,10 @@ namespace MarketPlaceEnd.Pages
                 App.db.User.Add(user);
                 App.db.SaveChanges();
                 MessageBox.Show("Регистрация выполнена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                NameTb.Text = "";
+                PasswordTb.Text = "";
+                FNameTb.Text = "";
+                LoginTb.Text = "";
             }
             else
             {
