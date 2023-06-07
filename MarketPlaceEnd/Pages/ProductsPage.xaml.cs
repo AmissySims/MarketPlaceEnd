@@ -56,10 +56,7 @@ namespace MarketPlaceEnd.Pages
             {
                 products = products.Where(x => x.TypeProductId == selType.Id).ToList();
             }
-            if (!string.IsNullOrWhiteSpace(searchString))
-            {
-                products = App.db.Product.Where(p => p.Title.ToLower().Contains(searchString)).ToList();
-            }
+          
             if (FilterCb.SelectedIndex == 1)
             {
                 products = products.Where(p => p.Price < 500).ToList();
@@ -71,6 +68,10 @@ namespace MarketPlaceEnd.Pages
             if (FilterCb.SelectedIndex == 3)
             {
                 products = products.Where(p => p.Price >= 2000).ToList();
+            }
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                products = App.db.Product.Where(p => p.Title.ToLower().Contains(searchString)).ToList();
             }
             ListProducts.ItemsSource = products;
         }
