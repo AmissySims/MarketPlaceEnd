@@ -95,9 +95,18 @@
 
                                 </Grid.RowDefinitions>
                                 <StackPanel Margin="5">
-                                    <Image x:Name="MainImage"
+                                <Image x:Name="MainImage"
                                             Width="140"
-                                            Height="120" Source="{Binding MainPhoto}"/>
+                                            Height="120"
+                                       RenderOptions.BitmapScalingMode="Fant">
+                                    <Image.Source>
+                                        <Binding Path="MainPhoto">
+                                            <Binding.TargetNullValue>
+                                                <BitmapImage UriSource="\Resources\Null.png"/>
+                                            </Binding.TargetNullValue>
+                                        </Binding>
+                                    </Image.Source>
+                                </Image>
                                     <TextBlock TextWrapping="Wrap"
                                         Text="{Binding Title}" 
                                         HorizontalAlignment="Center" />
