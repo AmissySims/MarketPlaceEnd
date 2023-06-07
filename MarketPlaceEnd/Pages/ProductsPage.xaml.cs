@@ -30,12 +30,7 @@ namespace MarketPlaceEnd.Pages
         {
             InitializeComponent();
 
-            //List<TypeProduct> listTypes = _context.TypeProduct.ToList();
-
-            //listTypes.Insert(0, new TypeProduct { Title = "Все" });
-
-            //TypeProdCb.ItemsSource = listTypes;
-            // TypeProdCb.SelectedIndex = 0;
+            
             selType = null;
             if (Account.AuthUser.RoleId == 1)
             {
@@ -89,7 +84,6 @@ namespace MarketPlaceEnd.Pages
         {
             try
             {
-                //Добавление товара в коризну
                 var selectedProduct = (sender as Button).DataContext as Product;
                 if (selectedProduct.Count > 0)
                 {
@@ -110,7 +104,6 @@ namespace MarketPlaceEnd.Pages
                     App.db.SaveChanges();
                     MessageBoxResult result = MessageBox.Show("Товар добавлен в корзину. Хотите перейти в корзину сейчас?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                    // Если пользователь выбрал "Да", перейти на вкладку корзины
                     if (result == MessageBoxResult.Yes)
                     {
                         NavigationService.Navigate(new BusketPage());
@@ -131,11 +124,19 @@ namespace MarketPlaceEnd.Pages
         }
         private void RemovePrBt_Click(object sender, RoutedEventArgs e)
         {
-            var selProd = (sender as Button).DataContext as Product;
-            App.db.Product.Remove(selProd);
-            App.db.SaveChanges();
-            MessageBox.Show("Удалено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-            Refresh();
+            try
+            {
+                var selProd = (sender as Button).DataContext as Product;
+                App.db.Product.Remove(selProd);
+                App.db.SaveChanges();
+                MessageBox.Show("Удалено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при удалении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
         }
 
         private void EditPrPrBt_Click(object sender, RoutedEventArgs e)

@@ -68,7 +68,7 @@ namespace MarketPlaceEnd.Pages.AddEditPages
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Произошла ошибка: " + ex.Message);
+                MessageBox.Show($"Ошибка при добавлении картинки: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -80,51 +80,58 @@ namespace MarketPlaceEnd.Pages.AddEditPages
 
         private void SaveBt_Click(object sender, RoutedEventArgs e)
         {
-
-            if (string.IsNullOrWhiteSpace(contextProduct.Title))
+            try
             {
-                MessageBox.Show("Заполните поле названия", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (string.IsNullOrEmpty(contextProduct.Description))
-            {
-                MessageBox.Show("Заполните поле описания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (contextProduct.Price == null)
-            {
-                MessageBox.Show("Заполните поле стоимости", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-
-            }
-
-            if (contextProduct.Provider == null)
-            {
-                MessageBox.Show("Выберите поставщика", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-
-            }
-            if (contextProduct.Count == null)
-            {
-                MessageBox.Show("Заполните поле количества", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-
-            }
-            if (contextProduct.TypeProduct == null)
-            {
-                MessageBox.Show("Выберите тип продукта", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            else
-            {
-                if (contextProduct.Id == 0)
+                if (string.IsNullOrWhiteSpace(contextProduct.Title))
                 {
-                    App.db.Product.Add(contextProduct);
+                    MessageBox.Show("Заполните поле названия", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
-                App.db.SaveChanges();
-                MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.GoBack();
+                if (string.IsNullOrEmpty(contextProduct.Description))
+                {
+                    MessageBox.Show("Заполните поле описания", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (contextProduct.Price == null)
+                {
+                    MessageBox.Show("Заполните поле стоимости", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+
+                }
+
+                if (contextProduct.Provider == null)
+                {
+                    MessageBox.Show("Выберите поставщика", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+
+                }
+                if (contextProduct.Count == null)
+                {
+                    MessageBox.Show("Заполните поле количества", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+
+                }
+                if (contextProduct.TypeProduct == null)
+                {
+                    MessageBox.Show("Выберите тип продукта", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    if (contextProduct.Id == 0)
+                    {
+                        App.db.Product.Add(contextProduct);
+                    }
+                    App.db.SaveChanges();
+                    MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    NavigationService.GoBack();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+          
            
         }
 
@@ -159,21 +166,28 @@ namespace MarketPlaceEnd.Pages.AddEditPages
 
         private void DeleteImageBt_Click(object sender, RoutedEventArgs e)
         {
-            var sel = LVPhoto.SelectedItem as ProductPhoto;
-            if (sel != null)
+            try
             {
-                if (MessageBox.Show("Точно хотите удалить?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                var sel = LVPhoto.SelectedItem as ProductPhoto;
+                if (sel != null)
                 {
-                    App.db.ProductPhoto.Remove(sel);
-                    App.db.SaveChanges();
+                    if (MessageBox.Show("Точно хотите удалить?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        App.db.ProductPhoto.Remove(sel);
+                        App.db.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Выберите изображение", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    Refresh();
                 }
-                else
-                {
-                    MessageBox.Show("Выберите изображение", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-                   
-                Refresh();
+            }
+           catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при удалении картинки: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

@@ -35,35 +35,42 @@ namespace MarketPlaceEnd.Pages
 
         private void EnterBt_Click(object sender, RoutedEventArgs e)
         {
-            
-            var login = LoginTb.Text;
-            var password = PasswordTb.Text;
-            Account.AuthUser = App.db.User.ToList().Find(x => x.Login == login && x.Password == password);
-            var user = Account.AuthUser;
+            try
+            {
+                var login = LoginTb.Text;
+                var password = PasswordTb.Text;
+                Account.AuthUser = App.db.User.ToList().Find(x => x.Login == login && x.Password == password);
+                var user = Account.AuthUser;
 
-            if (string.IsNullOrWhiteSpace(login))
-            {
-                MessageBox.Show("Заполните поле логина", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                if (string.IsNullOrWhiteSpace(login))
+                {
+                    MessageBox.Show("Заполните поле логина", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    MessageBox.Show("Заполните поле пароля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (user == null)
+                {
+                    MessageBox.Show("Такого пользователя не существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+
+                else
+                {
+                    Account.isAuth = true;
+                    MessageBox.Show("Вход выполнен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    NavigationService.Navigate(new MainPage());
+                }
             }
-            if (string.IsNullOrWhiteSpace(password))
+            catch(Exception ex)
             {
-                MessageBox.Show("Заполните поле пароля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                MessageBox.Show($"Ошибка при входе: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            if (user == null)
-            {
-                MessageBox.Show("Такого пользователя не существует", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return; 
-            }
-            
            
-            else
-            {
-                Account.isAuth = true;
-                MessageBox.Show("Вход выполнен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.Navigate(new MainPage());
-            }
            
         }
     }

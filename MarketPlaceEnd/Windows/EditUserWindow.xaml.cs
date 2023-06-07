@@ -44,48 +44,65 @@ namespace MarketPlaceEnd.Windows
        DialogResult = true;
 
         private void AddImageBt_Click(object sender, RoutedEventArgs e)
-        {
-            var dialog = new OpenFileDialog();
-            if(dialog.ShowDialog().GetValueOrDefault())
+        {   
+            try
             {
-                contextUser.Photo = File.ReadAllBytes(dialog.FileName);
-                DataContext = null;
-                DataContext = contextUser;
+                var dialog = new OpenFileDialog();
+                if (dialog.ShowDialog().GetValueOrDefault())
+                {
+                    contextUser.Photo = File.ReadAllBytes(dialog.FileName);
+                    DataContext = null;
+                    DataContext = contextUser;
+                }
             }
+            catch (Exception ex) 
+            {
+                MessageBox.Show($"Ошибка при добавлении картинки: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+           
         }
 
         private void SaveBt_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(contextUser.Name))
+            try
             {
-                MessageBox.Show("Заполните поле имени", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                if (string.IsNullOrWhiteSpace(contextUser.Name))
+                {
+                    MessageBox.Show("Заполните поле имени", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (string.IsNullOrEmpty(contextUser.FName))
+                {
+                    MessageBox.Show("Заполните поле фамилии", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (string.IsNullOrEmpty(contextUser.Login))
+                {
+                    MessageBox.Show("Заполните поле логина", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (string.IsNullOrEmpty(contextUser.Password))
+                {
+                    MessageBox.Show("Заполните поле пароля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    if (contextUser.Id == 0)
+                    {
+                        App.db.User.Add(contextUser);
+                    }
+                    App.db.SaveChanges();
+                    MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    DialogResult = true;
+                }
             }
-            if (string.IsNullOrEmpty(contextUser.FName))
+            catch (Exception ex)
             {
-                MessageBox.Show("Заполните поле фамилии", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            if (string.IsNullOrEmpty(contextUser.Login))
-            {
-                MessageBox.Show("Заполните поле логина", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (string.IsNullOrEmpty(contextUser.Password))
-            {
-                MessageBox.Show("Заполните поле паполя", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            else
-            {
-               if(contextUser.Id == 0)
-               {
-                    App.db.User.Add(contextUser);
-               }
-                App.db.SaveChanges();
-                MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                DialogResult = true;
-            }
+          
         }
     }
 }

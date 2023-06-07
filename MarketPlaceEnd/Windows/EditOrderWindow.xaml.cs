@@ -34,17 +34,26 @@ namespace MarketPlaceEnd.Windows
 
         private void SaveBt_Click(object sender, RoutedEventArgs e)
         {
-            if (contextOrder.StatusOrder == null)
+            try
             {
-                MessageBox.Show("Выберите статус", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+
+                if (contextOrder.StatusOrder == null)
+                {
+                    MessageBox.Show("Выберите статус", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    App.db.SaveChanges();
+                    MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    DialogResult = true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                App.db.SaveChanges();
-                MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                DialogResult = true;
+                MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+           
         }
     }
 }

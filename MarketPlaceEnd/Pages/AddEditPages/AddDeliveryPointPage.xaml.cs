@@ -40,26 +40,34 @@ namespace MarketPlaceEnd.Pages.AddEditPages
 
         private void SaveBt_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(contextPoint.Adress))
+            try
             {
-                MessageBox.Show("Заполните поле адреса", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (contextPoint.User == null)
-            {
-                MessageBox.Show("Выберите работника", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            else
-            {
-                if (contextPoint.Id == 0)
+                if (string.IsNullOrWhiteSpace(contextPoint.Adress))
                 {
-                    App.db.DeliveryPoint.Add(contextPoint);
+                    MessageBox.Show("Заполните поле адреса", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
-                App.db.SaveChanges();
-                MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.GoBack();
+                if (contextPoint.User == null)
+                {
+                    MessageBox.Show("Выберите работника", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    if (contextPoint.Id == 0)
+                    {
+                        App.db.DeliveryPoint.Add(contextPoint);
+                    }
+                    App.db.SaveChanges();
+                    MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    NavigationService.GoBack();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
         private void CancelBt_Click(object sender, RoutedEventArgs e)

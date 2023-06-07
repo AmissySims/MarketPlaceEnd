@@ -47,7 +47,7 @@ namespace MarketPlaceEnd.Pages
 
         private void BucketBt_Click(object sender, RoutedEventArgs e)
         {
-            //Добавление товара в коризну
+            
             try
             {
                 var selectedProduct = (sender as Button).DataContext as Product;
@@ -67,7 +67,7 @@ namespace MarketPlaceEnd.Pages
                     App.db.SaveChanges();
                     MessageBoxResult result = MessageBox.Show("Товар добавлен в корзину. Хотите перейти в корзину сейчас?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                    // Если пользователь выбрал "Да", перейти на вкладку корзины
+                    
                     if (result == MessageBoxResult.Yes)
                     {
                         NavigationService.Navigate(new BusketPage());

@@ -22,11 +22,11 @@ namespace MarketPlaceEnd.Pages
     /// </summary>
     public partial class TypeProductsPage : Page
     {
-        MarketPlaceEntities1 _context = new MarketPlaceEntities1();
+ 
         public TypeProductsPage()
         {
             InitializeComponent();
-            Sort();
+            
             if (Account.AuthUser.RoleId == 1)
             {
                 AddTypeBt.Visibility = Visibility.Visible;
@@ -39,9 +39,11 @@ namespace MarketPlaceEnd.Pages
 
         }
 
-        public void Sort()
+     
+        public void Refresh()
         {
-            List<TypeProduct> listType = _context.TypeProduct.ToList();
+            
+            var listType = App.db.TypeProduct.ToList();
             var searchString = FoundTb.Text;
             if (!string.IsNullOrWhiteSpace(searchString))
             {
@@ -50,10 +52,6 @@ namespace MarketPlaceEnd.Pages
             }
             TypesList.ItemsSource = listType;
         }
-        public void Refresh()
-        {
-            TypesList.ItemsSource = App.db.TypeProduct.ToList();
-        }
         private void AddTypeBt_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddEditTypesPage(new TypeProduct()));
@@ -61,13 +59,21 @@ namespace MarketPlaceEnd.Pages
 
         private void DeleteTypeBt_Click(object sender, RoutedEventArgs e)
         {
-            var selType = (sender as Button).DataContext as TypeProduct;
-            var pr = selType.Product;
-            App.db.Product.RemoveRange(pr);
-            App.db.TypeProduct.Remove(selType);
-            App.db.SaveChanges();
-            MessageBox.Show("Удалено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-            Refresh();
+            try
+            {
+                var selType = (sender as Button).DataContext as TypeProduct;
+                var pr = selType.Product;
+                App.db.Product.RemoveRange(pr);
+                App.db.TypeProduct.Remove(selType);
+                App.db.SaveChanges();
+                MessageBox.Show("Удалено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при удалении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+           
         }
 
         private void EditTypeBt_Click(object sender, RoutedEventArgs e)
@@ -83,7 +89,7 @@ namespace MarketPlaceEnd.Pages
 
         private void FoundTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Sort();
+            Refresh();
         }
     }
 }

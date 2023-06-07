@@ -36,22 +36,30 @@ namespace MarketPlaceEnd.Pages
 
         private void OrderBt_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var buc in bucketList)
+            try
             {
-                int countProd = App.db.Product.Where(p => p.Id == buc.Product.Id).Select(p => p.Count).FirstOrDefault() ?? -1;
-                if (countProd < buc.Product.Count)
+                foreach (var buc in bucketList)
                 {
-                    MessageBox.Show($"Остаток на складе {countProd}, укажите верное количество", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                    int countProd = App.db.Product.Where(p => p.Id == buc.Product.Id).Select(p => p.Count).FirstOrDefault() ?? -1;
+                    if (countProd < buc.Product.Count)
+                    {
+                        MessageBox.Show($"Остаток на складе {countProd}, укажите верное количество", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    else if (countProd == -1)
+                    {
+                        MessageBox.Show("Ошибка товара на складе", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                 }
-                else if (countProd == -1)
-                {
-                    MessageBox.Show("Ошибка товара на складе", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-            }
 
-            NavigationService.Navigate(new AddOrderPage(bucketList));
+                NavigationService.Navigate(new AddOrderPage(bucketList));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при оформлении заказа: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+           
         }
 
         private void DeleteCommand(object sender, RoutedEventArgs e)
@@ -79,6 +87,7 @@ namespace MarketPlaceEnd.Pages
         {
             TextBox currentTextBox = (TextBox)sender;
             TextBlock totalPriceTextBlock = FindTotalPriceTextBlock(currentTextBox);
+            
             if (totalPriceTextBlock.DataContext is BucketItem product)
             {
                 if (Int32.TryParse(currentTextBox.Text, out Int32 currentCount))
@@ -122,6 +131,7 @@ namespace MarketPlaceEnd.Pages
         private T FindVisualChild<T>(DependencyObject parent, string name) where T : FrameworkElement
         {
             int childCount = VisualTreeHelper.GetChildrenCount(parent);
+
             for (int i = 0; i < childCount; i++)
             {
                 DependencyObject child = VisualTreeHelper.GetChild(parent, i);

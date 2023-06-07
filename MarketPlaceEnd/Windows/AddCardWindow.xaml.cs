@@ -68,38 +68,46 @@ namespace MarketPlaceEnd.Windows
 
         private void AddCardBt_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(NumberCardTb.Text))
+            try
             {
-                MessageBox.Show("Заполните поле номера", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (string.IsNullOrEmpty(DateTb.Text))
-            {
-                MessageBox.Show("Заполните поле даты", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (string.IsNullOrEmpty(CVCTb.Text))
-            {
-                MessageBox.Show("Заполните поле CVC", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-     
-            else
-            {
-                Cards card = new Cards();
+                if (string.IsNullOrEmpty(NumberCardTb.Text))
                 {
-                    card.NumberCard = NumberCardTb.Text;
-                    card.DateCard = DateTb.Text;
-                    card.UserId = Account.AuthUser.Id;
-                    card.CVC = CVCTb.Text;
-                    card.Balance = Convert.ToDecimal(BalanceTb.Text); 
+                    MessageBox.Show("Заполните поле номера", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (string.IsNullOrEmpty(DateTb.Text))
+                {
+                    MessageBox.Show("Заполните поле даты", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (string.IsNullOrEmpty(CVCTb.Text))
+                {
+                    MessageBox.Show("Заполните поле CVC", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
 
-                App.db.Cards.Add(card);
-                App.db.SaveChanges();
-                MessageBox.Show("Карта добавлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                DialogResult = true;
+                else
+                {
+                    Cards card = new Cards();
+                    {
+                        card.NumberCard = NumberCardTb.Text;
+                        card.DateCard = DateTb.Text;
+                        card.UserId = Account.AuthUser.Id;
+                        card.CVC = CVCTb.Text;
+                        card.Balance = Convert.ToDecimal(BalanceTb.Text);
+                    }
+
+                    App.db.Cards.Add(card);
+                    App.db.SaveChanges();
+                    MessageBox.Show("Карта добавлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    DialogResult = true;
+                }
             }
+            catch(Exception ex) 
+            {
+                MessageBox.Show($"Ошибка при добавлении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+           
         }
     }
 }

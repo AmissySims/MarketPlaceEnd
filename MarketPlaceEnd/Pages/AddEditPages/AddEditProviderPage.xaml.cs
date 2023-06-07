@@ -48,26 +48,34 @@ namespace MarketPlaceEnd.Pages.AddEditPages
 
         private void SaveBt_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(contextProv.Title))
+            try
             {
-                MessageBox.Show("Заполните поле названия", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(contextProv.Adress))
-            {
-                MessageBox.Show("Заполните поле адреса", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            else
-            {
-                if (contextProv .Id == 0)
+                if (string.IsNullOrWhiteSpace(contextProv.Title))
                 {
-                    App.db.Provider.Add(contextProv);
+                    MessageBox.Show("Заполните поле названия", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
-                App.db.SaveChanges();
-                MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.GoBack();
+                if (string.IsNullOrWhiteSpace(contextProv.Adress))
+                {
+                    MessageBox.Show("Заполните поле адреса", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    if (contextProv.Id == 0)
+                    {
+                        App.db.Provider.Add(contextProv);
+                    }
+                    App.db.SaveChanges();
+                    MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    NavigationService.GoBack();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+           
         }
     }
 }

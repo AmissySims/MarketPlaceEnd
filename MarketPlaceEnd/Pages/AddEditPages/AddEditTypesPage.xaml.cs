@@ -38,21 +38,29 @@ namespace MarketPlaceEnd.Pages.AddEditPages
 
         private void SaveBt_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(contextType.Title))
+            try
             {
-                MessageBox.Show("Заполните поле названия", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            else
-            {
-                if (contextType.Id == 0)
+                if (string.IsNullOrWhiteSpace(contextType.Title))
                 {
-                    App.db.TypeProduct.Add(contextType);
+                    MessageBox.Show("Заполните поле названия", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
-                App.db.SaveChanges();
-                MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.GoBack();
+                else
+                {
+                    if (contextType.Id == 0)
+                    {
+                        App.db.TypeProduct.Add(contextType);
+                    }
+                    App.db.SaveChanges();
+                    MessageBox.Show("Сохранено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    NavigationService.GoBack();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+           
         }
 
         private void CancelBt_Click(object sender, RoutedEventArgs e)

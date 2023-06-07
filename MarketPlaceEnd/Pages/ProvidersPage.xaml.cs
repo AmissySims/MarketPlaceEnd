@@ -23,11 +23,11 @@ namespace MarketPlaceEnd.Pages
     /// </summary>
     public partial class ProvidersPage : Page
     {
-        MarketPlaceEntities1 _context = new MarketPlaceEntities1();
+        
         public ProvidersPage()
         {
             InitializeComponent();
-            Sort();
+            
             if(Account.AuthUser.RoleId == 1)
             {
                 AddProvBt.Visibility = Visibility.Visible;
@@ -38,20 +38,18 @@ namespace MarketPlaceEnd.Pages
             }
         }
 
-        public void Sort()
-        {
-            List<Provider> listProv = _context.Provider.ToList();
-            var searchString = FoundTb.Text;
-            if (!string.IsNullOrWhiteSpace(searchString))
-            {
-                listProv = listProv.Where(x => x.Title.ToLower().Contains(searchString.ToLower())).ToList();
-                ProvidersList.ItemsSource = listProv;
-            }
-            ProvidersList.ItemsSource = listProv;
-        }
+        
         public void Refresh()
         {
-            ProvidersList.ItemsSource = App.db.Provider.ToList();
+                var listProv = App.db.Provider.ToList();
+                var searchString = FoundTb.Text;
+                if (!string.IsNullOrWhiteSpace(searchString))
+                {
+                    listProv = listProv.Where(x => x.Title.ToLower().Contains(searchString.ToLower())).ToList();
+                    ProvidersList.ItemsSource = listProv;
+                }
+                ProvidersList.ItemsSource = listProv;
+            
         }
         private void AddProvBt_Click(object sender, RoutedEventArgs e)
         {
@@ -60,7 +58,7 @@ namespace MarketPlaceEnd.Pages
 
         private void FoundTb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Sort();
+            Refresh();
         }
 
         private void EditProvBt_Click(object sender, RoutedEventArgs e)
@@ -71,13 +69,22 @@ namespace MarketPlaceEnd.Pages
 
         private void DeleteProveBt_Click(object sender, RoutedEventArgs e)
         {
-            var selProv = (sender as Button).DataContext as Provider;
-            var pr = selProv.Product;
-            App.db.Product.RemoveRange(pr);
-            App.db.Provider.Remove(selProv);
-            App.db.SaveChanges();
-            MessageBox.Show("Удалено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-            Refresh();
+            try
+            {
+                var selProv = (sender as Button).DataContext as Provider;
+                var pr = selProv.Product;
+                App.db.Product.RemoveRange(pr);
+                App.db.Provider.Remove(selProv);
+                App.db.SaveChanges();
+                MessageBox.Show("Удалено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при удалении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+         
+
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
