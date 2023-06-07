@@ -15,10 +15,10 @@
             </StackPanel>-->
             <Border Background="White" BorderBrush="Gold" BorderThickness="2" Padding="3">
                 <StackPanel>
-
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"
+                    <TextBlock Text="SEYMOUR" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Margin="5" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"
                         TextWrapping="Wrap" 
-                        Text="  Наш маркетплейс - это уникальная онлайн-платформа, на которой каждый пользователь может найти все, что необходимо для комфортной и удобной жизни.
+                        Text="Наш маркетплейс - это уникальная онлайн-платформа, на которой каждый пользователь может найти все, что необходимо для комфортной и удобной жизни.
                                    
                                
                                

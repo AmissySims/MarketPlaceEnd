@@ -104,7 +104,7 @@
                                              ScrollViewer.HorizontalScrollBarVisibility="Auto">
                                         <ListBox.ItemsPanel>
                                             <ItemsPanelTemplate>
-                                                <WrapPanel HorizontalAlignment="Center"/>
+                                                <WrapPanel IsItemsHost="True"/>
                                             </ItemsPanelTemplate>
                                         </ListBox.ItemsPanel>
                                         <ListBox.ItemTemplate>
