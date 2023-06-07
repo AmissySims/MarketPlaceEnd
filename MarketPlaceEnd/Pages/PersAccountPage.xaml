@@ -34,9 +34,19 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Orientation="Horizontal" Margin="20">
-                                <Image Source="{Binding Photo}" Width="120" Height="150"
+                                <Image Width="120" Height="150"
                                         RenderOptions.BitmapScalingMode="Fant"
-                                       Margin="5"/>
+                                       Margin="5">
+                                    <Image.Source>
+                                        <Binding Path="Photo">
+                                            <Binding.TargetNullValue>
+                                                <BitmapImage UriSource="\Resources\user.png"/>
+                                            </Binding.TargetNullValue>
+                                        </Binding>
+                                    </Image.Source>
+                                   
+                                </Image>
+                               
                                 <StackPanel HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Orientation="Vertical">
@@ -101,51 +111,7 @@
                 </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <!--<StackPanel Orientation="Horizontal" Margin="20">
-                <Image Source="\Resources\logo.png" Width="150" Height="150"/>
-                <StackPanel HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Имя"
-                                   Margin="5"/>
-                        <TextBlock Text="{Binding Name}"
-                                   Margin="5"/>
-                        
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Фамилия"
-                                   Margin="5"/>
-                        <TextBlock Text="{Binding FName}"
-                                   Margin="5"/>
-
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Логин"
-                                   Margin="5"/>
-                        <TextBlock Text="{Binding Login}"
-                                   Margin="5"/>
-
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Пароль"
-                                   Margin="5"/>
-                        <TextBlock Text="{Binding Password}"
-                                   Margin="5"/>
-
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Роль"
-                                   Margin="5"/>
-                        <TextBlock Text="{Binding Role.Title}"
-                                   Margin="5"/>
-
-                    </StackPanel>
-                    <Button x:Name="EditBt"
-                            Content=" Редактировать "
-                            Style="{StaticResource Buttons}" Click="EditBt_Click"/>
-                </StackPanel>
-           </StackPanel>-->
+           
       
     
         <Border BorderBrush="#FFD9C09F"
