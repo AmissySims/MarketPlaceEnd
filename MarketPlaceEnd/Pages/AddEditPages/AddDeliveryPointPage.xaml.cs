@@ -27,6 +27,8 @@ namespace MarketPlaceEnd.Pages.AddEditPages
         public AddDeliveryPointPage(DeliveryPoint point)
         {
             InitializeComponent();
+            var users = App.db.User.Where(x => x.RoleId == 5).ToList();
+            RoleCb.ItemsSource = users;
             contextPoint = point;
             DataContext = contextPoint;
 
@@ -41,6 +43,11 @@ namespace MarketPlaceEnd.Pages.AddEditPages
             if (string.IsNullOrWhiteSpace(contextPoint.Adress))
             {
                 MessageBox.Show("Заполните поле адреса", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (contextPoint.User == null)
+            {
+                MessageBox.Show("Выберите работника", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             else

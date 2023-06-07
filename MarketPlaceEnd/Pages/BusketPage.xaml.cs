@@ -165,5 +165,13 @@ namespace MarketPlaceEnd.Pages
                 }
             }
         }
+
+        private void CountTb_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            if(!Char.IsDigit(e.Text, 0))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

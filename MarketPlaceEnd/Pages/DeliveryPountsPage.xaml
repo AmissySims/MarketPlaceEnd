@@ -51,9 +51,20 @@
                                         <TextBlock Text="{Binding Adress}"
                                        Margin="5"/>
                                     </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Visibility="{Binding Visible1}">
+                                        <TextBlock Text="Сотрудник" 
+                                       Margin="10 5"/>
+                                        <TextBlock Text="{Binding User.FullName}"
+                                       Margin="5"/>
+                                    </StackPanel>
                                 </StackPanel>
 
-                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                
+                            
+               
+
+
+                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                                     <Button x:Name="EditPoint"
                                         Content=" Редактировать "
                                             Visibility="{Binding BtnVisible1}"

@@ -64,5 +64,13 @@ namespace MarketPlaceEnd.Pages.AddEditPages
             }
             NavigationService.GoBack();
         }
+
+        private void TitleTb_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if(!Char.IsLetter(e.Text, 0))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
