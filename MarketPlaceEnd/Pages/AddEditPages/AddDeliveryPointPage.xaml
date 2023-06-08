@@ -12,7 +12,7 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Адрес" HorizontalAlignment="Center"
                        Margin="5"/>
-            <TextBox Width="200"
+            <TextBox Width="220"
                      TextWrapping="Wrap"
                      Height="30"
                      Margin="5"
