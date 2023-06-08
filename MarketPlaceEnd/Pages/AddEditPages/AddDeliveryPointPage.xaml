@@ -13,6 +13,8 @@
             <TextBlock Text="Адрес" HorizontalAlignment="Center"
                        Margin="5"/>
             <TextBox Width="200"
+                     TextWrapping="Wrap"
+                     Height="30"
                      Margin="5"
                      MaxLength="2000"
                      x:Name="AdressTb"
