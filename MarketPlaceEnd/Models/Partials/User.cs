@@ -32,9 +32,22 @@ namespace MarketPlaceEnd.Models
 
             }
         }
+        public Visibility BtnVisible1
+        {
+            get
+            {
+                if (Account.AuthUser.RoleId == 1)
+                {
+                    return Visibility.Collapsed;
 
+                }
+                else
+                { return Visibility.Visible; }
 
             }
+        }
+
+    }
         }
 
 

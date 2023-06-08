@@ -61,12 +61,11 @@ namespace MarketPlaceEnd.Pages
             NavigationService.Navigate(new GrafficsPage());
         }
 
-        private void AddUserBt_Click(object sender, RoutedEventArgs e)
+       
+
+        private void UserBt_Click(object sender, RoutedEventArgs e)
         {
-            EditUserWindow selUser = new EditUserWindow(new User());
-            selUser.ShowDialog();
-            UserList = App.db.User.Where(z => z.Id == Account.AuthUser.Id).ToList();
-            ListUse.ItemsSource = UserList;
+            NavigationService.Navigate(new UsersPage());
         }
     }
 }

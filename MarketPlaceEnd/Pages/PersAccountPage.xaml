@@ -89,12 +89,9 @@
                                         <Button x:Name="EditBt"
                                             Margin="5"
                                          Content=" Редактировать "
+                                                Visibility="{Binding BtnVisible1}"
                                             Style="{StaticResource Buttons}" Click="EditBt_Click"/>
-                                        <Button x:Name="AddUserBt"
-                                            Content=" Добавить  "
-                                            Margin="5"
-                                            Visibility="{Binding BtnVisible}"
-                                            Style="{StaticResource Buttons}" Click="AddUserBt_Click"/>
+                                      
                                     </StackPanel>
                                    
                                     <Button x:Name="StatBt"
@@ -102,7 +99,11 @@
                                             Margin="5"
                                             Visibility="{Binding BtnVisible}"
                                             Style="{StaticResource Buttons}" Click="StatBt_Click"/>
-                                   
+                                    <Button x:Name="UserBt"
+                                            Content=" Посмотреть пользователей "
+                                            Margin="5"
+                                            Visibility="{Binding BtnVisible}"
+                                            Style="{StaticResource Buttons}" Click="UserBt_Click"/>
                                 </StackPanel>
                             </StackPanel>
 

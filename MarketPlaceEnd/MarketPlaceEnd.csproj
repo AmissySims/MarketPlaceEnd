@@ -153,6 +153,9 @@
     <Compile Include="Pages\MainMainPage.xaml.cs">
       <DependentUpon>MainMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\UsersPage.xaml.cs">
+      <DependentUpon>UsersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AddCardWindow.xaml.cs">
       <DependentUpon>AddCardWindow.xaml</DependentUpon>
     </Compile>
@@ -243,6 +246,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TypeProductsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UsersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
