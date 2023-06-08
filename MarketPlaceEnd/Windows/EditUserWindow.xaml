@@ -32,7 +32,8 @@
                 <TextBlock Text="Имя"
                                    Margin="5"/>
                 <TextBox Text="{Binding Name}"
-                                   Margin="5"
+                         PreviewTextInput="TextBox_PreviewTextInput"
+                          Margin="5"
                          Width="200"/>
 
             </StackPanel>
@@ -40,8 +41,9 @@
                 <TextBlock Text="Фамилия"
                                    Margin="5"/>
                 <TextBox Text="{Binding FName}"
-                                   Margin="5"
-                             Width="200" />
+                          Margin="5"
+                         PreviewTextInput="TextBox_PreviewTextInput_1"
+                          Width="200" />
 
             </StackPanel>
             <StackPanel Orientation="Horizontal">
