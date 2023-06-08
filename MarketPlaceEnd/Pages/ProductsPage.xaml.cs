@@ -49,9 +49,14 @@ namespace MarketPlaceEnd.Pages
         }
         private void Refresh()
         {
-            var products = App.db.Product.ToList();
+           
 
-            var searchString = FoundTb.Text;
+            var searchString = FoundTb.Text.ToLower();
+            var products = App.db.Product.ToList();
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                products = App.db.Product.Where(p => p.Title.ToLower().Contains(searchString)).ToList();
+            }
             if (selType != null)
             {
                 products = products.Where(x => x.TypeProductId == selType.Id).ToList();
@@ -69,10 +74,7 @@ namespace MarketPlaceEnd.Pages
             {
                 products = products.Where(p => p.Price >= 2000).ToList();
             }
-            if (!string.IsNullOrWhiteSpace(searchString))
-            {
-                products = App.db.Product.Where(p => p.Title.ToLower().Contains(searchString)).ToList();
-            }
+           
             ListProducts.ItemsSource = products;
         }
 
