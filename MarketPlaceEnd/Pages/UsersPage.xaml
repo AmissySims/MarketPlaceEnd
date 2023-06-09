@@ -80,7 +80,7 @@
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
 
-                                            <TextBlock Text="Логини" 
+                                            <TextBlock Text="Логин" 
                                        Margin="10 5"/>
                                             <TextBlock Text="{Binding Login}"
                                        Margin="5"/>
@@ -96,7 +96,7 @@
                                         </StackPanel>
                                     </StackPanel>
                                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <Button x:Name="EditBt"
                                             Margin="5"
                                             Content=" Редактировать "
@@ -104,6 +104,8 @@
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <Button x:Name="DeleteBt"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
                                             Margin="5"
                                             Content=" Удалить "
                                             Style="{StaticResource Buttons}" Click="DeleteBt_Click"/>

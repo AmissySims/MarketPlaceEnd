@@ -5,34 +5,34 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="daa28161785a48adb1562c667336ffb2" Name="Diagram1">
-        <EntityTypeShape EntityType="MarketPlaceModel.Bucket" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Cards" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketPlaceModel.DeliveryPoint" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketPlaceModel.DeliveryType" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Order" Width="1.5" PointX="7.5" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketPlaceModel.OrderProduct" Width="1.5" PointX="9.75" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Product" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketPlaceModel.ProductPhoto" Width="1.5" PointX="5.25" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Provider" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketPlaceModel.Role" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketPlaceModel.StatusOrder" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketPlaceModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketPlaceModel.TypeProduct" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketPlaceModel.User" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
-        <AssociationConnector Association="MarketPlaceModel.FK__Bucket__ProductI__03F0984C" ManuallyRouted="false" />
-        <AssociationConnector Association="MarketPlaceModel.FK__Bucket__UserId__02FC7413" ManuallyRouted="false" />
-        <AssociationConnector Association="MarketPlaceModel.FK_Cards_User" ManuallyRouted="false" />
-        <AssociationConnector Association="MarketPlaceModel.FK_DeliveryPoint_User" ManuallyRouted="false" />
-        <AssociationConnector Association="MarketPlaceModel.FK_Order_DeliveryPoint" ManuallyRouted="false" />
-        <AssociationConnector Association="MarketPlaceModel.FK_Order_DeliveryType" ManuallyRouted="false" />
-        <AssociationConnector Association="MarketPlaceModel.FK_Order_StatusOrder" ManuallyRouted="false" />
-        <AssociationConnector Association="MarketPlaceModel.FK_Order_User" ManuallyRouted="false" />
-        <AssociationConnector Association="MarketPlaceModel.FK_OrderProduct_Order" ManuallyRouted="false" />
-        <AssociationConnector Association="MarketPlaceModel.FK_OrderProduct_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="MarketPlaceModel.FK_Product_Provider" ManuallyRouted="false" />
-        <AssociationConnector Association="MarketPlaceModel.FK_Product_TypeProduct" ManuallyRouted="false" />
-        <AssociationConnector Association="MarketPlaceModel.FK_ProductPhoto_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="MarketPlaceModel.FK_User_Role" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Bucket" Width="1.5" PointX="8.25" PointY="7.375" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Cards" Width="1.5" PointX="5.25" PointY="5.875" />
+        <EntityTypeShape EntityType="MarketPlaceModel.DeliveryPoint" Width="1.5" PointX="5.25" PointY="11.875" />
+        <EntityTypeShape EntityType="MarketPlaceModel.DeliveryType" Width="1.5" PointX="5.25" PointY="9.375" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Order" Width="1.5" PointX="7.5" PointY="10.5" />
+        <EntityTypeShape EntityType="MarketPlaceModel.OrderProduct" Width="1.5" PointX="9.75" PointY="11.25" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Product" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="MarketPlaceModel.ProductPhoto" Width="1.5" PointX="8.25" PointY="4" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Provider" Width="1.5" PointX="3.75" PointY="15.125" />
+        <EntityTypeShape EntityType="MarketPlaceModel.Role" Width="1.5" PointX="0.75" PointY="7.625" />
+        <EntityTypeShape EntityType="MarketPlaceModel.StatusOrder" Width="1.5" PointX="5.25" PointY="17.75" />
+        <EntityTypeShape EntityType="MarketPlaceModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="3.125" />
+        <EntityTypeShape EntityType="MarketPlaceModel.TypeProduct" Width="1.5" PointX="3.75" PointY="2.75" />
+        <EntityTypeShape EntityType="MarketPlaceModel.User" Width="1.5" PointX="3" PointY="6.75" />
+        <AssociationConnector Association="MarketPlaceModel.FK__Bucket__ProductI__03F0984C" />
+        <AssociationConnector Association="MarketPlaceModel.FK__Bucket__UserId__02FC7413" />
+        <AssociationConnector Association="MarketPlaceModel.FK_Cards_User" />
+        <AssociationConnector Association="MarketPlaceModel.FK_DeliveryPoint_User" />
+        <AssociationConnector Association="MarketPlaceModel.FK_Order_DeliveryPoint" />
+        <AssociationConnector Association="MarketPlaceModel.FK_Order_DeliveryType" />
+        <AssociationConnector Association="MarketPlaceModel.FK_Order_StatusOrder" />
+        <AssociationConnector Association="MarketPlaceModel.FK_Order_User" />
+        <AssociationConnector Association="MarketPlaceModel.FK_OrderProduct_Order" />
+        <AssociationConnector Association="MarketPlaceModel.FK_OrderProduct_Product" />
+        <AssociationConnector Association="MarketPlaceModel.FK_Product_Provider" />
+        <AssociationConnector Association="MarketPlaceModel.FK_Product_TypeProduct" />
+        <AssociationConnector Association="MarketPlaceModel.FK_ProductPhoto_Product" />
+        <AssociationConnector Association="MarketPlaceModel.FK_User_Role" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
