@@ -3,17 +3,9 @@ using MarketPlaceEnd.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MarketPlaceEnd.Pages.AddEditPages
 {
@@ -89,12 +81,12 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                     MessageBox.Show("На карте недостаточно средств! Выберите другую карту", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                 Order ord = new Order();
+                Order ord = new Order();
                 {
                     ord.UserId = Account.AuthUser.Id;
-                   
+
                     ord.StatusOrderId = 1;
-                  
+
                     if (Courier.IsChecked == true)
                     {
                         ord.DeliveryTypeId = 2;
@@ -144,17 +136,17 @@ namespace MarketPlaceEnd.Pages.AddEditPages
                             .FirstOrDefault();
                     selectedProd.Product.Count -= b.Quantity;
                     App.db.OrderProduct.Add(orderProduct);
-                    
+
                 }
 
                 //Сохранение
-              
-                    selCard.Balance -= Bucket.Sum(b => b.Quantity * b.Product.Price);
-                    App.db.SaveChanges();
-                    MessageBox.Show("Заказ успешно добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                    NavigationService.Navigate(new ProductsPage());
-             
-               
+
+                selCard.Balance -= Bucket.Sum(b => b.Quantity * b.Product.Price);
+                App.db.SaveChanges();
+                MessageBox.Show("Заказ успешно добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.Navigate(new ProductsPage());
+
+
 
             }
             catch (Exception ex)

@@ -34,7 +34,7 @@ namespace MarketPlaceEnd.Pages
         {
             var startDate = StartDate.SelectedDate;
             var endDate = EndDate.SelectedDate;
-            if (!startDate.HasValue)
+            if (!startDate.HasValue)    
             {
                 MessageBox.Show("Выберите даты", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -46,7 +46,7 @@ namespace MarketPlaceEnd.Pages
                 .GroupBy(x => x.User.FullName)
                 .ToDictionary(key => key.Key, value => value.Count());
             seria.Points.DataBindXY(chartDate.Keys, chartDate.Values);
-            seria.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            seria.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Column;
            
         }
     }

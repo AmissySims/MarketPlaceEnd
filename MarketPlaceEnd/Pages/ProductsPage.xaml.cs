@@ -45,6 +45,9 @@ namespace MarketPlaceEnd.Pages
             FilterCb.Items.Add("от 500 до 1500 руб.");
             FilterCb.Items.Add("от 1500 руб.");
 
+           
+
+
 
         }
         private void Refresh()

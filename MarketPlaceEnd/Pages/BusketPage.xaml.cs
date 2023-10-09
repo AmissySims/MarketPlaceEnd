@@ -26,7 +26,7 @@ namespace MarketPlaceEnd.Pages
                     .Select(b => new BucketItem
                     {
                         Product = b.Product,
-                        Quantity = b.Quantity
+                        Quantity = (int)b.Quantity
                     })
                     .ToList();
 

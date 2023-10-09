@@ -67,7 +67,7 @@
                             <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                                     <Button x:Name="EditPoint"
                                         Content=" Редактировать "
-                                            Visibility="{Binding BtnVisible1}"
+                                            Visibility="{Binding Visible1}"
                                         Style="{StaticResource Buttons}"
                                         Margin="10" Click="EditPoint_Click"/>
                                     
